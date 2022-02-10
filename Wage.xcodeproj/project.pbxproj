@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
+		018B7A6227B5BDF400068F7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6127B5BDF400068F7F /* ContentView.swift */; };
+		018B7A6427B5BDF500068F7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018B7A6327B5BDF500068F7F /* Assets.xcassets */; };
+		018B7A6727B5BDF500068F7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018B7A6627B5BDF500068F7F /* Preview Assets.xcassets */; };
+		018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6827B5BDF500068F7F /* Persistence.swift */; };
+		018B7A6C27B5BDF500068F7F /* Wage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */; };
+		018B7A7627B5BDF500068F7F /* WageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A7527B5BDF500068F7F /* WageTests.swift */; };
+		018B7A8027B5BDF500068F7F /* WageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A7F27B5BDF500068F7F /* WageUITests.swift */; };
+		018B7A8227B5BDF500068F7F /* WageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A8127B5BDF500068F7F /* WageUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		018B7A7227B5BDF500068F7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 018B7A5427B5BDF400068F7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 018B7A5B27B5BDF400068F7F;
+			remoteInfo = Wage;
+		};
+		018B7A7C27B5BDF500068F7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 018B7A5427B5BDF400068F7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 018B7A5B27B5BDF400068F7F;
+			remoteInfo = Wage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		018B7A5C27B5BDF400068F7F /* Wage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		018B7A5F27B5BDF400068F7F /* WageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageApp.swift; sourceTree = "<group>"; };
+		018B7A6127B5BDF400068F7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		018B7A6327B5BDF500068F7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		018B7A6627B5BDF500068F7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		018B7A6827B5BDF500068F7F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		018B7A6B27B5BDF500068F7F /* Wage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wage.xcdatamodel; sourceTree = "<group>"; };
+		018B7A7127B5BDF500068F7F /* WageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		018B7A7527B5BDF500068F7F /* WageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageTests.swift; sourceTree = "<group>"; };
+		018B7A7B27B5BDF500068F7F /* WageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		018B7A7F27B5BDF500068F7F /* WageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageUITests.swift; sourceTree = "<group>"; };
+		018B7A8127B5BDF500068F7F /* WageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		018B7A5927B5BDF400068F7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A6E27B5BDF500068F7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A7827B5BDF500068F7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		018B7A5327B5BDF400068F7F = {
+			isa = PBXGroup;
+			children = (
+				018B7A5E27B5BDF400068F7F /* Wage */,
+				018B7A7427B5BDF500068F7F /* WageTests */,
+				018B7A7E27B5BDF500068F7F /* WageUITests */,
+				018B7A5D27B5BDF400068F7F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		018B7A5D27B5BDF400068F7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				018B7A5C27B5BDF400068F7F /* Wage.app */,
+				018B7A7127B5BDF500068F7F /* WageTests.xctest */,
+				018B7A7B27B5BDF500068F7F /* WageUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		018B7A5E27B5BDF400068F7F /* Wage */ = {
+			isa = PBXGroup;
+			children = (
+				018B7A5F27B5BDF400068F7F /* WageApp.swift */,
+				018B7A6127B5BDF400068F7F /* ContentView.swift */,
+				018B7A6327B5BDF500068F7F /* Assets.xcassets */,
+				018B7A6827B5BDF500068F7F /* Persistence.swift */,
+				018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */,
+				018B7A6527B5BDF500068F7F /* Preview Content */,
+			);
+			path = Wage;
+			sourceTree = "<group>";
+		};
+		018B7A6527B5BDF500068F7F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				018B7A6627B5BDF500068F7F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		018B7A7427B5BDF500068F7F /* WageTests */ = {
+			isa = PBXGroup;
+			children = (
+				018B7A7527B5BDF500068F7F /* WageTests.swift */,
+			);
+			path = WageTests;
+			sourceTree = "<group>";
+		};
+		018B7A7E27B5BDF500068F7F /* WageUITests */ = {
+			isa = PBXGroup;
+			children = (
+				018B7A7F27B5BDF500068F7F /* WageUITests.swift */,
+				018B7A8127B5BDF500068F7F /* WageUITestsLaunchTests.swift */,
+			);
+			path = WageUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		018B7A5B27B5BDF400068F7F /* Wage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 018B7A8527B5BDF500068F7F /* Build configuration list for PBXNativeTarget "Wage" */;
+			buildPhases = (
+				018B7A5827B5BDF400068F7F /* Sources */,
+				018B7A5927B5BDF400068F7F /* Frameworks */,
+				018B7A5A27B5BDF400068F7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wage;
+			productName = Wage;
+			productReference = 018B7A5C27B5BDF400068F7F /* Wage.app */;
+			productType = "com.apple.product-type.application";
+		};
+		018B7A7027B5BDF500068F7F /* WageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 018B7A8827B5BDF500068F7F /* Build configuration list for PBXNativeTarget "WageTests" */;
+			buildPhases = (
+				018B7A6D27B5BDF500068F7F /* Sources */,
+				018B7A6E27B5BDF500068F7F /* Frameworks */,
+				018B7A6F27B5BDF500068F7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				018B7A7327B5BDF500068F7F /* PBXTargetDependency */,
+			);
+			name = WageTests;
+			productName = WageTests;
+			productReference = 018B7A7127B5BDF500068F7F /* WageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		018B7A7A27B5BDF500068F7F /* WageUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 018B7A8B27B5BDF500068F7F /* Build configuration list for PBXNativeTarget "WageUITests" */;
+			buildPhases = (
+				018B7A7727B5BDF500068F7F /* Sources */,
+				018B7A7827B5BDF500068F7F /* Frameworks */,
+				018B7A7927B5BDF500068F7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				018B7A7D27B5BDF500068F7F /* PBXTargetDependency */,
+			);
+			name = WageUITests;
+			productName = WageUITests;
+			productReference = 018B7A7B27B5BDF500068F7F /* WageUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		018B7A5427B5BDF400068F7F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					018B7A5B27B5BDF400068F7F = {
+						CreatedOnToolsVersion = 13.2;
+					};
+					018B7A7027B5BDF500068F7F = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 018B7A5B27B5BDF400068F7F;
+					};
+					018B7A7A27B5BDF500068F7F = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 018B7A5B27B5BDF400068F7F;
+					};
+				};
+			};
+			buildConfigurationList = 018B7A5727B5BDF400068F7F /* Build configuration list for PBXProject "Wage" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 018B7A5327B5BDF400068F7F;
+			productRefGroup = 018B7A5D27B5BDF400068F7F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				018B7A5B27B5BDF400068F7F /* Wage */,
+				018B7A7027B5BDF500068F7F /* WageTests */,
+				018B7A7A27B5BDF500068F7F /* WageUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		018B7A5A27B5BDF400068F7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				018B7A6727B5BDF500068F7F /* Preview Assets.xcassets in Resources */,
+				018B7A6427B5BDF500068F7F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A6F27B5BDF500068F7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A7927B5BDF500068F7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		018B7A5827B5BDF400068F7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */,
+				018B7A6C27B5BDF500068F7F /* Wage.xcdatamodeld in Sources */,
+				018B7A6227B5BDF400068F7F /* ContentView.swift in Sources */,
+				018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A6D27B5BDF500068F7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				018B7A7627B5BDF500068F7F /* WageTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		018B7A7727B5BDF500068F7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				018B7A8227B5BDF500068F7F /* WageUITestsLaunchTests.swift in Sources */,
+				018B7A8027B5BDF500068F7F /* WageUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		018B7A7327B5BDF500068F7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 018B7A5B27B5BDF400068F7F /* Wage */;
+			targetProxy = 018B7A7227B5BDF500068F7F /* PBXContainerItemProxy */;
+		};
+		018B7A7D27B5BDF500068F7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 018B7A5B27B5BDF400068F7F /* Wage */;
+			targetProxy = 018B7A7C27B5BDF500068F7F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		018B7A8327B5BDF500068F7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		018B7A8427B5BDF500068F7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		018B7A8627B5BDF500068F7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		018B7A8727B5BDF500068F7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		018B7A8927B5BDF500068F7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.WageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wage.app/Wage";
+			};
+			name = Debug;
+		};
+		018B7A8A27B5BDF500068F7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.WageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wage.app/Wage";
+			};
+			name = Release;
+		};
+		018B7A8C27B5BDF500068F7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.WageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wage;
+			};
+			name = Debug;
+		};
+		018B7A8D27B5BDF500068F7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F97FE5Z68U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.WageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wage;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		018B7A5727B5BDF400068F7F /* Build configuration list for PBXProject "Wage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018B7A8327B5BDF500068F7F /* Debug */,
+				018B7A8427B5BDF500068F7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		018B7A8527B5BDF500068F7F /* Build configuration list for PBXNativeTarget "Wage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018B7A8627B5BDF500068F7F /* Debug */,
+				018B7A8727B5BDF500068F7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		018B7A8827B5BDF500068F7F /* Build configuration list for PBXNativeTarget "WageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018B7A8927B5BDF500068F7F /* Debug */,
+				018B7A8A27B5BDF500068F7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		018B7A8B27B5BDF500068F7F /* Build configuration list for PBXNativeTarget "WageUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018B7A8C27B5BDF500068F7F /* Debug */,
+				018B7A8D27B5BDF500068F7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				018B7A6B27B5BDF500068F7F /* Wage.xcdatamodel */,
+			);
+			currentVersion = 018B7A6B27B5BDF500068F7F /* Wage.xcdatamodel */;
+			path = Wage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 018B7A5427B5BDF400068F7F /* Project object */;
+}

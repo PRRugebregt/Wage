@@ -17,7 +17,7 @@ class AverageCalculator {
     
     var averageFee: Int = 0
     var averageExperience: Int = 0
-    var averageGigType: GigType = .other
+    var averageGigType: GigType = .anders
     
     private func calculateValues() {
         averageFee = calculateFee()
@@ -36,7 +36,7 @@ class AverageCalculator {
     }
     
     private func calculateGigType() -> GigType {
-        guard wageFiles.count > 0 else { return .other}
+        guard wageFiles.count > 0 else { return .anders}
         var counts = [GigType]()
         for file in wageFiles {
             counts.append(file.gigType)

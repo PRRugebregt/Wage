@@ -22,7 +22,7 @@ struct WagesListView: View {
     var body: some View {
         GeometryReader() { geometry in
             VStack {
-                Button("Switch View Mode") {
+                Button("Weergave modus veranderen") {
                     isPrettyView.toggle()
                 }
                 .buttonStyle(.bordered)

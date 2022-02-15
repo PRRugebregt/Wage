@@ -53,6 +53,7 @@ struct AddObjectView: View {
             .onSubmit {
                 wageObjectCreator.wage = wageText
             }
+            .foregroundColor(.black)
             .padding()
             Spacer()
             HStack {
@@ -77,6 +78,7 @@ struct AddObjectView: View {
             .buttonStyle(.borderedProminent)
                 
         }
+        .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
     
 }

@@ -65,13 +65,13 @@ struct FilterView: View {
             Button("Filters toepassen", action: {
                 isPresented = false
             })
-                
                 .background(.blue)
                 .foregroundColor(.white)
                 .padding()
                 .cornerRadius(15)
                 .buttonStyle(.bordered)
         }
+        .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
     
 }

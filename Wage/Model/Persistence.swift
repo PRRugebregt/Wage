@@ -7,11 +7,11 @@
 
 import CoreData
 
-struct PersistenceController {
+class PersistenceController {
     static let shared = PersistenceController()
- //   let user = User()
-    let container: NSPersistentContainer
+    var wageFileManageable: WageFileManageable?
     var wageFileLoader: WageFileLoader?
+    let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Wage")
@@ -20,12 +20,15 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-
+    }
+    
+    func setWageFileManageable(_ wageFileManageable: WageFileManageable) {
+        self.wageFileManageable = wageFileManageable
     }
     
     func createObject(wageFile: WageFile) {
-        WageFiles.shared.appendNewFile(wageFile)
-        wageFileLoader?.loadLocalFiles()
+        wageFileManageable?.appendNewFile(wageFile)
+        wageFileLoader?.loadAllFiles()
         let object = WageObject(context: container.viewContext)
         object.artistType = wageFile.artistType.rawValue
         object.gigType = wageFile.gigType.rawValue
@@ -56,6 +59,7 @@ struct PersistenceController {
                                     instrument: Instrument(rawValue: object.instrument!)!)
             wageFiles.append(wageFile)
         }
+        print(wageFiles)
         return wageFiles
     }
     

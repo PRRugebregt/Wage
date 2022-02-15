@@ -47,6 +47,7 @@ struct UserView: View {
                             }
                         }
                     }
+                    .foregroundColor(.blue)
                     Divider()
                     Text("Hoeveel jaar ervaring heb je als professioneel muzikant")
                         .font(.title2)
@@ -66,12 +67,12 @@ struct UserView: View {
                     Divider()
                     Text("Heb je muziek gestudeerd? (MBO, HBO)")
                     HStack{
-                        Button("Yes") {
+                        Button("Ja") {
                             studiedMusic = true
                             user.updateDidStudy(studiedMusic)
                         }
                         .background(user.user.didStudy ? .purple : .clear)
-                        Button("No") {
+                        Button("Nee") {
                             studiedMusic = false
                             user.updateDidStudy(studiedMusic)
                         }
@@ -79,7 +80,7 @@ struct UserView: View {
                     }
                     .buttonStyle(.bordered)
                     .cornerRadius(10)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     Spacer()
                 }
                 NavigationLink {
@@ -96,9 +97,10 @@ struct UserView: View {
                     Text("Start app")
                         .padding()
                 }
-                .background(RoundedRectangle(cornerRadius: 5).foregroundColor(.orange))
+                .background(RoundedRectangle(cornerRadius: 5).foregroundColor(.purple))
+                .foregroundColor(.white)
             }
-            .foregroundColor(.white)
+            .foregroundColor(.black)
             .textFieldStyle(.roundedBorder)
             .frame(alignment: .center)
             .padding()

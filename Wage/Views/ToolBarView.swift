@@ -16,13 +16,14 @@ struct ToolBarView: View {
     
     var body: some View {
         HStack {
+            Spacer()
             Button("Remove Filters") {
                 filtering.reset()
-                wageFileLoader.loadLocalFiles()
+                wageFileLoader.removeFilters()
+                wageFileLoader.loadAllFiles()
             }
             .opacity(filtering.isFiltered ? 1 : 0)
             Spacer()
-
             Button("Filter") {
                 showFilters.toggle()
             }
@@ -35,29 +36,28 @@ struct ToolBarView: View {
             }) {
                 FilterView(filters: filtering, isPresented: $showFilters)
             }
-            .frame(width: 100)
+            //.frame(width: 100)
             Spacer()
-
-            Text("add wage")
-                .foregroundColor(.purple)
-                .font(.title3)
             Button("+") {
                 showAddObjectView.toggle()
             }.sheet(isPresented: $showAddObjectView, onDismiss: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    wageFileLoader.loadLocalFiles()
+                    wageFileLoader.loadAllFiles()
                     showSuccessAlert.toggle()
                 }
             }) {
                 AddObjectView(isShown: $showAddObjectView)
             }
-            .font(.title2)
+            .font(.title)
+            .foregroundColor(.white)
+            .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(.purple).aspectRatio(1/1, contentMode: .fit))
+            .shadow(color: .gray, radius: 3, x: 0, y: 3)
             .alert("Done", isPresented: $showSuccessAlert) {
                 Text("hi")
             } message: {
                 Text("Your wage was submitted to the database. Thank you very much for your contribution!")
             }
-
+            Spacer()
         }
         .buttonStyle(.bordered)
     }

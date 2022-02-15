@@ -17,6 +17,7 @@ struct MainView: View {
     }
     
     init() {
+        _ = DependencyRouter(wageFileLoader: wageFileLoader)
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().tintColor = .purple
     }
@@ -27,13 +28,12 @@ struct MainView: View {
                 VStack {
                     Button("Alleen eigen resultaten : \(wageFileLoader.isLocal ? "Ja" : "Nee")") {
                         wageFileLoader.isLocal.toggle()
-                        wageFileLoader.loadLocalFiles()
+                        wageFileLoader.loadAllFiles()
                     }
                     .buttonStyle(.bordered)
-
                     WagesListView(wageFileLoader: wageFileLoader)
                 }
-                .background(LinearGradient(colors: [.orange,.purple], startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
 
                 .toolbar(content: {
                     ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)

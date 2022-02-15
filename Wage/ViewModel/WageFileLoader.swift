@@ -11,22 +11,29 @@ import Firebase
 class WageFileLoader: ObservableObject {
     
     @Published var wageFiles: [WageFile] = []
-    init() {
-        self.loadLocalFiles()
-    }
     private var networkDownload = NetworkDownload()
+    private var filters: FilterOptions?
+    var wageFileManageable: WageFileManageable? {
+        didSet {
+            loadAllFiles()
+        }
+    }
     var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? true {
         didSet {
             UserDefaults.standard.setValue(isLocal, forKey: "isLocal")
         }
     }
     
-    func loadLocalFiles() {
+    func loadAllFiles() {
         if isLocal {
-            self.wageFiles = WageFiles.shared.all
+            self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
+            if filters != nil {
+                filterResults(with: filters!)
+            }
         } else {
             loadNetworkFiles()
         }
+
     }
     
     private func loadNetworkFiles() {
@@ -45,6 +52,9 @@ class WageFileLoader: ObservableObject {
                 wageFiles.append(wageFile)
             }
             self.wageFiles = wageFiles
+            if self.filters != nil {
+                self.filterResults(with: self.filters!)
+            }
         }
     }
     
@@ -68,8 +78,9 @@ class WageFileLoader: ObservableObject {
     }
     
     func filterResults(with options: FilterOptions) {
+        self.filters = options
         print(options)
-        var filteredWageFiles = WageFiles.shared.all
+        var filteredWageFiles = wageFileManageable?.all ?? []
         if let gigType = options.gigType {
             filteredWageFiles = filteredWageFiles.filter({$0.gigType == gigType})
         }
@@ -83,6 +94,10 @@ class WageFileLoader: ObservableObject {
             filteredWageFiles = filteredWageFiles.filter({$0.wage > minimum})
         }
         self.wageFiles = filteredWageFiles
+    }
+    
+    func removeFilters() {
+        self.filters = nil
     }
     
 }

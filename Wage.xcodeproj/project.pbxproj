@@ -32,6 +32,7 @@
 		019091A127BA76AB00B84AED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 019091A027BA76AB00B84AED /* GoogleService-Info.plist */; };
 		019091A327BB2D7400B84AED /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A227BB2D7400B84AED /* HelpView.swift */; };
 		019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A427BBD25300B84AED /* AverageCalculator.swift */; };
+		019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A627BC36C300B84AED /* DependencyRouter.swift */; };
 		2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3D47C73F54D01202245DF /* Pods_Wage.framework */; };
 		AC03DA03DF0209C6AFDD43F0 /* Pods_Wage_WageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAA79CCB178C7BE6AC0F40 /* Pods_Wage_WageUITests.framework */; };
 		C08DE643DABED681E1B10C08 /* Pods_WageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89677E9050F03A2AF064DAF4 /* Pods_WageTests.framework */; };
@@ -83,6 +84,7 @@
 		019091A027BA76AB00B84AED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		019091A227BB2D7400B84AED /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		019091A427BBD25300B84AED /* AverageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalculator.swift; sourceTree = "<group>"; };
+		019091A627BC36C300B84AED /* DependencyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRouter.swift; sourceTree = "<group>"; };
 		02B109C1D32E8B5C4745987C /* Pods-Wage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wage.release.xcconfig"; path = "Target Support Files/Pods-Wage/Pods-Wage.release.xcconfig"; sourceTree = "<group>"; };
 		0EF2791A2EC626EF7EEE7FEC /* Pods-WageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WageTests.release.xcconfig"; path = "Target Support Files/Pods-WageTests/Pods-WageTests.release.xcconfig"; sourceTree = "<group>"; };
 		12F3D47C73F54D01202245DF /* Pods_Wage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +206,7 @@
 				0190918D27B80E4D00B84AED /* WageObjectCreator.swift */,
 				0190919C27B84E5A00B84AED /* UserCreator.swift */,
 				019091A427BBD25300B84AED /* AverageCalculator.swift */,
+				019091A627BC36C300B84AED /* DependencyRouter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				0190918827B7D14300B84AED /* Filtering.swift in Sources */,
 				0190919627B8320800B84AED /* AddObjectView.swift in Sources */,
 				0190918627B7B13400B84AED /* WageFileLoader.swift in Sources */,
+				019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */,
 				0190918E27B80E4D00B84AED /* WageObjectCreator.swift in Sources */,
 				018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */,
 				0190919B27B835E600B84AED /* UserView.swift in Sources */,

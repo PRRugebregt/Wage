@@ -1,0 +1,6 @@
+framework module Pods_Wage {
+  umbrella header "Pods-Wage-umbrella.h"
+
+  export *
+  module * { export * }
+}

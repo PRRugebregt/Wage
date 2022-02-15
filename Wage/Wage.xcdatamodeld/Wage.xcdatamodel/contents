@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SavedFilters" representedClassName="SavedFilters" syncable="YES" codeGenerationType="class"/>
+    <entity name="UserObject" representedClassName="UserObject" syncable="YES" codeGenerationType="class">
+        <attribute name="didStudy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="instrument" optional="YES" attributeType="String"/>
+        <attribute name="yearsOfExperience" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="WageObject" representedClassName="WageObject" syncable="YES" codeGenerationType="class">
+        <attribute name="artistType" optional="YES" attributeType="String"/>
+        <attribute name="didStudy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="gigType" optional="YES" attributeType="String"/>
+        <attribute name="idNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="instrument" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="wage" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yearsOfExperience" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="SavedFilters" positionX="-63" positionY="-9" width="128" height="29"/>
+        <element name="UserObject" positionX="-54" positionY="27" width="128" height="74"/>
+        <element name="WageObject" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

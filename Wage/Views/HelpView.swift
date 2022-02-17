@@ -30,7 +30,7 @@ struct HelpView: View {
             }
             Divider()
             Group{
-                Text("Ik heb deze app gemaakt, omdat ik merk dat als ik met medemuzikanten praat over gages, dat er grote verschillen zijn in wat iedereen vraagt en ook wat er wordt gegeven vanuit artiesten en evenementen. Het leek me interessant om eens zoveel mogelijk gages van verschillende mensen, met verschillende achtergronden te verzamelen en deze weer te geven in een gemiddelde per type optreden, of artiest. Als je helemaal naar beneden scrollt kun je suggesties naar me mailen, zodat ik de app nog kan verbeteren en aanpassen. Veel plezier!")
+                Text("Ik heb deze app gemaakt als experiment, omdat ik merk dat als ik met medemuzikanten praat over gages, dat er grote verschillen zijn in wat iedereen vraagt, wat 'normaal' is en ook wat er wordt gegeven vanuit artiesten, boekingsbureaus en evenementen. Het leek me interessant om eens zoveel mogelijk gages van verschillende mensen, met verschillende achtergronden te verzamelen en deze weer te geven in een gemiddelde per type optreden, of artiest. Als je helemaal naar beneden scrollt kun je suggesties naar me mailen, zodat ik de app nog kan verbeteren en aanpassen. Veel plezier!")
                 Divider()
                 Text("Hoe werkt de app")
                     .font(.subheadline)
@@ -38,41 +38,43 @@ struct HelpView: View {
             }
             Divider()
             Group {
-                Text("Vul de gages in die je hebt gekregen voor het optreden met de categorie die je hebt gekozen. Je kunt kiezen uit verschillende type optredens en artiest types. Deze app is om een gemiddelde te bepalen van alle gages van verschillende type optredens en muzikanten. Je kunt filteren op jaren ervaring, maximum en minimum gages etc. Alle gegevens worden ANONIEM verzameld. Je naam of contactgegevens komen nergens in de data voor.")
+                Text("Vul de gages in die je hebt gekregen voor het optreden met de categorie die je hebt gekozen. Je kunt kiezen uit verschillende type optredens en grootte van shows. Deze app is om een gemiddelde te bepalen van alle gages van verschillende type optredens en muzikanten. Je kunt filteren op jaren ervaring, maximum en minimum gages etc. Alle gegevens worden ANONIEM verzameld. Je naam of contactgegevens komen nergens in de data voor. De gegevens zijn het meest bruikbaar als iedereen alles zo goed als mogelijk invult. Heb je vaste gages bij een vaste artiest, band, orkest of concept, vul deze dan 1 keer in voor verschillende type shows. Verandert dit na een tijd, dan is het ook handig om deze nieuwe gage in te vullen. Losse (sessie) optredens en inval shows en eenmalige projecten kun je wel per show invullen.")
                 Divider()
-                Text("Hoe maak je onderscheid tussen klein, middel, en grote artiesten")
+                Text("Hoe maak je onderscheid tussen klein, middel, en grote shows")
                     .font(.subheadline)
                     .foregroundColor(.white)
             }
             Divider()
             Group {
-            Text("Dit is natuurlijk een klein beetje controversieel en zeer subjectief, maar is bedoeld om nog meer onderscheid te maken tussen verschillende soorten optredens. Een festival met een A artiest verdient natuurlijk meer dan een festival optreden met een minder bekende artiest. Grofweg kunnen we dit onderscheid maken : ")
+            Text("Dit is natuurlijk een klein beetje controversieel en zeer subjectief, maar is bedoeld om nog meer onderscheid te maken tussen verschillende soorten optredens. Een festival met een A artiest, of een coverband optreden op een groot evenement verdient natuurlijk meer dan een festival optreden met een minder bekende artiest, of klein evenement. Dus zonder enige intentie om mensen te beledigen kunnen we grofweg dit onderscheid maken : ")
                 Divider()
-            Text("Grote Artiest: ")
+            Text("Grote Show: ")
                     .font(.title3)
                     .foregroundColor(.white)
                 Divider()
 
-            Text("Een grote artiest, met 1 of meerdere top 10 hits. Speelt in de grote zalen in Nederland, met uitverkochte tours en is bekend onder de meerderheid van Nederland")
+            Text("Een show met een grote artiest (bijv. top 10 hits, bekende Nederlander) of orkest, een groot evenement (meer dan 1000 mensen), of een grote bekende band/formatie (met meer dan 60 shows per jaar)")
                 .font(.subheadline)
                 Divider()
-            Text("Middelgrote Artiest: ")
+            Text("Middelgrote shows: ")
                     .font(.title3)
                     .foregroundColor(.white)
             }
             Group {
                 Divider()
-            Text("Een middelgrote artiest. Liedjes worden wel gedraaid op radio en/of TV. Speelt veel in Nederland in de popzalen en op festivals")
+            Text("Een show middelgrote artiest (Liedjes worden gedraaid op radio/tv, goedverkochte tours) of middelgroot orkest, een middelgroot evenement (300 tot 1000 mensen), of een goedspelende band/formatie (20 - 60 shows per jaar)")
                 .font(.subheadline)
                 Divider()
             Text("Kleine Artiest: ")
                     .font(.title3)
                     .foregroundColor(.white)
                 Divider()
-            Text("Kleine of beginnend artiest. Heeft nog geen liedjes die bekend zijn bij het grote publiek. Zit misschien in een niche. Speelt in de kleine popzalen, of festivals.")
+            Text("Kleine of beginnend artiest (Tours in kleine popzalen) of klein orkest, kleine evenementen (tot 300 mensen), of een band/formatie met minder dan 20 shows per jaar.")
                 .font(.subheadline)
+                Divider()
+                Text("Neem dit dus ook met een korreltje zout. Het gaat erom dat we een onderscheid maken tussen grote en minder grote shows en evenementen. Probeer bij keuzes waar het minder duidelijk is zelf naar de context te kijken. Bij 'repetitie' kijk je naar de grootte van de artiest/orkest/evenement waar het voor is. Bij een bruiloft kijk je naar de grootte van het feest, van het boekingskantoor of misschien zelfs wel hoe bekend het bruidspaar is")
             }
-            Divider()
+
             Group {
                 Text("Hier kun je een suggestie of commentaar opsturen over de app")
                     .foregroundColor(.white)

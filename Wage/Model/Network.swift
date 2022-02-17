@@ -8,6 +8,10 @@
 import Foundation
 import Firebase
 
+protocol NetworkDownloadable {
+    func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ()) 
+}
+
 class NetworkUpload {
         
     private var db = Firestore.firestore()
@@ -43,7 +47,7 @@ class NetworkUpload {
     
 }
 
-class NetworkDownload {
+class NetworkDownload: NetworkDownloadable {
     
     private var db = Firestore.firestore()
     @Published private var isDoneDownloading = false

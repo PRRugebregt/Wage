@@ -16,17 +16,19 @@ struct ToolBarView: View {
     
     var body: some View {
         HStack {
-            Spacer()
             Button("Remove Filters") {
                 filtering.reset()
                 wageFileLoader.removeFilters()
                 wageFileLoader.loadAllFiles()
             }
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(.purple))
+            .shadow(color: .gray, radius: 3, x: 0, y: 3)
             .opacity(filtering.isFiltered ? 1 : 0)
-            Spacer()
             Button("Filter") {
                 showFilters.toggle()
             }
+            .frame(maxWidth: .infinity, minHeight: 40)
             .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(.purple))
             .foregroundColor(.white)
             .font(.title2)
@@ -34,31 +36,32 @@ struct ToolBarView: View {
             .sheet(isPresented: $showFilters, onDismiss: {
                 wageFileLoader.filterResults(with: filtering.filterOptions)
             }) {
-                FilterView(filters: filtering, isPresented: $showFilters)
+                FilterView(filters: filtering,
+                           wageFileLoader: wageFileLoader,
+                           isPresented: $showFilters)
             }
-            //.frame(width: 100)
-            Spacer()
             Button("+") {
                 showAddObjectView.toggle()
             }.sheet(isPresented: $showAddObjectView, onDismiss: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     wageFileLoader.loadAllFiles()
                     showSuccessAlert.toggle()
                 }
             }) {
                 AddObjectView(isShown: $showAddObjectView)
             }
+            .frame(maxWidth: .infinity, maxHeight: 40)
             .font(.title)
             .foregroundColor(.white)
             .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(.purple).aspectRatio(1/1, contentMode: .fit))
             .shadow(color: .gray, radius: 3, x: 0, y: 3)
-            .alert("Done", isPresented: $showSuccessAlert) {
+            .alert("Bedankt!", isPresented: $showSuccessAlert) {
                 Text("hi")
             } message: {
-                Text("Your wage was submitted to the database. Thank you very much for your contribution!")
+                Text("Je input is opgeslagen in de database. Bedankt voor je medewerking!")
             }
-            Spacer()
         }
+        .frame(maxHeight: 50)
         .buttonStyle(.bordered)
     }
 }

@@ -18,7 +18,7 @@ struct WageApp: App {
     
     var body: some Scene {
         WindowGroup {
-            UserView()
+            MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

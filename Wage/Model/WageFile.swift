@@ -23,8 +23,15 @@ enum GigType: String, CaseIterable, Identifiable {
     case club
     case festival
     case theater
-    case evenement
-    case promo
+    case privefeest
+    case bedrijfsfeest
+    case bruiloft
+    case musical 
+    case radio
+    case tv
+    case studiodag
+    case orkest
+    case repetitie
     case anders
 }
 
@@ -36,12 +43,16 @@ protocol WageFileManageable {
 
 class WageFiles: WageFileManageable {
     
-    private var networkDownload = NetworkDownload()
+    private var networkDownload: NetworkDownloadable
     var all: [WageFile] {
         get {
                 return PersistenceController.shared.loadAllObjects()
         }
         set {}
+    }
+    
+    init(networkDownload: NetworkDownloadable) {
+        self.networkDownload = networkDownload
     }
     
     func appendNewFile(_ file: WageFile) {

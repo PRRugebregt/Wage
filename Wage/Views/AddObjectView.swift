@@ -32,7 +32,7 @@ struct AddObjectView: View {
             }
             .padding()
             .cornerRadius(5)
-            Text("Type artiest: ")
+            Text("Grootte van show: ")
             Menu(artistTypeTitle) {
                 ForEach(ArtistType.allCases) { artistType in
                     Button(artistType.rawValue) {
@@ -53,6 +53,7 @@ struct AddObjectView: View {
             .onSubmit {
                 wageObjectCreator.wage = wageText
             }
+            .keyboardType(.decimalPad)
             .foregroundColor(.black)
             .padding()
             Spacer()

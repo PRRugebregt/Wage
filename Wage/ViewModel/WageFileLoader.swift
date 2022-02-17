@@ -11,33 +11,46 @@ import Firebase
 class WageFileLoader: ObservableObject {
     
     @Published var wageFiles: [WageFile] = []
-    private var networkDownload = NetworkDownload()
+    @Published var isLoading: Bool = false
     private var filters: FilterOptions?
+    var networkDownload: NetworkDownloadable? {
+        didSet {
+            loadAllFiles()
+        }
+    }
     var wageFileManageable: WageFileManageable? {
         didSet {
             loadAllFiles()
         }
     }
-    var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? true {
+    @Published var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? true {
         didSet {
             UserDefaults.standard.setValue(isLocal, forKey: "isLocal")
         }
     }
+    @Published var isPrettyView = UserDefaults.standard.object(forKey: "isPrettyView") as? Bool ?? false {
+        didSet {
+            UserDefaults.standard.setValue(isPrettyView, forKey: "isPrettyView")
+        }
+    }
     
     func loadAllFiles() {
+        wageFiles = []
         if isLocal {
             self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
             if filters != nil {
                 filterResults(with: filters!)
             }
         } else {
-            loadNetworkFiles()
+            isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.loadNetworkFiles()
+            }
         }
-
     }
     
     private func loadNetworkFiles() {
-        networkDownload.downloadAllData { queryDocuments in
+        networkDownload?.downloadAllData { queryDocuments in
             var wageFiles = [WageFile]()
             for file in queryDocuments {
                 let data = file.data()
@@ -51,6 +64,7 @@ class WageFileLoader: ObservableObject {
                 let wageFile = WageFile(id: id, wage: wage, artistType: artistType!, gigType: gigType!, yearsOfExperience: yearsOfExperience, didStudy: didStudy, instrument: instrument!)
                 wageFiles.append(wageFile)
             }
+            self.isLoading = false
             self.wageFiles = wageFiles
             if self.filters != nil {
                 self.filterResults(with: self.filters!)
@@ -59,6 +73,7 @@ class WageFileLoader: ObservableObject {
     }
     
     func sortFiles(by option: String) {
+        print(wageFiles.count)
         switch option {
         case "Gage":
             wageFiles.sort(by: {$0.wage > $1.wage})
@@ -74,6 +89,9 @@ class WageFileLoader: ObservableObject {
             wageFiles.sort(by: {$0.didStudy && !$1.didStudy})
         default :
             wageFiles.sort(by: {$0.wage > $1.wage})
+        }
+        for wage in wageFiles {
+            print(wage.wage)
         }
     }
     

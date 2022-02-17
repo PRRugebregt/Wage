@@ -13,32 +13,22 @@ struct WagesListView: View {
     @State var headers: [String] = [
         "Item"
     ]
-    @State private var isPrettyView = UserDefaults.standard.object(forKey: "isPrettyView") as? Bool ?? false {
-        didSet {
-            UserDefaults.standard.setValue(isPrettyView, forKey: "isPrettyView")
-        }
-    }
     
     var body: some View {
         GeometryReader() { geometry in
             VStack {
-                Button("Weergave modus veranderen") {
-                    isPrettyView.toggle()
-                }
-                .buttonStyle(.bordered)
                 ScrollView(.horizontal) {
-                    if !isPrettyView {
-                    List(headers, id: \.id) { header in
+                    if !wageFileLoader.isPrettyView {
                         HeaderView(size: geometry.size, wageFileLoader: wageFileLoader)
-                        .truncationMode(Text.TruncationMode.tail)
-                    }
-                    .listStyle(.inset)
-                    .frame(width: geometry.size.width * 1.65, height: 70)
+                            .padding(0.0)
+                            .background(.white)
+                            .frame(maxWidth: .infinity, maxHeight: 70)
+                        
                     } else {
 
                     }
                     List(wageFileLoader.wageFiles) { item in
-                        if !isPrettyView {
+                        if !wageFileLoader.isPrettyView {
                         HStack {
                             Text("\(wageFileLoader.wageFiles.firstIndex(where: {$0 == item})!)")
                                 .frame(width: geometry.size.width / 7)
@@ -55,6 +45,7 @@ struct WagesListView: View {
                                 .frame(width: geometry.size.width / 4.7)
                             Text(String(item.didStudy ? "Ja" : "Nee"))
                                 .frame(width: geometry.size.width / 4.2)
+                            Spacer()
                         }
                         } else {
                             PrettyCell(item: item, size: geometry.size)
@@ -62,12 +53,14 @@ struct WagesListView: View {
                     }
                     .frame(width: geometry.size.width * 1.65)
                 }
-                .listStyle(.inset)
-                .opacity(0.7)
-
-            }
+                }
+            .navigationBarTitle("")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .listStyle(.inset)
+            .opacity(0.7)
+            .animation(.easeInOut)
         }
-        .animation(.easeInOut)
     }
 }
 
@@ -78,23 +71,25 @@ struct PrettyCell: View {
     
     var body: some View {
         HStack {
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Gage: ").font(.title3).foregroundColor(.black)
                 Spacer()
                 Text("\(item.wage)").font(.title3).foregroundColor(.purple)
             }
-            VStack {
-                Text("Type artiest: ").font(.title3).foregroundColor(.black).truncationMode(.tail)
+            VStack(alignment: .leading) {
+                Text("Grootte: ").font(.title3).foregroundColor(.black).truncationMode(.tail)
                 Spacer()
                 Text("\(item.artistType.rawValue.capitalized)").font(.title2).foregroundColor(.purple)
             }
-            VStack {
-                Text("Type optreden:").font(.title3)
+            VStack(alignment: .leading) {
+                Text("Type:").font(.title3)
                 Spacer()
                 Text("\(item.gigType.rawValue)").font(.title2).foregroundColor(.purple)
             }
             Image("\(item.instrument.rawValue)").resizable().aspectRatio(1/1, contentMode: .fit)
+            Spacer()
         }
+        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(.white))
         .frame(width: size.width / 1.1, height: 60)
     }
 }
@@ -102,22 +97,25 @@ struct PrettyCell: View {
 struct HeaderView: View {
     
     let size: CGSize
-    @ObservedObject var wageFileLoader: WageFileLoader
+    var wageFileLoader: WageFileLoader
     
     var body: some View {
-        HStack {
+            HStack {
             Text("Index")
-            .frame(width: size.width / 7)
+                    .frame(width: size.width / 6.5)
             Button("Gage") {
                 wageFileLoader.sortFiles(by: "Gage")
+                print(1)
             }
             .frame(width: size.width / 6)
-            Button("Artiest Type") {
+            Button("Grootte") {
                 wageFileLoader.sortFiles(by: "Artiest Type")
+                print(2)
             }
             .frame(width: size.width / 6)
-            Button("Gig Type") {
+            Button("Type") {
                 wageFileLoader.sortFiles(by: "Gig Type")
+                print(3)
             }
             .frame(width: size.width / 6)
             Divider()
@@ -133,7 +131,11 @@ struct HeaderView: View {
                 wageFileLoader.sortFiles(by: "Gestudeerd")
             }
             .frame(width: size.width / 4.2)
+                Spacer()
         }
+        .padding()
+        .background(.white)
+        .foregroundColor(.black)
     }
     
 }

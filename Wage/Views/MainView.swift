@@ -11,6 +11,8 @@ import CoreData
 struct MainView: View {
     
     @ObservedObject private var wageFileLoader: WageFileLoader = WageFileLoader()
+    @State private var presentUserView = true
+    @State private var isLoading = false
     var filtering = Filtering()
     var wageFiles: [WageFile] {
         return wageFileLoader.wageFiles
@@ -20,31 +22,21 @@ struct MainView: View {
         _ = DependencyRouter(wageFileLoader: wageFileLoader)
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().tintColor = .purple
+        isLoading = wageFileLoader.isLoading
     }
     
     var body: some View {
         TabView {
-            NavigationView {
-                VStack {
-                    Button("Alleen eigen resultaten : \(wageFileLoader.isLocal ? "Ja" : "Nee")") {
-                        wageFileLoader.isLocal.toggle()
-                        wageFileLoader.loadAllFiles()
-                    }
-                    .buttonStyle(.bordered)
-                    WagesListView(wageFileLoader: wageFileLoader)
-                }
-                .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
-
-                .toolbar(content: {
-                    ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
-                        .background(.clear)
-                })
+            VStack(alignment: .center) {
+                ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
+                    .background(.clear)
+                WagesListView(wageFileLoader: wageFileLoader)
             }
+            .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
             .tabItem {
                 Label("Je gages", systemImage: "music.note")
                     .background(.white)
             }
-
             AverageView(wageFiles: wageFiles)
                 .tabItem {
                     Label("Je Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
@@ -53,9 +45,23 @@ struct MainView: View {
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")
                 }
+            
+            if wageFileLoader.isLoading {
+                Spinner()
+                    .background(.clear)
+            } else {
+                
+            }
+                
         }
-        .navigationViewStyle(.stack)
-        
+        .sheet(isPresented: $presentUserView, onDismiss: {
+            
+        }, content: {
+            UserView(isPresented: $presentUserView)
+        })
+        .navigationBarHidden(true)
+        .navigationTitle("")
+
     }
 }
 
@@ -90,6 +96,7 @@ struct AverageView: View {
     }
     
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -18,21 +18,36 @@ struct ToolBarView: View {
         VStack {
             Text("Wage")
                 .font(.largeTitle)
-                .foregroundColor(.white)
                 .fontWeight(.light)
+                .foregroundColor(.white)
                 .padding()
             HStack {
-                Button("Remove Filters") {
+                Button() {
                     filtering.reset()
                     wageFileLoader.removeFilters()
                     wageFileLoader.loadAllFiles()
+                } label: {
+                    HStack {
+                    Text("Filters").fontWeight(.light).font(.body)
+                    Image(systemName: "delete.left")
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(.clear))
+                .frame(maxWidth: .infinity, minHeight: 40)
+                .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")))
+                .foregroundColor(.white)
+                .font(.body)
                 .shadow(color: .gray, radius: 3, x: 0, y: 3)
                 .opacity(filtering.isFiltered ? 1 : 0)
-                Button("Filter") {
+                .padding()
+                Button {
                     showFilters.toggle()
+                } label: {
+                    HStack {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    Text("Add Filter")
+                            .fontWeight(.light)
+                            .font(.body)
+                    }
                 }
                 .frame(maxWidth: .infinity, minHeight: 40)
                 .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")))
@@ -60,7 +75,6 @@ struct ToolBarView: View {
                 .font(.title)
                 .foregroundColor(.white)
                 .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")).aspectRatio(1/1, contentMode: .fit))
-//                .shadow(color: Color("blueIsh-2"), radius: 2, x: 0, y: 2)
                 .alert("Bedankt!", isPresented: $showSuccessAlert) {
                     Text("hi")
                 } message: {

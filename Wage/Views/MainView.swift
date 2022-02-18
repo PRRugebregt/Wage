@@ -27,21 +27,23 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            ZStack {
-            VStack(alignment: .center) {
-                ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
-                    .background(.clear)
-                WagesListView(wageFileLoader: wageFileLoader)
-            }
-            .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
-                if wageFileLoader.isLoading {
-                    Spinner()
-                        .background(.clear)
-                } else {
+            NavigationView {
+                ZStack {
+                    VStack(alignment: .center) {
+                        ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
+                            .background(.clear)
+                        WagesListView(wageFileLoader: wageFileLoader)
+                    }
+                    .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    if wageFileLoader.isLoading {
+                        Spinner()
+                            .background(.clear)
+                    } else {
+                        
+                    }
                     
                 }
-
-        }
+            }
             .tabItem {
                 Label("Je gages", systemImage: "music.note")
                     .background(.white)
@@ -54,7 +56,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")
                 }
-            }
+        }
         .sheet(isPresented: $presentUserView, onDismiss: {
             
         }, content: {

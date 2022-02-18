@@ -36,7 +36,7 @@ struct FilterView: View {
                 Button("\(wageFileLoader.isPrettyView ? "Compact" : "Tabel")") {
                     wageFileLoader.isPrettyView.toggle()
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(Color("lightBlue"))
                 .buttonStyle(.bordered)
                 Divider()
                 Text("Online resultaten weergeven: ")
@@ -46,7 +46,7 @@ struct FilterView: View {
                     wageFileLoader.isLocal.toggle()
                     wageFileLoader.loadAllFiles()
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(Color("lightBlue"))
                 .buttonStyle(.bordered)
                 Divider()
             }
@@ -63,7 +63,7 @@ struct FilterView: View {
                         }
                     }
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(Color("lightBlue"))
                 .padding()
                 .cornerRadius(5)
                 Divider()
@@ -79,7 +79,7 @@ struct FilterView: View {
                         }
                     }
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(Color("lightBlue"))
                 .padding()
                 .cornerRadius(5)
             }
@@ -105,7 +105,7 @@ struct FilterView: View {
             Button("Filters toepassen", action: {
                 isPresented = false
             })
-                .background(.blue)
+                .background(Color("blueIsh-3"))
                 .foregroundColor(.white)
                 .cornerRadius(15)
                 .buttonStyle(.bordered)
@@ -113,7 +113,7 @@ struct FilterView: View {
         }
         .padding()
         .foregroundColor(.white)
-        .background(LinearGradient(colors: [Color("toolbar"),Color("userView")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
         }
     }
     

@@ -98,7 +98,7 @@ class WageFileLoader: ObservableObject {
     func filterResults(with options: FilterOptions) {
         self.filters = options
         print(options)
-        var filteredWageFiles = self.wageFiles ?? []
+        var filteredWageFiles = self.wageFiles
         if let gigType = options.gigType {
             filteredWageFiles = filteredWageFiles.filter({$0.gigType == gigType})
         }

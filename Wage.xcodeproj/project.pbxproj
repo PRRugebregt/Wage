@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180675C27C029C300EAD6F9 /* PrettyCell.swift */; };
 		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
 		018B7A6227B5BDF400068F7F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6127B5BDF400068F7F /* MainView.swift */; };
 		018B7A6427B5BDF500068F7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018B7A6327B5BDF500068F7F /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0180675C27C029C300EAD6F9 /* PrettyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyCell.swift; sourceTree = "<group>"; };
 		018B7A5C27B5BDF400068F7F /* Wage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B7A5F27B5BDF400068F7F /* WageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageApp.swift; sourceTree = "<group>"; };
 		018B7A6127B5BDF400068F7F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				019091A227BB2D7400B84AED /* HelpView.swift */,
 				019091A827BE449900B84AED /* Spinner.swift */,
 				019091AC27BE7CF200B84AED /* RangeSlider.swift */,
+				0180675C27C029C300EAD6F9 /* PrettyCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				0190919627B8320800B84AED /* AddObjectView.swift in Sources */,
 				0190918627B7B13400B84AED /* WageFileLoader.swift in Sources */,
 				019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */,
+				0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */,
 				0190918E27B80E4D00B84AED /* WageObjectCreator.swift in Sources */,
 				018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */,
 				0190919B27B835E600B84AED /* UserView.swift in Sources */,

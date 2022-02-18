@@ -49,6 +49,7 @@ struct WagesListView: View {
                         }
                         } else {
                             PrettyCell(item: item, size: geometry.size)
+
                         }
                     }
                     .frame(width: geometry.size.width * 1.65)
@@ -61,37 +62,6 @@ struct WagesListView: View {
             .opacity(0.7)
             .animation(.easeInOut)
         }
-    }
-}
-
-struct PrettyCell: View {
-    
-    var item: WageFile
-    let size: CGSize
-    let colors: [String] = [
-        "blueIsh", "blueIsh-1", "blueIsh-2", "blueIsh-3"
-    ]
-    
-    var body: some View {
-        HStack {
-            Image("\(item.instrument.rawValue)").resizable().aspectRatio(1/1, contentMode: .fit)
-                .foregroundColor(.white)
-                .padding(.leading)
-            VStack(alignment: .leading) {
-                Spacer()
-                Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
-                Spacer()
-                Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
-                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
-                Spacer()
-            }
-            .padding()
-            Spacer()
-            Image(systemName: "chevron.right").foregroundColor(.white).padding()
-        }
-        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("\(colors[Int.random(in: 0...3)])"))
-        .shadow(color: .gray, radius: 3, x: 0, y: 3))
-        .frame(width: size.width * 0.85, height: 80, alignment: .leading)
     }
 }
 

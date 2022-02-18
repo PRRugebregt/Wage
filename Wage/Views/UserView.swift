@@ -18,16 +18,31 @@ struct UserView: View {
         NavigationView {
             ZStack {
                 Rectangle().foregroundColor(Color("userView")).ignoresSafeArea()
-            VStack {
+                VStack {
+                    VStack {
+                        HStack {
                 Text("Jouw Profiel")
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .font(.largeTitle)
-                    .fontWeight(.light)
-                Group {
+                            Image(systemName: "person.fill")
+                                .font(.largeTitle)
+                        }
+                    Text("Deze informatie wordt toegevoegd aan je gages")
+                            .fontWeight(.thin)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color("blueIsh-2"))
+                    }
+                    .padding(5)
+                    .ignoresSafeArea()
                     Spacer()
+                    VStack {
+                Group {
+                    Spacer(minLength: 10)
+                    HStack {
                     Text("Welk instrument speel je?")
-                        .font(.title3)
                         .fontWeight(.thin)
+                        Image(systemName: "pianokeys")
+                    }
                     Menu("\(user.user.instrument.rawValue)") {
                         ForEach(Instrument.allCases) { instrument in
                             Button(instrument.rawValue) {
@@ -40,10 +55,14 @@ struct UserView: View {
                     .font(.title3)
                     .foregroundColor(.white)
                     .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
+                }
+                Group {
                     Divider()
+                    HStack {
                     Text("Hoeveel jaar ervaring heb je als professioneel muzikant")
-                        .font(.title3)
                         .fontWeight(.thin)
+                        Image(systemName: "music.note")
+                    }
                     TextField("\(user.user.yearsOfExperience)", text: $yearsOfExperience)
                         .foregroundColor(.black)
                         .frame(width: 200, alignment: .center)
@@ -55,9 +74,11 @@ struct UserView: View {
                         .frame(alignment: .center)
                         .keyboardType(.decimalPad)
                     Divider()
-                    Text("Heb je muziek gestudeerd? (MBO, HBO)")
-                        .font(.title3)
-                        .fontWeight(.thin)
+                    HStack {
+                        Text("Heb je muziek gestudeerd? (MBO, HBO)")
+                            .fontWeight(.thin)
+                        Image(systemName: "book.closed")
+                    }
                     HStack{
                         Button("Ja") {
                             user.updateDidStudy(true)
@@ -86,6 +107,9 @@ struct UserView: View {
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
                 .foregroundColor(.white)
+                        Spacer()
+                        
+                }
             }
             .foregroundColor(.black)
             .textFieldStyle(.roundedBorder)
@@ -95,6 +119,7 @@ struct UserView: View {
             .navigationBarHidden(true)
             .navigationTitle("")
         }
+        .opacity(0.8)
     }
 }
 

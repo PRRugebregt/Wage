@@ -37,15 +37,15 @@ class WageFileLoader: ObservableObject {
     func loadAllFiles() {
         wageFiles = []
         if isLocal {
+            print("local")
             self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
             if filters != nil {
                 filterResults(with: filters!)
             }
         } else {
+            print("Online")
             isLoading = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.loadNetworkFiles()
-            }
+            self.loadNetworkFiles()
         }
     }
     
@@ -98,7 +98,7 @@ class WageFileLoader: ObservableObject {
     func filterResults(with options: FilterOptions) {
         self.filters = options
         print(options)
-        var filteredWageFiles = wageFileManageable?.all ?? []
+        var filteredWageFiles = self.wageFiles ?? []
         if let gigType = options.gigType {
             filteredWageFiles = filteredWageFiles.filter({$0.gigType == gigType})
         }

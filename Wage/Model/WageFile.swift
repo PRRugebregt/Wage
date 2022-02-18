@@ -36,7 +36,7 @@ enum GigType: String, CaseIterable, Identifiable {
 }
 
 protocol WageFileManageable {
-    var all: [WageFile] { get }
+    var all: [WageFile] { get set }
     func appendNewFile(_ file: WageFile)
     func fetchAllFiles() -> [WageFile]
 }

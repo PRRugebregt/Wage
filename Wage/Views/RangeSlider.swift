@@ -10,9 +10,16 @@ import SwiftUI
 struct RangeSlider: View {
     
     var filtering: Filtering
-    @State var positionMinimum: CGFloat = 0
-    @State var positionMaximum: CGFloat = 50
-    let screenWidth = UIScreen.main.bounds.size.width - 30
+    @State var positionMinimum: CGFloat
+    @State var positionMaximum: CGFloat 
+    let screenWidth: CGFloat
+    
+    init(filtering: Filtering, screenWidth: CGFloat) {
+        self.screenWidth = screenWidth
+        self.filtering = filtering
+        positionMinimum = CGFloat(filtering.minimumWage) / 1000 * screenWidth
+        positionMaximum = CGFloat(filtering.maximumWage) / 1000 * screenWidth
+    }
     
     var body: some View {
         VStack {
@@ -21,12 +28,13 @@ struct RangeSlider: View {
                     .foregroundColor(.black).opacity(0.2)
                     .frame(height: 6)
                 Rectangle()
-                    .foregroundColor(.black)
+                    .foregroundColor(.clear)
+                    .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-2")], startPoint: .topLeading, endPoint: .bottomTrailing))
                     .frame(width: positionMaximum - positionMinimum + 18, height: 6)
                     .offset(x: positionMinimum)
                 HStack(spacing: 0) {
                     Circle()
-                        .fill(.black)
+                        .fill(Color("blueIsh-3"))
                         .frame(width: 18, height: 18)
                         .offset(x: positionMinimum)
                         .gesture(
@@ -39,7 +47,7 @@ struct RangeSlider: View {
                                 })
                         )
                     Circle()
-                        .fill(.black)
+                        .fill(Color("blueIsh-3"))
                         .frame(width: 18, height: 18)
                         .offset(x: positionMaximum)
                         .gesture(
@@ -47,7 +55,6 @@ struct RangeSlider: View {
                                 .onChanged({ value in
                                     if value.location.x >= positionMinimum && value.location.x <= screenWidth {
                                         self.positionMaximum = value.location.x
-                                        print(positionMaximum / screenWidth)
                                         filtering.changeWageMaximum(with: positionMaximum / screenWidth)
                                     }
                                 })
@@ -61,6 +68,6 @@ struct RangeSlider: View {
 
 struct RangeSlider_Previews: PreviewProvider {
     static var previews: some View {
-        RangeSlider(filtering: Filtering())
+        RangeSlider(filtering: Filtering(), screenWidth: 500)
     }
 }

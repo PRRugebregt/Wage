@@ -17,14 +17,17 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Rectangle().foregroundColor(.orange).ignoresSafeArea()
+                Rectangle().foregroundColor(Color("userView")).ignoresSafeArea()
             VStack {
-                Text("Your Profile")
+                Text("Jouw Profiel")
+                    .foregroundColor(.white)
                     .font(.largeTitle)
+                    .fontWeight(.light)
                 Group {
                     Spacer()
                     Text("Welk instrument speel je?")
-                        .font(.title2)
+                        .font(.title3)
+                        .fontWeight(.thin)
                     Menu("\(user.user.instrument.rawValue)") {
                         ForEach(Instrument.allCases) { instrument in
                             Button(instrument.rawValue) {
@@ -32,11 +35,15 @@ struct UserView: View {
                             }
                         }
                     }
-                    .font(.title)
-                    .foregroundColor(.blue)
+                    .padding()
+                    .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                    .font(.title3)
+                    .foregroundColor(.white)
+                    .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
                     Divider()
                     Text("Hoeveel jaar ervaring heb je als professioneel muzikant")
-                        .font(.title2)
+                        .font(.title3)
+                        .fontWeight(.thin)
                     TextField("\(user.user.yearsOfExperience)", text: $yearsOfExperience)
                         .foregroundColor(.black)
                         .frame(width: 200, alignment: .center)
@@ -44,20 +51,22 @@ struct UserView: View {
                             let yearsOfExperienceInt = Int(yearsOfExperience)!
                             user.updateYearsExperience(amount: yearsOfExperienceInt)
                         }
-                        .font(.title2)
+                        .font(.title3)
                         .frame(alignment: .center)
                         .keyboardType(.decimalPad)
                     Divider()
                     Text("Heb je muziek gestudeerd? (MBO, HBO)")
+                        .font(.title3)
+                        .fontWeight(.thin)
                     HStack{
                         Button("Ja") {
                             user.updateDidStudy(true)
                         }
-                        .background(user.user.didStudy ? .purple : .clear)
+                        .background(user.user.didStudy ? Color("toolbar") : .clear)
                         Button("Nee") {
                             user.updateDidStudy(false)
                         }
-                        .background(user.user.didStudy ? .clear : Color.purple)
+                        .background(user.user.didStudy ? .clear : Color("toolbar"))
                     }
                     .buttonStyle(.bordered)
                     .font(.title2)
@@ -75,7 +84,7 @@ struct UserView: View {
                 .buttonStyle(.bordered)
                 .font(.title3)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 5).foregroundColor(.purple))
+                .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
                 .foregroundColor(.white)
             }
             .foregroundColor(.black)

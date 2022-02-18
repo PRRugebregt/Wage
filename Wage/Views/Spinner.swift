@@ -32,7 +32,8 @@ struct Spinner: View {
         }.frame(width: 80, height: 80)
             .background(.clear)
         .onAppear() {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (mainTimer) in
+            self.animateSpinner()
+            Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (mainTimer) in
                 self.animateSpinner()
                 self.animateSpinner2()
             }

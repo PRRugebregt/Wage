@@ -21,18 +21,27 @@ struct MainView: View {
     init() {
         _ = DependencyRouter(wageFileLoader: wageFileLoader)
         UITabBar.appearance().backgroundColor = .white
-        UITabBar.appearance().tintColor = .purple
+        UITabBar.appearance().tintColor = UIColor(named: "blueIsh")
         isLoading = wageFileLoader.isLoading
     }
     
     var body: some View {
         TabView {
+            ZStack {
             VStack(alignment: .center) {
                 ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
                     .background(.clear)
                 WagesListView(wageFileLoader: wageFileLoader)
             }
-            .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
+                if wageFileLoader.isLoading {
+                    Spinner()
+                        .background(.clear)
+                } else {
+                    
+                }
+
+        }
             .tabItem {
                 Label("Je gages", systemImage: "music.note")
                     .background(.white)
@@ -45,15 +54,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")
                 }
-            
-            if wageFileLoader.isLoading {
-                Spinner()
-                    .background(.clear)
-            } else {
-                
             }
-                
-        }
         .sheet(isPresented: $presentUserView, onDismiss: {
             
         }, content: {
@@ -61,7 +62,6 @@ struct MainView: View {
         })
         .navigationBarHidden(true)
         .navigationTitle("")
-
     }
 }
 

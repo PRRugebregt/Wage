@@ -68,29 +68,30 @@ struct PrettyCell: View {
     
     var item: WageFile
     let size: CGSize
+    let colors: [String] = [
+        "blueIsh", "blueIsh-1", "blueIsh-2", "blueIsh-3"
+    ]
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text("Gage: ").font(.title3).foregroundColor(.black)
-                Spacer()
-                Text("\(item.wage)").font(.title3).foregroundColor(.purple)
-            }
-            VStack(alignment: .leading) {
-                Text("Grootte: ").font(.title3).foregroundColor(.black).truncationMode(.tail)
-                Spacer()
-                Text("\(item.artistType.rawValue.capitalized)").font(.title2).foregroundColor(.purple)
-            }
-            VStack(alignment: .leading) {
-                Text("Type:").font(.title3)
-                Spacer()
-                Text("\(item.gigType.rawValue)").font(.title2).foregroundColor(.purple)
-            }
             Image("\(item.instrument.rawValue)").resizable().aspectRatio(1/1, contentMode: .fit)
+                .foregroundColor(.white)
+                .padding(.leading)
+            VStack(alignment: .leading) {
+                Spacer()
+                Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
+                Spacer()
+                Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
+                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                Spacer()
+            }
+            .padding()
             Spacer()
+            Image(systemName: "chevron.right").foregroundColor(.white).padding()
         }
-        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(.white))
-        .frame(width: size.width / 1.1, height: 60)
+        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("\(colors[Int.random(in: 0...3)])"))
+        .shadow(color: .gray, radius: 3, x: 0, y: 3))
+        .frame(width: size.width * 0.85, height: 80, alignment: .leading)
     }
 }
 
@@ -143,6 +144,7 @@ struct HeaderView: View {
 struct WagesListView_Previews: PreviewProvider {
     static var previews: some View {
         WagesListView(wageFileLoader: WageFileLoader())
+        PrettyCell(item: WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 15, didStudy: true, instrument: .Drums), size: CGSize(width: 400, height: 100))
     }
 }
 
@@ -152,3 +154,4 @@ extension String: Identifiable {
         return hash
     }
 }
+

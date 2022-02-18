@@ -21,31 +21,40 @@ struct FilterView: View {
     @State var artistTypeTitle = "Kiezen"
     
     var body: some View {
+        GeometryReader() { geometry in
+
         VStack(alignment: .leading) {
             Text("Filters")
                 .font(.largeTitle)
+                .fontWeight(.thin)
             Spacer()
             Divider()
 
             Group {
                 Text("Weergave Modus: ")
-                    .foregroundColor(.black)
+                    .fontWeight(.thin)
                 Button("\(wageFileLoader.isPrettyView ? "Compact" : "Tabel")") {
                     wageFileLoader.isPrettyView.toggle()
                 }
+                .foregroundColor(.blue)
                 .buttonStyle(.bordered)
                 Divider()
                 Text("Online resultaten weergeven: ")
+                    .fontWeight(.thin)
+
                 Button("\(wageFileLoader.isLocal ? "Nee" : "Ja")") {
                     wageFileLoader.isLocal.toggle()
                     wageFileLoader.loadAllFiles()
                 }
+                .foregroundColor(.blue)
                 .buttonStyle(.bordered)
                 Divider()
             }
             
             Group {
                 Text("Type optreden: ")
+                    .fontWeight(.thin)
+
                 Menu(gigTypeTitle) {
                     ForEach(gigTypes) { gigType in
                         Button(gigType.rawValue) {
@@ -54,11 +63,14 @@ struct FilterView: View {
                         }
                     }
                 }
+                .foregroundColor(.blue)
                 .padding()
                 .cornerRadius(5)
                 Divider()
 
                 Text("Grootte: ")
+                    .fontWeight(.thin)
+
                 Menu(artistTypeTitle) {
                     ForEach(artistTypes) { artistType in
                         Button(artistType.rawValue) {
@@ -67,19 +79,26 @@ struct FilterView: View {
                         }
                     }
                 }
+                .foregroundColor(.blue)
                 .padding()
                 .cornerRadius(5)
             }
             Divider()
             Group {
                 Text("Gage bedrag:")
+                    .fontWeight(.thin)
+
                 Spacer()
                 HStack {
                     Text("\(filters.minimumWage)")
+                        .fontWeight(.thin)
+
                     Spacer()
                     Text("\(filters.maximumWage)")
+                        .fontWeight(.thin)
+
                 }
-                RangeSlider(filtering: filters)
+                RangeSlider(filtering: filters, screenWidth: geometry.size.width * 0.8 - 30)
                 Divider()
             }
             Spacer()
@@ -90,9 +109,12 @@ struct FilterView: View {
                 .foregroundColor(.white)
                 .cornerRadius(15)
                 .buttonStyle(.bordered)
+        
         }
         .padding()
-        .background(LinearGradient(colors: [.orange,.purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .foregroundColor(.white)
+        .background(LinearGradient(colors: [Color("toolbar"),Color("userView")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        }
     }
     
 }

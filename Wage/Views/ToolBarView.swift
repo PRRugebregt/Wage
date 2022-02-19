@@ -8,62 +8,22 @@
 import SwiftUI
 
 struct ToolBarView: View {
-    @State private var showFilters = false
     @State private var showAddObjectView = false
     @State private var showSuccessAlert = false
     var wageFileLoader: WageFileLoader
+    @State private var showFilters = false
     @ObservedObject var filtering: Filtering
     
     var body: some View {
         VStack {
-            Text("Wage")
-                .font(.largeTitle)
-                .fontWeight(.light)
-                .foregroundColor(.white)
-                .padding()
             HStack {
-                Button() {
-                    filtering.reset()
-                    wageFileLoader.removeFilters()
-                    wageFileLoader.loadAllFiles()
-                } label: {
-                    HStack {
-                    Text("Filters").fontWeight(.light).font(.body)
-                    Image(systemName: "delete.left")
-                    }
-                }
-                .frame(maxWidth: .infinity, minHeight: 40)
-                .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")))
-                .foregroundColor(.white)
-                .font(.body)
-                .shadow(color: .gray, radius: 3, x: 0, y: 3)
-                .opacity(filtering.isFiltered ? 1 : 0)
-                .padding()
+                Spacer()
                 Button {
-                    showFilters.toggle()
-                } label: {
-                    HStack {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                    Text("Add Filter")
-                            .fontWeight(.light)
-                            .font(.body)
-                    }
-                }
-                .frame(maxWidth: .infinity, minHeight: 40)
-                .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")))
-                .foregroundColor(.white)
-                .font(.title2)
-                .shadow(color: .gray, radius: 3, x: 0, y: 3)
-                .sheet(isPresented: $showFilters, onDismiss: {
-                    wageFileLoader.filterResults(with: filtering.filterOptions)
-                }) {
-                    FilterView(filters: filtering,
-                               wageFileLoader: wageFileLoader,
-                               isPresented: $showFilters)
-                }
-                Button("+") {
                     showAddObjectView.toggle()
-                }.sheet(isPresented: $showAddObjectView, onDismiss: {
+                } label: {
+                    Image(systemName: "plus.circle")
+                }
+                .sheet(isPresented: $showAddObjectView, onDismiss: {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         wageFileLoader.loadAllFiles()
                         showSuccessAlert.toggle()
@@ -71,10 +31,9 @@ struct ToolBarView: View {
                 }) {
                     AddObjectView(isShown: $showAddObjectView)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 40)
+                .padding()
                 .font(.title)
                 .foregroundColor(.white)
-                .background(RoundedRectangle(cornerRadius: 5, style: .circular).foregroundColor(Color("blueIsh")).aspectRatio(1/1, contentMode: .fit))
                 .alert("Bedankt!", isPresented: $showSuccessAlert) {
                     Text("hi")
                 } message: {
@@ -83,7 +42,7 @@ struct ToolBarView: View {
             }
             .frame(maxHeight: 50)
         }
-        .background(Color("toolbar"))
+        .background(Color("blueIsh-2"))
     }
 }
 

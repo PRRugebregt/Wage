@@ -26,6 +26,11 @@ class Filtering: ObservableObject {
         isFiltered = true
     }
     
+    func changeInstrument(to instrument: Instrument) {
+        filterOptions.changeInstrument(to: instrument)
+        isFiltered = true
+    }
+    
     func changeArtistType(to option: ArtistType) {
         filterOptions.changeArtistType(to: option)
         isFiltered = true

@@ -13,7 +13,7 @@ struct MainView: View {
     @ObservedObject private var wageFileLoader: WageFileLoader = WageFileLoader()
     @State private var presentUserView = true
     @State private var isLoading = false
-    var filtering = Filtering()
+    private var filtering = Filtering()
     var wageFiles: [WageFile] {
         return wageFileLoader.wageFiles
     }
@@ -32,7 +32,7 @@ struct MainView: View {
                     VStack(alignment: .center) {
                         ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
                             .background(.clear)
-                        WagesListView(wageFileLoader: wageFileLoader)
+                        WagesListView(wageFileLoader: wageFileLoader, filtering: filtering)
                     }
                     .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
                     if wageFileLoader.isLoading {
@@ -44,6 +44,7 @@ struct MainView: View {
                     
                 }
             }
+            .navigationViewStyle(.stack)
             .tabItem {
                 Label("Je gages", systemImage: "music.note")
                     .background(.white)
@@ -79,21 +80,34 @@ struct AverageView: View {
     }
     
     var body: some View {
+        ZStack {
+            Rectangle().foregroundColor(.clear).background(LinearGradient(colors: [Color("toolbar"),Color("lightBlue"),Color("userView")], startPoint: .topLeading, endPoint: .bottomTrailing))
         VStack {
             Spacer()
-            Text("Gemiddelde gage")
-                .font(.title2)
-            Text("\(averageCalculator.averageFee)")
-                .font(.title)
-            Text("Gemiddeld aantal jaar ervaring")
-                .font(.title2)
-            Text("\(averageCalculator.averageExperience)")
-                .font(.title)
-            Text("Meest gespeeld bij")
-                .font(.title2)
-            Text("\(averageCalculator.averageGigType.rawValue)")
-                .font(.title)
+            Group {
+                Text("Totaal aantal resultaten")
+                    .font(.title2)
+                Text("\(wageFiles.count)")
+                    .font(.title)
+                Text("Gemiddelde gage")
+                    .font(.title2)
+                Text("\(averageCalculator.averageFee)")
+                    .font(.title)
+                Text("Meest gespeeld bij")
+                    .font(.title2)
+                Text("\(averageCalculator.averageGigType.rawValue)")
+                    .font(.title)
+                Text("Gemiddeld aantal jaar ervaring")
+                    .font(.title2)
+                Text("\(averageCalculator.averageExperience)")
+                    .font(.title)
+                Text("Meest voorkomende instrument")
+                    .font(.title2)
+                Text("\(averageCalculator.averageInstrument.rawValue)")
+                    .font(.title)
+            }
             Spacer()
+        }
         }
     }
     

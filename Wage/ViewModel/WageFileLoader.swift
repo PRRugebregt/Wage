@@ -105,6 +105,9 @@ class WageFileLoader: ObservableObject {
         if let artistType = options.artistType {
             filteredWageFiles = filteredWageFiles.filter({$0.artistType == artistType})
         }
+        if let instrumentType = options.instrumentType {
+            filteredWageFiles = filteredWageFiles.filter({$0.instrument == instrumentType})
+        }
         if let maximum = options.wageHighLimit {
             filteredWageFiles = filteredWageFiles.filter({$0.wage < maximum})
         }

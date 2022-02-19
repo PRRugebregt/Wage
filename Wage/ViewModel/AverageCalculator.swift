@@ -18,11 +18,13 @@ class AverageCalculator {
     var averageFee: Int = 0
     var averageExperience: Int = 0
     var averageGigType: GigType = .anders
+    var averageInstrument: Instrument = .Anders
     
     private func calculateValues() {
         averageFee = calculateFee()
         averageGigType = calculateGigType()
         averageExperience = calculateYears()
+        averageInstrument = calculateInstrument()
     }
     
     private func calculateFee() -> Int {
@@ -61,5 +63,24 @@ class AverageCalculator {
         sum = sum / wageFiles.count
         return sum
     }
+    
+    private func calculateInstrument() -> Instrument {
+        guard wageFiles.count > 0 else { return .Anders}
+        var counts = [Instrument]()
+        for file in wageFiles {
+            counts.append(file.instrument)
+        }
+        let freq = counts.frequency
+        let maxVal = freq.values.max()
+        var mostGigged: Instrument?
+        for f in freq {
+            if f.value == maxVal {
+                mostGigged = f.key
+            }
+        }
+        return mostGigged!
+    }
+    
+    
     
 }

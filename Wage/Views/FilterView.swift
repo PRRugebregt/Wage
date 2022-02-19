@@ -11,12 +11,14 @@ import SwiftUI
 struct FilterView: View {
     
     @ObservedObject var filters: Filtering
+    let instrumentTypes = Instrument.allCases
     let gigTypes = GigType.allCases
     let artistTypes = ArtistType.allCases
     @ObservedObject var wageFileLoader: WageFileLoader
     @Binding var isPresented: Bool
     @State var minimum: String = ""
     @State var maximum: String = ""
+    @State var instrumentTypeTitle = "Kiezen"
     @State var gigTypeTitle = "Kiezen"
     @State var artistTypeTitle = "Kiezen"
     
@@ -52,6 +54,21 @@ struct FilterView: View {
             }
             
             Group {
+                Text("Instrument: ")
+                    .fontWeight(.thin)
+
+                Menu(instrumentTypeTitle) {
+                    ForEach(instrumentTypes) { instrument in
+                        Button(instrument.rawValue) {
+                            instrumentTypeTitle = instrument.rawValue
+                            filters.changeInstrument(to: instrument)
+                        }
+                    }
+                }
+                .foregroundColor(Color("lightBlue"))
+                .padding(.horizontal)
+                .cornerRadius(5)
+                Divider()
                 Text("Type optreden: ")
                     .fontWeight(.thin)
 
@@ -64,7 +81,7 @@ struct FilterView: View {
                     }
                 }
                 .foregroundColor(Color("lightBlue"))
-                .padding()
+                .padding(.horizontal)
                 .cornerRadius(5)
                 Divider()
 
@@ -80,7 +97,7 @@ struct FilterView: View {
                     }
                 }
                 .foregroundColor(Color("lightBlue"))
-                .padding()
+                .padding(.horizontal)
                 .cornerRadius(5)
             }
             Divider()
@@ -111,9 +128,10 @@ struct FilterView: View {
                 .buttonStyle(.bordered)
         
         }
-        .padding()
+        .padding(.horizontal)
         .foregroundColor(.white)
         .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .ignoresSafeArea()
         }
     }
     

@@ -19,7 +19,7 @@ enum Instrument: String, CaseIterable, Identifiable {
     case Bas
     case Viool
     case Cello
-    case Contrbas
+    case Contrabas
     case Percussie
     case Saxofoon
     case Trompet

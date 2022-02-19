@@ -58,7 +58,10 @@ struct PrettyDetail: View {
     
     var body: some View {
         ZStack {
-            Image(item.instrument.rawValue).opacity(0.1)
+            Image(item.instrument.rawValue)
+//                .resizable()
+                .opacity(0.1)
+//                .frame(width: size.height, height: size.height, alignment: .center)
         VStack {
             Image(item.instrument.rawValue).resizable().frame(width: size.width * 0.5, height: size.width * 0.5).aspectRatio(1/1, contentMode: .fit)
             Spacer()

@@ -22,6 +22,7 @@ struct AddObjectView: View {
                 Text("Voeg nieuwe gage toe")
                     .font(.largeTitle)
                     .fontWeight(.light)
+                    .padding()
                 Spacer()
                 Text("Type optreden: ").font(.title3).fontWeight(.thin)
                 Menu(gigTypeTitle) {
@@ -58,10 +59,12 @@ struct AddObjectView: View {
                 .onSubmit {
                     wageObjectCreator.wage = wageText
                 }
+                .frame(width: 200)
                 .font(.title3)
                 .background(.white)
                 .foregroundColor(.black)
                 .textFieldStyle(.roundedBorder)
+                .cornerRadius(10)
                 .keyboardType(.decimalPad)
                 .padding()
             }
@@ -71,7 +74,7 @@ struct AddObjectView: View {
                 Button("Annuleren") {
                     isShown = false
                 }
-                .background(Color("blueIsh-2"))
+                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                 Button("Gage toevoegen") {
                     guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen" else {
                         showAlert.toggle()
@@ -80,7 +83,7 @@ struct AddObjectView: View {
                     wageObjectCreator.createObject()
                     isShown = false
                 }
-                .background(Color("blueIsh-2"))
+                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                 .alert("Oops", isPresented: $showAlert) {
                     Text("Hi")
                 } message: {
@@ -88,12 +91,27 @@ struct AddObjectView: View {
                 }
 
             }
-            .buttonStyle(.borderedProminent)
+            .padding()
+            .buttonStyle(.bordered)
             }
         }
+        .frame(maxWidth: .infinity)
         .font(.title3)
+        .foregroundColor(.white)
         .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
     
 }
 
+struct AddObjectView_Previews: PreviewProvider {
+    static var previews: some View {
+        PreviewAddObject()
+    }
+}
+
+struct PreviewAddObject: View {
+    @State var isShown = true
+    var body: some View {
+        AddObjectView(isShown: $isShown)
+    }
+}

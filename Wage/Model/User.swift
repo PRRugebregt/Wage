@@ -55,7 +55,7 @@ struct User {
         yearsOfExperience = Int(users[0].yearsOfExperience)
         instrument = Instrument(rawValue: users[0].instrument!)!
         didStudy = users[0].didStudy
-        print(didStudy)
+        NotificationCenter.default.post(Notification(name: .shareUser, object: nil, userInfo: ["user":self]))        
     }
     
     mutating func updateInstrument(with instrument: Instrument) {

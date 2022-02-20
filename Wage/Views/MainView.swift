@@ -14,6 +14,7 @@ struct MainView: View {
     @State private var presentUserView = true
     @State private var isLoading = false
     private var filtering = Filtering()
+    private var userCreator = UserCreator()
     var wageFiles: [WageFile] {
         return wageFileLoader.wageFiles
     }
@@ -30,7 +31,7 @@ struct MainView: View {
             NavigationView {
                 ZStack {
                     VStack(alignment: .center) {
-                        ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
+                        ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering, userCreator: userCreator)
                             .background(.clear)
                         WagesListView(wageFileLoader: wageFileLoader, filtering: filtering)
                     }
@@ -61,14 +62,12 @@ struct MainView: View {
         .sheet(isPresented: $presentUserView, onDismiss: {
             
         }, content: {
-            UserView(isPresented: $presentUserView)
+            UserView(user: userCreator, isPresented: $presentUserView)
         })
         .navigationBarHidden(true)
         .navigationTitle("")
     }
 }
-
-
 
 
 struct ContentView_Previews: PreviewProvider {

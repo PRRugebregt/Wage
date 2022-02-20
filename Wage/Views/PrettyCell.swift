@@ -19,35 +19,35 @@ struct PrettyCell: View {
     }
     
     var body: some View {
-            HStack {
-                Image("\(item.instrument.rawValue)").resizable().aspectRatio(1/1, contentMode: .fit)
-                    .foregroundColor(.white)
-                    .padding(.leading)
-                VStack(alignment: .leading) {
-                    Spacer()
-                    Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
-                    Spacer()
-                    Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
-                        .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
-                    Spacer()
-                }
+        HStack {
+            Image("\(item.instrument.rawValue)").resizable().aspectRatio(1/1, contentMode: .fit)
+                .foregroundColor(.white)
+                .padding(.leading)
+            VStack(alignment: .leading) {
                 Spacer()
-                NavigationLink {
-                    PrettyDetail(item: item, color: chosenColor, size: size).animation(.easeInOut, value: 0)
-                } label: {
-                    
-                }
-                .frame(width: 0)
-                Image(systemName: "chevron.right").foregroundColor(.white)
-                    .padding()
+                Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
+                Spacer()
+                Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
+                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                Spacer()
             }
-            .navigationTitle("")
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("\(chosenColor)"))
-            .shadow(color: .gray, radius: 3, x: 0, y: 3))
-            .frame(width: size.width * 0.9, height: 80, alignment: .leading)
-
+            Spacer()
+            NavigationLink {
+                PrettyDetail(item: item, color: chosenColor, size: size).animation(.easeInOut, value: 0)
+            } label: {
+                
+            }
+            .frame(width: 0)
+            Image(systemName: "chevron.right").foregroundColor(.white)
+                .padding()
+        }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("\(chosenColor)"))
+                        .shadow(color: .gray, radius: 3, x: 0, y: 3))
+        .frame(width: size.width * 0.9, height: 80, alignment: .leading)
+        
     }
 }
 
@@ -59,38 +59,38 @@ struct PrettyDetail: View {
     var body: some View {
         ZStack {
             Image(item.instrument.rawValue)
-//                .resizable()
+            //                .resizable()
                 .opacity(0.1)
-//                .frame(width: size.height, height: size.height, alignment: .center)
-        VStack {
-            Image(item.instrument.rawValue).resizable().frame(width: size.width * 0.5, height: size.width * 0.5).aspectRatio(1/1, contentMode: .fit)
-            Spacer()
-            Text("\(item.instrument.rawValue)").fontWeight(.thin).font(.title)
+            //                .frame(width: size.height, height: size.height, alignment: .center)
+            VStack {
+                Image(item.instrument.rawValue).resizable().frame(width: size.width * 0.5, height: size.width * 0.5).aspectRatio(1/1, contentMode: .fit)
+                Spacer()
+                Text("\(item.instrument.rawValue)").fontWeight(.thin).font(.title)
+                    .padding()
+                Spacer()
+                HStack{
+                    Spacer()
+                    Text("€ \(item.wage)").fontWeight(.light).font(.title3)
+                    Spacer()
+                    VStack {
+                        Text("\(item.gigType.rawValue)").fontWeight(.light).font(.title3)
+                        Text("\(item.artistType.rawValue)").fontWeight(.light).font(.title3)
+                    }
+                    Spacer()
+                }
                 .padding()
-            Spacer()
-            HStack{
-                Spacer()
-                Text("€ \(item.wage)").fontWeight(.light).font(.title3)
-                Spacer()
-                VStack {
-                    Text("\(item.gigType.rawValue)").fontWeight(.light).font(.title3)
-                    Text("\(item.artistType.rawValue)").fontWeight(.light).font(.title3)
+                
+                Text("Muzikant gegevens").fontWeight(.light).font(.title)
+                HStack {
+                    Text("\(item.yearsOfExperience) jaar ervaring")
+                    Divider()
+                    Text("Gestudeerd: \(item.didStudy ? "Ja" : "Nee")")
                 }
                 Spacer()
             }
-            .padding()
-
-            Text("Muzikant gegevens").fontWeight(.light).font(.title)
-            HStack {
-                Text("\(item.yearsOfExperience) jaar ervaring")
-                Divider()
-                Text("Gestudeerd: \(item.didStudy ? "Ja" : "Nee")")
-            }
-            Spacer()
-        }
-        .foregroundColor(.white)
-        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color(color)).frame(width: size.width * 0.9))
-        .frame(width: size.width * 0.9, height: size.width * 0.9, alignment: .center)
+            .foregroundColor(.white)
+            .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color(color)).frame(width: size.width * 0.9))
+            .frame(width: size.width * 0.9, height: size.width * 0.9, alignment: .center)
         }
     }
     

@@ -11,6 +11,7 @@ struct AddObjectView: View {
     
     private let wageObjectCreator = WageObjectCreator()
     @Binding var isShown: Bool
+    @Binding var objectAdded: Bool
     @State private var showAlert = false
     @State private var gigTypeTitle = "Kiezen"
     @State private var artistTypeTitle = "Kiezen"
@@ -56,43 +57,47 @@ struct AddObjectView: View {
                     print(wageText)
                     wageObjectCreator.wage = wageText
                 })
-                .onSubmit {
-                    wageObjectCreator.wage = wageText
-                }
-                .frame(width: 200)
-                .font(.title3)
-                .background(.white)
-                .foregroundColor(.black)
-                .textFieldStyle(.roundedBorder)
-                .cornerRadius(10)
-                .keyboardType(.decimalPad)
-                .padding()
+                    .onSubmit {
+                        wageObjectCreator.wage = wageText
+                    }
+                    .frame(width: 200)
+                    .font(.title3)
+                    .background(.white)
+                    .foregroundColor(.black)
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(10)
+                    .keyboardType(.decimalPad)
+                    .padding()
             }
             Spacer()
             Group {
-            HStack {
-                Button("Annuleren") {
-                    isShown = false
-                }
-                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
-                Button("Gage toevoegen") {
-                    guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen" else {
-                        showAlert.toggle()
-                        return
+                HStack {
+                    Button("Annuleren") {
+                        isShown = false
                     }
-                    wageObjectCreator.createObject()
-                    isShown = false
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
+                    Button("Gage toevoegen") {
+                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen" else {
+                            print(wageObjectCreator.wage)
+                            print(artistTypeTitle)
+                            print(gigTypeTitle)
+                            showAlert.toggle()
+                            return
+                        }
+                        objectAdded = true
+                        wageObjectCreator.createObject()
+                        isShown = false
+                    }
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
+                    .alert("Oops", isPresented: $showAlert) {
+                        Text("Hi")
+                    } message: {
+                        Text("Vul aub alle informatie in")
+                    }
+                    
                 }
-                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
-                .alert("Oops", isPresented: $showAlert) {
-                    Text("Hi")
-                } message: {
-                    Text("Vul aub alle informatie in")
-                }
-
-            }
-            .padding()
-            .buttonStyle(.bordered)
+                .padding()
+                .buttonStyle(.bordered)
             }
         }
         .frame(maxWidth: .infinity)
@@ -100,6 +105,7 @@ struct AddObjectView: View {
         .foregroundColor(.white)
         .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
+        
     
 }
 
@@ -111,7 +117,9 @@ struct AddObjectView_Previews: PreviewProvider {
 
 struct PreviewAddObject: View {
     @State var isShown = true
+    @State var objectAdded = true
+
     var body: some View {
-        AddObjectView(isShown: $isShown)
+        AddObjectView(isShown: $isShown, objectAdded: $objectAdded)
     }
 }

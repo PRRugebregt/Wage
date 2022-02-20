@@ -9,6 +9,7 @@ import CoreData
 
 class PersistenceController {
     static let shared = PersistenceController()
+    var user: User?
     var wageFileManageable: WageFileManageable?
     var wageFileLoader: WageFileLoader?
     let container: NSPersistentContainer
@@ -20,6 +21,12 @@ class PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUser(_:)), name: .shareUser, object: nil)
+    }
+    
+    @objc func updateUser(_ notification: Notification) {
+        guard let user = notification.userInfo?["user"] as? User  else { return }
+        self.user = user
     }
     
     func setWageFileManageable(_ wageFileManageable: WageFileManageable) {
@@ -103,6 +110,7 @@ class PersistenceController {
     }
     
     func modifyUserObject(with user: User) {
+        self.user = user
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserObject")
         do {
             let objects = try container.viewContext.fetch(request)

@@ -30,35 +30,35 @@ struct WagesListView: View {
                             .frame(maxWidth: .infinity, maxHeight: 70)
                         
                     } else {
-
+                        
                     }
                     List(wageFileLoader.wageFiles) { item in
                         if orientation == .landscapeLeft || orientation == .landscapeRight {
-                        HStack {
-                            Text("\(wageFileLoader.wageFiles.firstIndex(where: {$0 == item})!)")
-                                .frame(width: geometry.size.width / 7)
-                            Text("\(item.wage)")
-                                .frame(width: geometry.size.width / 6)
-                            Text("\(item.artistType.rawValue)")
-                                .frame(width: geometry.size.width / 6)
-                            Text("\(item.gigType.rawValue)")
-                                .frame(width: geometry.size.width / 6)
-                            Divider()
-                            Text("\(item.yearsOfExperience)")
-                                .frame(width: geometry.size.width / 6)
-                            Text("\(item.instrument.rawValue)")
-                                .frame(width: geometry.size.width / 4.7)
-                            Text(String(item.didStudy ? "Ja" : "Nee"))
-                                .frame(width: geometry.size.width / 4.2)
-                            Spacer()
-                        }
+                            HStack {
+                                Text("\(wageFileLoader.wageFiles.firstIndex(where: {$0 == item})!)")
+                                    .frame(width: geometry.size.width / 7)
+                                Text("\(item.wage)")
+                                    .frame(width: geometry.size.width / 6)
+                                Text("\(item.artistType.rawValue)")
+                                    .frame(width: geometry.size.width / 6)
+                                Text("\(item.gigType.rawValue)")
+                                    .frame(width: geometry.size.width / 6)
+                                Divider()
+                                Text("\(item.yearsOfExperience)")
+                                    .frame(width: geometry.size.width / 6)
+                                Text("\(item.instrument.rawValue)")
+                                    .frame(width: geometry.size.width / 4.7)
+                                Text(String(item.didStudy ? "Ja" : "Nee"))
+                                    .frame(width: geometry.size.width / 4.2)
+                                Spacer()
+                            }
                         } else {
                             PrettyCell(item: item, size: geometry.size)
                         }
                     }
                     .frame(width: geometry.size.width * 1.65)
                 }
-                }
+            }
             .navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
@@ -77,7 +77,7 @@ struct TopWageListView: View {
     @Binding var showFilters: Bool
     @ObservedObject var filtering: Filtering
     @ObservedObject var wageFileLoader: WageFileLoader
-
+    
     var body: some View {
         HStack {
             Spacer()
@@ -85,8 +85,8 @@ struct TopWageListView: View {
                 showFilters.toggle()
             } label: {
                 HStack {
-                Image(systemName: "line.3.horizontal.decrease.circle")
-                Text("Add Filter")
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    Text("Add Filter")
                         .fontWeight(.light)
                         .font(.body)
                 }
@@ -109,7 +109,7 @@ struct TopWageListView: View {
                 wageFileLoader.loadAllFiles()
             } label: {
                 HStack {
-                Text("Filters").fontWeight(.light).font(.body)
+                    Text("Filters").fontWeight(.light).font(.body)
                     Image(systemName: "x.square").font(.title3)
                 }
             }
@@ -130,9 +130,9 @@ struct HeaderView: View {
     var wageFileLoader: WageFileLoader
     
     var body: some View {
-            HStack {
+        HStack {
             Text("Index")
-                    .frame(width: size.width / 6.5)
+                .frame(width: size.width / 6.5)
             Button("Gage") {
                 wageFileLoader.sortFiles(by: "Gage")
                 print(1)
@@ -161,7 +161,7 @@ struct HeaderView: View {
                 wageFileLoader.sortFiles(by: "Gestudeerd")
             }
             .frame(width: size.width / 4.2)
-                Spacer()
+            Spacer()
         }
         .padding()
         .background(.white)

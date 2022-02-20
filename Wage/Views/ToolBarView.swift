@@ -10,9 +10,11 @@ import SwiftUI
 struct ToolBarView: View {
     @State private var showAddObjectView = false
     @State private var showSuccessAlert = false
+    @State private var objectAdded = false
     var wageFileLoader: WageFileLoader
     @State private var showFilters = false
     @ObservedObject var filtering: Filtering
+    @ObservedObject var userCreator: UserCreator
     
     var body: some View {
         VStack {
@@ -28,11 +30,14 @@ struct ToolBarView: View {
                 }
                 .sheet(isPresented: $showAddObjectView, onDismiss: {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        wageFileLoader.loadAllFiles()
-                        showSuccessAlert.toggle()
+                        if objectAdded {
+                            wageFileLoader.loadAllFiles()
+                            showSuccessAlert.toggle()
+                            objectAdded = false
+                        }
                     }
                 }) {
-                    AddObjectView(isShown: $showAddObjectView)
+                    AddObjectView(isShown: $showAddObjectView, objectAdded: $objectAdded)
                 }
                 .padding()
                 .font(.title)
@@ -51,6 +56,6 @@ struct ToolBarView: View {
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(wageFileLoader: WageFileLoader(), filtering: Filtering())
+        ToolBarView(wageFileLoader: WageFileLoader(), filtering: Filtering(), userCreator: UserCreator())
     }
 }

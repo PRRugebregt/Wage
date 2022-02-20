@@ -18,12 +18,9 @@ class WageFileLoader: ObservableObject {
             loadAllFiles()
         }
     }
-    var wageFileManageable: WageFileManageable? {
-        didSet {
-            loadAllFiles()
-        }
-    }
-    @Published var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? true {
+    var wageFileManageable: WageFileManageable?
+    
+    @Published var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? false {
         didSet {
             UserDefaults.standard.setValue(isLocal, forKey: "isLocal")
         }
@@ -39,7 +36,7 @@ class WageFileLoader: ObservableObject {
         if isLocal {
             print("local")
             self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
-            print(filters)
+            print(filters.debugDescription) 
             if filters != nil {
                 filterResults(with: filters!)
             }

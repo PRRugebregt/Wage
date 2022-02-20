@@ -22,11 +22,11 @@ enum GigType: String, CaseIterable, Identifiable {
     }
     case club
     case festival
-    case theater
+    case theater 
     case privefeest
     case bedrijfsfeest
     case bruiloft
-    case musical 
+    case musical
     case radio
     case tv
     case studiodag

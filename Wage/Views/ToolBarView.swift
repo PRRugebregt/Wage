@@ -18,6 +18,9 @@ struct ToolBarView: View {
         VStack {
             HStack {
                 Spacer()
+                Spacer()
+                Image("logo").resizable().frame(width: 100).foregroundColor(.white).aspectRatio(3/1, contentMode: .fit)
+                Spacer()
                 Button {
                     showAddObjectView.toggle()
                 } label: {

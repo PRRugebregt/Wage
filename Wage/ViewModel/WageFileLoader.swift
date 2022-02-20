@@ -12,7 +12,7 @@ class WageFileLoader: ObservableObject {
     
     @Published var wageFiles: [WageFile] = []
     @Published var isLoading: Bool = false
-    private var filters: FilterOptions?
+    var filters: FilterOptions?
     var networkDownload: NetworkDownloadable? {
         didSet {
             loadAllFiles()
@@ -39,6 +39,7 @@ class WageFileLoader: ObservableObject {
         if isLocal {
             print("local")
             self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
+            print(filters)
             if filters != nil {
                 filterResults(with: filters!)
             }
@@ -80,7 +81,7 @@ class WageFileLoader: ObservableObject {
         case "Jaren Ervaring":
             wageFiles.sort(by: {$0.yearsOfExperience > $1.yearsOfExperience})
         case "Instrument":
-            wageFiles.sort(by: {$0.instrument.rawValue < $1.instrument.rawValue})
+            wageFiles.sort(by: {$0.instrument.rawValue.capitalized < $1.instrument.rawValue})
         case "Artiest Type":
             wageFiles.sort(by: {$0.artistType.rawValue < $1.artistType.rawValue})
         case "Gig Type":
@@ -115,6 +116,10 @@ class WageFileLoader: ObservableObject {
             filteredWageFiles = filteredWageFiles.filter({$0.wage > minimum})
         }
         self.wageFiles = filteredWageFiles
+    }
+    
+    func setFilterOptions(with options: FilterOptions) {
+        self.filters = options
     }
     
     func removeFilters() {

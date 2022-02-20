@@ -9,7 +9,6 @@ import UIKit
 
 class Filtering: ObservableObject {
     
-    private var filteredItems: [WageFile] = []
     @Published var filterOptions: FilterOptions = FilterOptions()
     var minimumWage = 0
     var maximumWage = 1000

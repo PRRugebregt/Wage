@@ -63,7 +63,7 @@ struct HelpView: View {
                     .fontWeight(.thin)
                 .font(.subheadline)
                 Divider()
-            Text("Middelgrote shows: ")
+            Text("Middelgrote Show: ")
                     .font(.title3)
                     .foregroundColor(.white)
             }
@@ -73,7 +73,7 @@ struct HelpView: View {
                     .fontWeight(.thin)
                 .font(.subheadline)
                 Divider()
-            Text("Kleine Artiest: ")
+            Text("Kleine Show: ")
                     .font(.title3)
                     .foregroundColor(.white)
                 Divider()
@@ -82,8 +82,8 @@ struct HelpView: View {
                 .font(.subheadline)
                 Divider()
                 Text("Neem dit dus ook met een korreltje zout. Het gaat erom dat we een onderscheid maken tussen grote en minder grote shows en evenementen. Probeer bij keuzes waar het minder duidelijk is zelf naar de context te kijken. Bij 'repetitie' kijk je naar de grootte van de artiest/orkest/evenement waar het voor is. Bij een bruiloft kijk je naar de grootte van het feest, van het boekingskantoor of misschien zelfs wel hoe bekend het bruidspaar is")
+                    .font(.title3)
                     .fontWeight(.thin)
-
             }
 
             Group {

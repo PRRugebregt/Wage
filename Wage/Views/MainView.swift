@@ -69,49 +69,6 @@ struct MainView: View {
 }
 
 
-struct AverageView: View {
-    
-    var wageFiles: [WageFile]
-    private var averageCalculator = AverageCalculator()
-    
-    init(wageFiles: [WageFile]) {
-        self.wageFiles = wageFiles
-        averageCalculator.wageFiles = self.wageFiles
-    }
-    
-    var body: some View {
-        ZStack {
-            Rectangle().foregroundColor(.clear).background(LinearGradient(colors: [Color("toolbar"),Color("lightBlue"),Color("userView")], startPoint: .topLeading, endPoint: .bottomTrailing))
-        VStack {
-            Spacer()
-            Group {
-                Text("Totaal aantal resultaten")
-                    .font(.title2)
-                Text("\(wageFiles.count)")
-                    .font(.title)
-                Text("Gemiddelde gage")
-                    .font(.title2)
-                Text("\(averageCalculator.averageFee)")
-                    .font(.title)
-                Text("Meest gespeeld bij")
-                    .font(.title2)
-                Text("\(averageCalculator.averageGigType.rawValue)")
-                    .font(.title)
-                Text("Gemiddeld aantal jaar ervaring")
-                    .font(.title2)
-                Text("\(averageCalculator.averageExperience)")
-                    .font(.title)
-                Text("Meest voorkomende instrument")
-                    .font(.title2)
-                Text("\(averageCalculator.averageInstrument.rawValue)")
-                    .font(.title)
-            }
-            Spacer()
-        }
-        }
-    }
-    
-}
 
 
 struct ContentView_Previews: PreviewProvider {

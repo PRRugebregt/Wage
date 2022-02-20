@@ -24,114 +24,114 @@ struct FilterView: View {
     
     var body: some View {
         GeometryReader() { geometry in
-
-        VStack(alignment: .leading) {
-            Text("Filters")
-                .font(.largeTitle)
-                .fontWeight(.thin)
-            Spacer()
-            Divider()
-
-            Group {
-                Text("Weergave Modus: ")
-                    .fontWeight(.thin)
-                Button("\(wageFileLoader.isPrettyView ? "Compact" : "Tabel")") {
-                    wageFileLoader.isPrettyView.toggle()
-                }
-                .foregroundColor(Color("lightBlue"))
-                .buttonStyle(.bordered)
-                Divider()
-                Text("Online resultaten weergeven: ")
-                    .fontWeight(.thin)
-
-                Button("\(wageFileLoader.isLocal ? "Nee" : "Ja")") {
-                    wageFileLoader.isLocal.toggle()
-                    wageFileLoader.loadAllFiles()
-                }
-                .foregroundColor(Color("lightBlue"))
-                .buttonStyle(.bordered)
-                Divider()
-            }
-            
-            Group {
-                Text("Instrument: ")
-                    .fontWeight(.thin)
-
-                Menu(instrumentTypeTitle) {
-                    ForEach(instrumentTypes) { instrument in
-                        Button(instrument.rawValue) {
-                            instrumentTypeTitle = instrument.rawValue
-                            filters.changeInstrument(to: instrument)
-                        }
-                    }
-                }
-                .foregroundColor(Color("lightBlue"))
-                .padding(.horizontal)
-                .cornerRadius(5)
-                Divider()
-                Text("Type optreden: ")
-                    .fontWeight(.thin)
-
-                Menu(gigTypeTitle) {
-                    ForEach(gigTypes) { gigType in
-                        Button(gigType.rawValue) {
-                            gigTypeTitle = gigType.rawValue
-                            filters.changeGigType(to: gigType)
-                        }
-                    }
-                }
-                .foregroundColor(Color("lightBlue"))
-                .padding(.horizontal)
-                .cornerRadius(5)
-                Divider()
-
-                Text("Grootte: ")
-                    .fontWeight(.thin)
-
-                Menu(artistTypeTitle) {
-                    ForEach(artistTypes) { artistType in
-                        Button(artistType.rawValue) {
-                            artistTypeTitle = artistType.rawValue
-                            filters.changeArtistType(to: artistType)
-                        }
-                    }
-                }
-                .foregroundColor(Color("lightBlue"))
-                .padding(.horizontal)
-                .cornerRadius(5)
-            }
-            Divider()
-            Group {
-                Text("Gage bedrag:")
-                    .fontWeight(.thin)
-
-                Spacer()
-                HStack {
-                    Text("\(filters.minimumWage)")
+                VStack(alignment: .leading) {
+                    Text("Filters")
+                        .font(.largeTitle)
                         .fontWeight(.thin)
-
                     Spacer()
-                    Text("\(filters.maximumWage)")
-                        .fontWeight(.thin)
-
+                    Divider()
+                    
+                    Group {
+//                        Text("Weergave Modus: ")
+//                            .fontWeight(.thin)
+//                        Button("\(wageFileLoader.isPrettyView ? "Compact" : "Tabel")") {
+//                            wageFileLoader.isPrettyView.toggle()
+//                        }
+//                        .foregroundColor(Color("lightBlue"))
+//                        .buttonStyle(.bordered)
+//                        Divider()
+                        Text("Online resultaten weergeven: ")
+                            .fontWeight(.thin)
+                        
+                        Button("\(wageFileLoader.isLocal ? "Nee" : "Ja")") {
+                            wageFileLoader.isLocal.toggle()
+                            wageFileLoader.loadAllFiles()
+                        }
+                        .foregroundColor(Color("lightBlue"))
+                        .buttonStyle(.bordered)
+                        Divider()
+                    }
+                    
+                    Group {
+                        Text("Instrument: ")
+                            .fontWeight(.thin)
+                        
+                        Menu(instrumentTypeTitle) {
+                            ForEach(instrumentTypes) { instrument in
+                                Button(instrument.rawValue) {
+                                    instrumentTypeTitle = instrument.rawValue
+                                    filters.changeInstrument(to: instrument)
+                                }
+                            }
+                        }
+                        .foregroundColor(Color("lightBlue"))
+                        .padding(.horizontal)
+                        .cornerRadius(5)
+                        Divider()
+                        Text("Type optreden: ")
+                            .fontWeight(.thin)
+                        
+                        Menu(gigTypeTitle) {
+                            ForEach(gigTypes) { gigType in
+                                Button(gigType.rawValue) {
+                                    gigTypeTitle = gigType.rawValue
+                                    filters.changeGigType(to: gigType)
+                                }
+                            }
+                        }
+                        .foregroundColor(Color("lightBlue"))
+                        .padding(.horizontal)
+                        .cornerRadius(5)
+                        Divider()
+                        
+                        Text("Grootte: ")
+                            .fontWeight(.thin)
+                        
+                        Menu(artistTypeTitle) {
+                            ForEach(artistTypes) { artistType in
+                                Button(artistType.rawValue) {
+                                    artistTypeTitle = artistType.rawValue
+                                    filters.changeArtistType(to: artistType)
+                                }
+                            }
+                        }
+                        .foregroundColor(Color("lightBlue"))
+                        .padding(.horizontal)
+                        .cornerRadius(5)
+                    }
+                    Divider()
+                    
+                    Group {
+                        Text("Gage bedrag:")
+                            .fontWeight(.thin)
+                        
+                        Spacer()
+                        HStack {
+                            Text("\(filters.minimumWage)")
+                                .fontWeight(.thin)
+                            
+                            Spacer()
+                            Text("\(filters.maximumWage)")
+                                .fontWeight(.thin)
+                            
+                        }
+                        RangeSlider(filtering: filters, screenWidth: geometry.size.width * 0.8 - 30)
+                        Divider()
+                    }
+                    
+                    Spacer()
+                    Button("Filters toepassen", action: {
+                        isPresented = false
+                    })
+                        .background(Color("blueIsh-3"))
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
+                        .buttonStyle(.bordered)
+                    
                 }
-                RangeSlider(filtering: filters, screenWidth: geometry.size.width * 0.8 - 30)
-                Divider()
-            }
-            Spacer()
-            Button("Filters toepassen", action: {
-                isPresented = false
-            })
-                .background(Color("blueIsh-3"))
+                .padding(.horizontal)
                 .foregroundColor(.white)
-                .cornerRadius(15)
-                .buttonStyle(.bordered)
-        
-        }
-        .padding(.horizontal)
-        .foregroundColor(.white)
-        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
-        .ignoresSafeArea()
+                .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
         }
     }
     

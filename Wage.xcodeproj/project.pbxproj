@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014ED84427C0E6B900705AF0 /* AverageView.swift */; };
 		0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180675C27C029C300EAD6F9 /* PrettyCell.swift */; };
 		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
 		018B7A6227B5BDF400068F7F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6127B5BDF400068F7F /* MainView.swift */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		014ED84427C0E6B900705AF0 /* AverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageView.swift; sourceTree = "<group>"; };
+		014ED84627C0E83A00705AF0 /* Wage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wage.entitlements; sourceTree = "<group>"; };
 		0180675C27C029C300EAD6F9 /* PrettyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyCell.swift; sourceTree = "<group>"; };
 		018B7A5C27B5BDF400068F7F /* Wage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B7A5F27B5BDF400068F7F /* WageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageApp.swift; sourceTree = "<group>"; };
@@ -155,14 +158,15 @@
 		018B7A5E27B5BDF400068F7F /* Wage */ = {
 			isa = PBXGroup;
 			children = (
+				014ED84627C0E83A00705AF0 /* Wage.entitlements */,
 				019091A027BA76AB00B84AED /* GoogleService-Info.plist */,
 				018B7A5F27B5BDF400068F7F /* WageApp.swift */,
 				0190919927B832E800B84AED /* Views */,
+				0190918B27B8050700B84AED /* Model */,
+				0190918C27B8051400B84AED /* ViewModel */,
 				018B7A6327B5BDF500068F7F /* Assets.xcassets */,
 				018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */,
 				018B7A6527B5BDF500068F7F /* Preview Content */,
-				0190918B27B8050700B84AED /* Model */,
-				0190918C27B8051400B84AED /* ViewModel */,
 			);
 			path = Wage;
 			sourceTree = "<group>";
@@ -230,6 +234,7 @@
 				019091A827BE449900B84AED /* Spinner.swift */,
 				019091AC27BE7CF200B84AED /* RangeSlider.swift */,
 				0180675C27C029C300EAD6F9 /* PrettyCell.swift */,
+				014ED84427C0E6B900705AF0 /* AverageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				0190919D27B84E5A00B84AED /* UserCreator.swift in Sources */,
 				019091A327BB2D7400B84AED /* HelpView.swift in Sources */,
 				019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */,
+				014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */,
 				018B7A6227B5BDF400068F7F /* MainView.swift in Sources */,
 				019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */,
 				018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */,
@@ -677,12 +683,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -696,6 +704,7 @@
 				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -708,12 +717,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -727,6 +738,7 @@
 				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

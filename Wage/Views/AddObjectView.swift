@@ -18,39 +18,55 @@ struct AddObjectView: View {
     @State private var wageText = ""
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Group {
-                Text("Voeg nieuwe gage toe")
-                    .font(.largeTitle)
+                Text("Nieuwe gage")
                     .fontWeight(.light)
-                    .padding()
+                    .padding(.vertical)
+                    .font(.title)
                 Spacer()
-                Text("Type optreden: ").font(.title3).fontWeight(.thin)
+                Divider()
+                HStack {
+                    Text("Type optreden ").foregroundColor(Color("darkWhite"))
+                    Spacer()
+                    Image(systemName: "music.note.house")
+                }
                 Menu(gigTypeTitle) {
                     ForEach(GigType.allCases) { gigType in
                         Button(gigType.rawValue) {
                             gigTypeTitle = gigType.rawValue
                             wageObjectCreator.gigType = gigType
                         }
+                        .buttonStyle(.bordered)
                     }
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color("blueIsh-1")))
+                .foregroundColor(Color("lightBlue"))
+                Divider()
             }
             Group {
-                Text("Grootte van show: ").font(.title3).fontWeight(.thin)
+                HStack {
+                    Text("Grootte van show ").foregroundColor(Color("darkWhite"))
+                    Spacer()
+                    Image(systemName: "lines.measurement.horizontal")
+                }
                 Menu(artistTypeTitle) {
                     ForEach(ArtistType.allCases) { artistType in
                         Button(artistType.rawValue) {
                             artistTypeTitle = artistType.rawValue
                             wageObjectCreator.artistType = artistType
                         }
+                        .buttonStyle(.bordered)
                     }
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 6).foregroundColor(Color("blueIsh-1")))
-                Spacer()
-                Text("Gage").font(.title3).fontWeight(.thin)
+                .foregroundColor(Color("lightBlue"))
+                Divider()
+                HStack {
+                    Text("Gage").foregroundColor(Color("darkWhite"))
+                    Spacer()
+                    Image(systemName: "dollarsign.circle").font(.title3)
+                }
                 TextField("Wat was je gage", text: $wageText) {
                     wageObjectCreator.wage = wageText
                 }.onChange(of: wageText, perform: { T in
@@ -60,14 +76,13 @@ struct AddObjectView: View {
                     .onSubmit {
                         wageObjectCreator.wage = wageText
                     }
-                    .frame(width: 200)
-                    .font(.title3)
-                    .background(.white)
-                    .foregroundColor(.black)
-                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 200, height: 30)
+                    .font(.body)
+                    .background(Color("darkWhite"))
+                    .foregroundColor(.white)
+                    .textFieldStyle(.plain)
                     .cornerRadius(10)
                     .keyboardType(.decimalPad)
-                    .padding()
             }
             Spacer()
             Group {
@@ -96,12 +111,13 @@ struct AddObjectView: View {
                     }
                     
                 }
-                .padding()
+                .padding(.vertical)
                 .buttonStyle(.bordered)
             }
         }
+        .padding(.horizontal)
         .frame(maxWidth: .infinity)
-        .font(.title3)
+        .font(.body)
         .foregroundColor(.white)
         .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
     }

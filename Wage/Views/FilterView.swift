@@ -32,14 +32,6 @@ struct FilterView: View {
                 Divider()
                 
                 Group {
-                    //                        Text("Weergave Modus: ")
-                    //                            .fontWeight(.thin)
-                    //                        Button("\(wageFileLoader.isPrettyView ? "Compact" : "Tabel")") {
-                    //                            wageFileLoader.isPrettyView.toggle()
-                    //                        }
-                    //                        .foregroundColor(Color("lightBlue"))
-                    //                        .buttonStyle(.bordered)
-                    //                        Divider()
                     Text("Online resultaten weergeven: ")
                         .fontWeight(.thin)
                     

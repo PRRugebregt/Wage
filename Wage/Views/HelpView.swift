@@ -14,7 +14,8 @@ struct HelpView: View {
     private var networkUpload = NetworkUpload()
     
     init() {
-        UITextView.appearance().backgroundColor = .clear
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().unselectedItemTintColor = .black
     }
     
     var body: some View {

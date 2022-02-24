@@ -46,7 +46,7 @@ class WageFiles: WageFileManageable {
     private var networkDownload: NetworkDownloadable
     var all: [WageFile] {
         get {
-                return PersistenceController.shared.loadAllObjects()
+            return PersistenceController.shared.loadAllObjects()
         }
         set {}
     }

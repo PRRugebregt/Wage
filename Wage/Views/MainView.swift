@@ -11,7 +11,7 @@ import CoreData
 struct MainView: View {
     
     @ObservedObject private var wageFileLoader: WageFileLoader = WageFileLoader()
-    @State private var presentUserView = true
+    @State private var presentUserView = false
     @State private var isLoading = false
     private var filtering = Filtering()
     private var userCreator = UserCreator()
@@ -21,8 +21,9 @@ struct MainView: View {
     
     init() {
         _ = DependencyRouter(wageFileLoader: wageFileLoader)
-        UITabBar.appearance().backgroundColor = .white
-        UITabBar.appearance().tintColor = UIColor(named: "blueIsh")
+        UITabBar.appearance().backgroundColor = UIColor(named: "blueIsh-2")
+        UITabBar.appearance().unselectedItemTintColor = .white
+//        UITabBar.appearance().isTranslucent = true
         isLoading = wageFileLoader.isLoading
     }
     
@@ -50,14 +51,17 @@ struct MainView: View {
                 Label("Je gages", systemImage: "music.note")
                     .background(.white)
             }
+
             AverageView(wageFiles: wageFiles)
                 .tabItem {
                     Label("Je Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
                 }
+
             HelpView()
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")
                 }
+
         }
         .sheet(isPresented: $presentUserView, onDismiss: {
             

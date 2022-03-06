@@ -79,7 +79,7 @@ struct AddObjectView: View {
                     .frame(width: 200, height: 30)
                     .font(.body)
                     .background(Color("darkWhite"))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .textFieldStyle(.plain)
                     .cornerRadius(10)
                     .keyboardType(.decimalPad)

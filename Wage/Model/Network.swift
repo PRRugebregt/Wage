@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 protocol NetworkDownloadable {
     func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ()) 
@@ -35,7 +36,8 @@ class NetworkUpload {
             "artistType": wageFile.artistType.rawValue,
             "yearsOfExperience": wageFile.yearsOfExperience,
             "wage": wageFile.wage,
-            "didStudy": wageFile.didStudy
+            "didStudy": wageFile.didStudy,
+            "timeStamp": wageFile.timeStamp
         ]) { error in
             guard error == nil else {
                 print(error!.localizedDescription)

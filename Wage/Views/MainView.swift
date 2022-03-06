@@ -11,10 +11,12 @@ import CoreData
 struct MainView: View {
     
     @ObservedObject private var wageFileLoader: WageFileLoader = WageFileLoader()
-    @State private var presentUserView = false
-    @State private var isLoading = false
+    @State private var presentUserView = true
     private var filtering = Filtering()
     private var userCreator = UserCreator()
+    private var isLoading: Bool {
+        return wageFileLoader.isLoading
+    }
     var wageFiles: [WageFile] {
         return wageFileLoader.wageFiles
     }
@@ -23,8 +25,6 @@ struct MainView: View {
         _ = DependencyRouter(wageFileLoader: wageFileLoader)
         UITabBar.appearance().backgroundColor = UIColor(named: "blueIsh-2")
         UITabBar.appearance().unselectedItemTintColor = .white
-//        UITabBar.appearance().isTranslucent = true
-        isLoading = wageFileLoader.isLoading
     }
     
     var body: some View {
@@ -37,13 +37,12 @@ struct MainView: View {
                         WagesListView(wageFileLoader: wageFileLoader, filtering: filtering)
                     }
                     .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
-                    if wageFileLoader.isLoading {
+                    if isLoading {
                         Spinner()
                             .background(.clear)
                     } else {
-                        
+                        // Remove Spinner
                     }
-                    
                 }
             }
             .navigationViewStyle(.stack)

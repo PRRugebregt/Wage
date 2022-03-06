@@ -13,12 +13,13 @@
         <attribute name="idNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="instrument" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="wage" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="yearsOfExperience" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="SavedFilters" positionX="-63" positionY="-9" width="128" height="29"/>
         <element name="UserObject" positionX="-54" positionY="27" width="128" height="74"/>
-        <element name="WageObject" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="WageObject" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>

@@ -7,8 +7,25 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 class WageFileLoader: ObservableObject {
+    
+    enum SortOptions: String, CaseIterable, Identifiable {
+        var id: String {
+            rawValue
+        }
+        case dateHigh = "Datum (meest recent)"
+        case dateLow = "Datum (oudste eerst)"
+        case wageHigh = "Gage (hoog naar laag)"
+        case wageLow = "Gage (laag naar hoog)"
+        case yearsOfExperienceHigh = "Jaren Ervaring (hoog naar laag)"
+        case yearsOfExperienceLow = "Jaren Ervaring (laag naar hoog)"
+        case instrument = "Instrument"
+        case gigtype = "Gig type"
+        case artistType = "Show grootte"
+        case didStudy = "Gestudeerd"
+    }
     
     @Published var wageFiles: [WageFile] = []
     @Published var isLoading: Bool = false
@@ -52,14 +69,19 @@ class WageFileLoader: ObservableObject {
             var wageFiles = [WageFile]()
             for file in queryDocuments {
                 let data = file.data()
-                let id = data["id"] as! Int64
-                let instrument = Instrument(rawValue: data["instrument"] as! String)
-                let gigType = GigType(rawValue: data["gigType"] as! String)
-                let artistType = ArtistType(rawValue: data["artistType"] as! String)
-                let yearsOfExperience = data["yearsOfExperience"] as! Int
-                let wage = data["wage"] as! Int
-                let didStudy = data["didStudy"] as! Bool
-                let wageFile = WageFile(id: id, wage: wage, artistType: artistType!, gigType: gigType!, yearsOfExperience: yearsOfExperience, didStudy: didStudy, instrument: instrument!)
+                guard let id = data["id"] as? Int64 else { return }
+                guard let instrumentRaw = data["instrument"] as? String else { return }
+                guard let instrument = Instrument(rawValue: instrumentRaw) else { return }
+                guard let gigTypeRaw = data["gigType"] as? String else { return }
+                guard let gigType = GigType(rawValue: gigTypeRaw) else { return }
+                guard let artistTypeRaw = data["artistType"] as? String else { return }
+                guard let artistType = ArtistType(rawValue: artistTypeRaw) else { return }
+                guard let yearsOfExperience = data["yearsOfExperience"] as? Int else { return }
+                guard let wage = data["wage"] as? Int else { return }
+                guard let didStudy = data["didStudy"] as? Bool else { return }
+                guard let firTimeStamp = data["timeStamp"] as? Timestamp else { return }
+                let timeStamp = firTimeStamp.dateValue()
+                let wageFile = WageFile(id: id, wage: wage, artistType: artistType, gigType: gigType, yearsOfExperience: yearsOfExperience, didStudy: didStudy, instrument: instrument, timeStamp: timeStamp)
                 wageFiles.append(wageFile)
             }
             self.isLoading = false
@@ -73,17 +95,25 @@ class WageFileLoader: ObservableObject {
     func sortFiles(by option: String) {
         print(wageFiles.count)
         switch option {
-        case "Gage":
+        case SortOptions.dateHigh.rawValue:
+            wageFiles.sort(by: {$0.timeStamp > $1.timeStamp})
+        case SortOptions.dateLow.rawValue:
+            wageFiles.sort(by: {$0.timeStamp < $1.timeStamp})
+        case SortOptions.wageHigh.rawValue:
             wageFiles.sort(by: {$0.wage > $1.wage})
-        case "Jaren Ervaring":
+        case SortOptions.wageLow.rawValue:
+            wageFiles.sort(by: {$0.wage < $1.wage})
+        case SortOptions.yearsOfExperienceHigh.rawValue:
             wageFiles.sort(by: {$0.yearsOfExperience > $1.yearsOfExperience})
-        case "Instrument":
-            wageFiles.sort(by: {$0.instrument.rawValue.capitalized < $1.instrument.rawValue})
-        case "Artiest Type":
+        case SortOptions.yearsOfExperienceLow.rawValue:
+            wageFiles.sort(by: {$0.yearsOfExperience < $1.yearsOfExperience})
+        case SortOptions.instrument.rawValue:
+            wageFiles.sort(by: {$0.instrument.rawValue < $1.instrument.rawValue})
+        case SortOptions.artistType.rawValue:
             wageFiles.sort(by: {$0.artistType.rawValue < $1.artistType.rawValue})
-        case "Gig Type":
+        case SortOptions.gigtype.rawValue:
             wageFiles.sort(by: {$0.gigType.rawValue < $1.gigType.rawValue})
-        case "Gestudeerd":
+        case SortOptions.didStudy.rawValue:
             wageFiles.sort(by: {$0.didStudy && !$1.didStudy})
         default :
             wageFiles.sort(by: {$0.wage > $1.wage})

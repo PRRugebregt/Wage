@@ -17,12 +17,11 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Rectangle().foregroundColor(Color("userView")).ignoresSafeArea()
                 VStack {
-                    VStack {
+                    VStack(alignment: .center) {
                         HStack {
                             Text("Jouw Profiel")
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("darkWhite"))
                                 .font(.largeTitle)
                             Image(systemName: "person.fill")
                                 .font(.largeTitle)
@@ -30,12 +29,12 @@ struct UserView: View {
                         Text("Deze informatie wordt toegevoegd aan je gages")
                             .fontWeight(.thin)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(Color("blueIsh-2"))
+                            .foregroundColor(Color("lightBlue"))
                     }
                     .padding(5)
                     .ignoresSafeArea()
                     Spacer()
-                    VStack {
+                    VStack(alignment: .leading) {
                         Group {
                             Spacer(minLength: 10)
                             HStack {
@@ -50,7 +49,8 @@ struct UserView: View {
                                     }
                                 }
                             }
-                            .padding()
+                            .padding(10)
+                            .menuStyle(.borderlessButton)
                             .shadow(color: .gray, radius: 2, x: 0, y: 2)
                             .font(.title3)
                             .foregroundColor(.white)
@@ -83,11 +83,11 @@ struct UserView: View {
                                 Button("Ja") {
                                     user.updateDidStudy(true)
                                 }
-                                .background(user.user.didStudy ? Color("toolbar") : .clear)
+                                .background(user.user.didStudy ? Color("blueIsh") : .clear)
                                 Button("Nee") {
                                     user.updateDidStudy(false)
                                 }
-                                .background(user.user.didStudy ? .clear : Color("toolbar"))
+                                .background(user.user.didStudy ? .clear : Color("blueIsh"))
                             }
                             .buttonStyle(.bordered)
                             .font(.title2)
@@ -102,7 +102,7 @@ struct UserView: View {
                                 isPresented = false
                             }
                         }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.borderless)
                         .font(.title3)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
@@ -111,11 +111,12 @@ struct UserView: View {
                         
                     }
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .textFieldStyle(.roundedBorder)
                 .frame(alignment: .center)
                 .padding()
             }
+            .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
             .navigationBarHidden(true)
             .navigationTitle("")
         }

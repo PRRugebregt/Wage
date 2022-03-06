@@ -39,6 +39,7 @@
 		019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091AC27BE7CF200B84AED /* RangeSlider.swift */; };
 		019A9C9427C2AD79006415EF /* AddRandomEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9327C2AD79006415EF /* AddRandomEntries.swift */; };
 		019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9627C2CABD006415EF /* NotificationExtensions.swift */; };
+		01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */; };
 		2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3D47C73F54D01202245DF /* Pods_Wage.framework */; };
 		AC03DA03DF0209C6AFDD43F0 /* Pods_Wage_WageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAA79CCB178C7BE6AC0F40 /* Pods_Wage_WageUITests.framework */; };
 		C08DE643DABED681E1B10C08 /* Pods_WageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89677E9050F03A2AF064DAF4 /* Pods_WageTests.framework */; };
@@ -98,6 +99,7 @@
 		019091AC27BE7CF200B84AED /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		019A9C9327C2AD79006415EF /* AddRandomEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRandomEntries.swift; sourceTree = "<group>"; };
 		019A9C9627C2CABD006415EF /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
 		02B109C1D32E8B5C4745987C /* Pods-Wage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wage.release.xcconfig"; path = "Target Support Files/Pods-Wage/Pods-Wage.release.xcconfig"; sourceTree = "<group>"; };
 		0EF2791A2EC626EF7EEE7FEC /* Pods-WageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WageTests.release.xcconfig"; path = "Target Support Files/Pods-WageTests/Pods-WageTests.release.xcconfig"; sourceTree = "<group>"; };
 		12F3D47C73F54D01202245DF /* Pods_Wage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				019A9C9627C2CABD006415EF /* NotificationExtensions.swift */,
+				01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */,
 				0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */,
 				0190918E27B80E4D00B84AED /* WageObjectCreator.swift in Sources */,
+				01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */,
 				018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */,
 				0190919B27B835E600B84AED /* UserView.swift in Sources */,
 				019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */,
@@ -701,7 +705,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
@@ -717,7 +721,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -735,7 +739,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
@@ -751,7 +755,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.7;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

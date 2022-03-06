@@ -44,6 +44,7 @@ class PersistenceController {
         object.instrument = wageFile.instrument.rawValue
         object.didStudy = wageFile.didStudy
         object.yearsOfExperience = Int16(wageFile.yearsOfExperience)
+        object.timeStamp = wageFile.timeStamp
         print(object)
         do {
             try container.viewContext.save()
@@ -58,12 +59,13 @@ class PersistenceController {
         for object in coreDataObjects {
             let wageFile = WageFile(
                 id: object.idNumber,
-                                    wage: Int(object.wage),
-                                    artistType: ArtistType(rawValue: object.artistType!)!,
-                                    gigType: GigType(rawValue: object.gigType!)!,
-                                    yearsOfExperience: Int(object.yearsOfExperience),
-                                    didStudy: object.didStudy,
-                                    instrument: Instrument(rawValue: object.instrument!)!)
+                wage: Int(object.wage),
+                artistType: ArtistType(rawValue: object.artistType!)!,
+                gigType: GigType(rawValue: object.gigType!)!,
+                yearsOfExperience: Int(object.yearsOfExperience),
+                didStudy: object.didStudy,
+                instrument: Instrument(rawValue: object.instrument!)!,
+                timeStamp: object.timeStamp!)
             wageFiles.append(wageFile)
         }
         print(wageFiles)

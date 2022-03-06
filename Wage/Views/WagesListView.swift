@@ -10,6 +10,9 @@ import SwiftUI
 struct WagesListView: View {
     
     @ObservedObject var wageFileLoader: WageFileLoader
+    var wageFiles : [WageFile] {
+        return wageFileLoader.wageFiles
+    }
     @State var headers: [String] = [
         "Item"
     ]
@@ -21,50 +24,16 @@ struct WagesListView: View {
         GeometryReader() { geometry in
             VStack {
                 TopWageListView(showFilters: $showFilters, filtering: filtering, wageFileLoader: wageFileLoader)
-                
-                ScrollView(.horizontal) {
-                    if orientation == .landscapeLeft || orientation == .landscapeRight {
-                        HeaderView(size: geometry.size, wageFileLoader: wageFileLoader)
-                            .padding(0.0)
-                            .background(.white)
-                            .frame(maxWidth: .infinity, maxHeight: 70)
-                        
-                    } else {
-                        
+                    List(wageFiles) { item in
+                        PrettyCell(item: item, size: geometry.size)
                     }
-                    List(wageFileLoader.wageFiles) { item in
-                        if orientation == .landscapeLeft || orientation == .landscapeRight {
-                            HStack {
-                                Text("\(wageFileLoader.wageFiles.firstIndex(where: {$0 == item})!)")
-                                    .frame(width: geometry.size.width / 7)
-                                Text("\(item.wage)")
-                                    .frame(width: geometry.size.width / 6)
-                                Text("\(item.artistType.rawValue)")
-                                    .frame(width: geometry.size.width / 6)
-                                Text("\(item.gigType.rawValue)")
-                                    .frame(width: geometry.size.width / 6)
-                                Divider()
-                                Text("\(item.yearsOfExperience)")
-                                    .frame(width: geometry.size.width / 6)
-                                Text("\(item.instrument.rawValue)")
-                                    .frame(width: geometry.size.width / 4.7)
-                                Text(String(item.didStudy ? "Ja" : "Nee"))
-                                    .frame(width: geometry.size.width / 4.2)
-                                Spacer()
-                            }
-                        } else {
-                            PrettyCell(item: item, size: geometry.size)
-                        }
-                    }
-                    .frame(width: geometry.size.width * 1.65)
-                }
+                    .animation(.spring())
             }
             .navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .listStyle(.inset)
             .opacity(0.7)
-            .animation(.easeInOut)
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                 orientation = UIDevice.current.orientation
             }
@@ -80,18 +49,35 @@ struct TopWageListView: View {
     
     var body: some View {
         HStack {
-            Spacer()
+            Menu(content: {
+                ForEach(WageFileLoader.SortOptions.allCases) { sortOption in
+                    Button(sortOption.rawValue) {
+                        wageFileLoader.sortFiles(by: sortOption.rawValue)
+                    }
+                }
+            }, label: {
+                HStack {
+                    Text("Sorteer").fontWeight(.light).font(.body)
+                    Image(systemName: "chevron.down").font(.subheadline)
+                }
+            })
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.blue)
+            .font(.title2)
+            .shadow(color: .gray, radius: 3, x: 0, y: 3)
             Button {
                 showFilters.toggle()
             } label: {
                 HStack {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    Group {
                     Text("Add Filter")
                         .fontWeight(.light)
                         .font(.body)
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    }
                 }
             }
-            .frame(height: 40)
+            .frame(maxWidth: .infinity)
             .foregroundColor(.blue)
             .font(.title2)
             .shadow(color: .gray, radius: 3, x: 0, y: 3)
@@ -103,6 +89,7 @@ struct TopWageListView: View {
                            wageFileLoader: wageFileLoader,
                            isPresented: $showFilters)
             }
+            VStack(alignment: .trailing) {
             Button() {
                 filtering.reset()
                 wageFileLoader.removeFilters()
@@ -113,7 +100,7 @@ struct TopWageListView: View {
                     Image(systemName: "x.square").font(.title3)
                 }
             }
-            .frame(width: 100)
+            .frame(maxWidth: .infinity)
             .foregroundColor(.red)
             .font(.body)
             .shadow(color: .gray, radius: 3, x: 0, y: 3)
@@ -121,6 +108,7 @@ struct TopWageListView: View {
             .padding()
         }
         .frame(height: 40)
+        }
     }
 }
 
@@ -173,7 +161,9 @@ struct HeaderView: View {
 struct WagesListView_Previews: PreviewProvider {
     static var previews: some View {
         WagesListView(wageFileLoader: WageFileLoader(), filtering: Filtering())
-        PrettyCell(item: WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 15, didStudy: true, instrument: .Drums), size: CGSize(width: 400, height: 100))
+.previewInterfaceOrientation(.landscapeRight)
+        PrettyCell(item: WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 15, didStudy: true, instrument: .Drums, timeStamp: Date.now), size: CGSize(width: 400, height: 100))
+.previewInterfaceOrientation(.landscapeLeft)
     }
 }
 

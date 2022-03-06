@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PrettyCell: View {
     
+    @State var orientation: UIDeviceOrientation = UIDevice.current.orientation
     var item: WageFile
     let size: CGSize
     let colors: [String] = [
@@ -32,6 +33,20 @@ struct PrettyCell: View {
                 Spacer()
             }
             Spacer()
+            if orientation == .landscapeLeft || orientation == .landscapeRight {
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text("Jaren ervaring: \(item.yearsOfExperience)")                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                    Spacer()
+                    Text("Gestudeerd: \(item.didStudy ? "Ja" : "Nee")")                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                    Spacer()
+                }
+            }
+            Spacer()
+            if orientation == .landscapeLeft || orientation == .landscapeRight {
+                Text("\(item.dateFormatted)")                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                Divider()
+            }
             NavigationLink {
                 PrettyDetail(item: item, color: chosenColor, size: size).animation(.easeInOut, value: 0)
             } label: {
@@ -46,51 +61,94 @@ struct PrettyCell: View {
         .navigationBarBackButtonHidden(true)
         .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("\(chosenColor)"))
                         .shadow(color: .gray, radius: 3, x: 0, y: 3))
-        .frame(width: size.width * 0.9, height: 80, alignment: .leading)
-        
+        .frame(height: 80, alignment: .leading)
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            orientation = UIDevice.current.orientation
+        }
     }
 }
 
 struct PrettyDetail: View {
+    @State var orientation: UIDeviceOrientation?
     let item: WageFile
     let color: String
     let size: CGSize
+    var height: CGFloat {
+        if orientation == .landscapeLeft || orientation == .landscapeRight {
+            return 0.65
+        } else {
+            return 0.8
+        }
+    }
+    var standardPadding: CGFloat {
+        if orientation == .landscapeLeft || orientation == .landscapeRight {
+            return 30
+        } else {
+            return 15
+        }
+    }
+    var square = Rectangle()
+    
+    init(item: WageFile, color: String, size: CGSize) {
+        self.item = item
+        self.color = color
+        self.size = size
+        UINavigationBar.changeAppearance(clear: true)
+        UITabBar.appearance().backgroundColor = .clear
+    }
     
     var body: some View {
         ZStack {
-            Image(item.instrument.rawValue)
-            //                .resizable()
-                .opacity(0.1)
-            //                .frame(width: size.height, height: size.height, alignment: .center)
-            VStack {
-                Image(item.instrument.rawValue).resizable().frame(width: size.width * 0.5, height: size.width * 0.5).aspectRatio(1/1, contentMode: .fit)
-                Spacer()
-                Text("\(item.instrument.rawValue)").fontWeight(.thin).font(.title)
-                    .padding()
-                Spacer()
-                HStack{
-                    Spacer()
-                    Text("€ \(item.wage)").fontWeight(.light).font(.title3)
-                    Spacer()
+            GeometryReader() { geometrySize in
+                Image(item.instrument.rawValue)
+                    .position(x: geometrySize.size.width / 2, y: geometrySize.size.height / 2)
+                    .frame(height: geometrySize.size.height * 1.2)
+                    .opacity(0.1)
+                    .clipped()
+                    .ignoresSafeArea(edges: .vertical)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 15).foregroundColor(Color(color)).opacity(0.8).padding(standardPadding)
                     VStack {
-                        Text("\(item.gigType.rawValue)").fontWeight(.light).font(.title3)
-                        Text("\(item.artistType.rawValue)").fontWeight(.light).font(.title3)
+                        Image(item.instrument.rawValue).resizable().aspectRatio(1/1, contentMode: .fit)
+                            //.frame(height: geometrySize.size.height * 0.2)
+                        Spacer()
+                        Text(item.dateFormatted).fontWeight(.thin).font(.title3)
+
+                        Text("\(item.instrument.rawValue)").fontWeight(.thin).font(.title)
+                            .padding()
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("€ \(item.wage)").fontWeight(.light).font(.title2)
+                            Spacer()
+                            VStack {
+                                Text("\(item.gigType.rawValue)").fontWeight(.light).font(.title)
+                                Text("\(item.artistType.rawValue)").fontWeight(.light).font(.title2)
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                        Spacer()
+                        VStack {
+                            Text("Muzikant Gegevens").fontWeight(.light).font(.title2)
+                            Divider()
+                            HStack {
+                                Text("\(item.yearsOfExperience) jaar ervaring")
+                                Text("Gestudeerd: \(item.didStudy ? "Ja" : "Nee")")
+                            }
+                        }
+
+                        Spacer()
                     }
-                    Spacer()
+                    .padding(standardPadding)
+                    .foregroundColor(.white)
                 }
+                .frame(height: geometrySize.size.height * height)
                 .padding()
-                
-                Text("Muzikant gegevens").fontWeight(.light).font(.title)
-                HStack {
-                    Text("\(item.yearsOfExperience) jaar ervaring")
-                    Divider()
-                    Text("Gestudeerd: \(item.didStudy ? "Ja" : "Nee")")
-                }
-                Spacer()
             }
-            .foregroundColor(.white)
-            .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color(color)).frame(width: size.width * 0.9))
-            .frame(width: size.width * 0.9, height: size.width * 0.9, alignment: .center)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            orientation = UIDevice.current.orientation
         }
     }
     
@@ -98,5 +156,8 @@ struct PrettyDetail: View {
 
 struct PrettyCell_Previews: PreviewProvider {
     static var previews: some View {
-        PrettyCell(item: WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 15, didStudy: true, instrument: .Drums), size: CGSize(width: 400, height: 100))    }
+        let item = WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 15, didStudy: true, instrument: .Drums, timeStamp: Date.now)
+        PrettyCell(item: item, size: CGSize(width: 400, height: 100))
+        PrettyDetail(item: item, color: "blueIsh-2", size: CGSize(width: 300, height: 500))
+    }
 }

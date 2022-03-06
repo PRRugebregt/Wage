@@ -28,7 +28,6 @@ struct Spinner: View {
         ZStack {
             SpinnerCircle(start: spinnerStart, end: spinnerEndS2S3, rotation: rotationDegreeS3, color: Color.purple)
                 .opacity(0.6)
-            
         }.frame(width: 80, height: 80)
             .background(.clear)
             .onAppear() {
@@ -42,7 +41,7 @@ struct Spinner: View {
     }
     
     // MARK: Animation methods
-    func animateSpinner(with timeInterval: Double, completion: @escaping (() -> Void)) {
+    func animateSpinnerTime(with timeInterval: Double, completion: @escaping (() -> Void)) {
         Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { _ in
             withAnimation(Animation.easeInOut(duration: rotationTime)) {
                 completion()
@@ -51,23 +50,24 @@ struct Spinner: View {
     }
     
     func animateSpinner() {
-        animateSpinner(with: rotationTime) { self.spinnerEndS1 = 0.5 }
-        animateSpinner(with: (rotationTime * 2)) {
+        animateSpinnerTime(with: rotationTime) { self.spinnerEndS1 = 0.5 }
+        animateSpinnerTime(with: (rotationTime * 2)) {
             self.spinnerEndS1 = 0.03
         }
-        animateSpinner(with: (rotationTime * 2) - 0.025) {
+        animateSpinnerTime(with: (rotationTime * 2) - 0.025) {
             self.rotationDegreeS1 += fullRotation
         }
     }
+    
     func animateSpinner2() {
-        animateSpinner(with: rotationTime) { self.spinnerEndS2S3 = 0.4 }
-        animateSpinner(with: (rotationTime * 2)) {
+        animateSpinnerTime(with: rotationTime) { self.spinnerEndS2S3 = 0.4 }
+        animateSpinnerTime(with: (rotationTime * 2)) {
             self.spinnerEndS2S3 = 0.04
         }
-        animateSpinner(with: (rotationTime * 2) - 0.028) {
+        animateSpinnerTime(with: (rotationTime * 2) - 0.028) {
             self.rotationDegreeS2 += fullRotation
         }
-        animateSpinner(with: (rotationTime * 2) - 0.028) {
+        animateSpinnerTime(with: (rotationTime * 2) - 0.028) {
             self.rotationDegreeS3 += fullRotation
         }
     }

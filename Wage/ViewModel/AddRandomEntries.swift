@@ -14,7 +14,7 @@ class AddRandomEntries {
         for _ in 0 ... 70 {
             let file = WageFile(
                                 id: Int64.random(in: 0 ..< Int64.max),
-                                wage: Int.random(in: 100...500), artistType: ArtistType.allCases.randomElement()!, gigType: GigType.allCases.randomElement()!, yearsOfExperience: Int.random(in: 2 ... 20), didStudy: Bool.random(), instrument: Instrument.allCases.randomElement()!)
+                                wage: Int.random(in: 100...500), artistType: ArtistType.allCases.randomElement()!, gigType: GigType.allCases.randomElement()!, yearsOfExperience: Int.random(in: 2 ... 20), didStudy: Bool.random(), instrument: Instrument.allCases.randomElement()!, timeStamp: Date.now)
             PersistenceController.shared.createObject(wageFile: file)
         }
     }

@@ -30,16 +30,11 @@ class WageFileLoader: ObservableObject {
     @Published var wageFiles: [WageFile] = []
     @Published var isLoading: Bool = false
     var filters: FilterOptions?
-    var networkDownload: NetworkDownloadable? {
+    var networkDownload: NetworkDownloadable? 
+    var wageFileManageable: WageFileManageable?
+    var isLocal: Bool = true {
         didSet {
             loadAllFiles()
-        }
-    }
-    var wageFileManageable: WageFileManageable?
-    
-    @Published var isLocal = UserDefaults.standard.object(forKey: "isLocal") as? Bool ?? false {
-        didSet {
-            UserDefaults.standard.setValue(isLocal, forKey: "isLocal")
         }
     }
     @Published var isPrettyView = UserDefaults.standard.object(forKey: "isPrettyView") as? Bool ?? false {
@@ -89,6 +84,15 @@ class WageFileLoader: ObservableObject {
             if self.filters != nil {
                 self.filterResults(with: self.filters!)
             }
+        }
+    }
+    
+    func deleteWageFile(with indexes: IndexSet) {
+        indexes.forEach { index in
+            let wageFileToDelete = wageFiles[index]
+            networkDownload?.removeWageFileOnline(wageFileToDelete)
+            PersistenceController.shared.removeFromCoreData(wageFileToDelete)
+            wageFiles.remove(at: index)
         }
     }
     

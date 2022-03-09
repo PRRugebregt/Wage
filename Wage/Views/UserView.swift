@@ -84,10 +84,14 @@ struct UserView: View {
                                     user.updateDidStudy(true)
                                 }
                                 .background(user.user.didStudy ? Color("blueIsh") : .clear)
+                                .opacity(user.user.didStudy ? 1 : 0.5)
+                                .shadow(radius: user.user.didStudy ? 3 : 0).foregroundColor(.white)
                                 Button("Nee") {
                                     user.updateDidStudy(false)
                                 }
                                 .background(user.user.didStudy ? .clear : Color("blueIsh"))
+                                .opacity(user.user.didStudy ? 0.5 : 1)
+                                .shadow(radius: user.user.didStudy ? 0 : 3).foregroundColor(.white)
                             }
                             .buttonStyle(.bordered)
                             .font(.title2)
@@ -108,7 +112,6 @@ struct UserView: View {
                         .background(RoundedRectangle(cornerRadius: 5).foregroundColor(Color("blueIsh")))
                         .foregroundColor(.white)
                         Spacer()
-                        
                     }
                 }
                 .foregroundColor(.white)

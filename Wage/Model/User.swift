@@ -34,6 +34,7 @@ enum Instrument: String, CaseIterable, Identifiable {
 
 struct User {
     
+    var newUser: Bool
     var yearsOfExperience: Int
     var didStudy: Bool
     var instrument: Instrument
@@ -47,10 +48,12 @@ struct User {
             yearsOfExperience = 0
             instrument = .Anders
             didStudy = false
+            newUser = true
             PersistenceController.shared.createUserObject(self)
             return
         }
         print("yes user found")
+        newUser = false
         coreDataObject = users[0]
         yearsOfExperience = Int(users[0].yearsOfExperience)
         instrument = Instrument(rawValue: users[0].instrument!)!

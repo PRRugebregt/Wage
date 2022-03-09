@@ -7,18 +7,41 @@
 
 import Foundation
 
-class DependencyRouter {
+class Dependencies {
     
     private let networkDownload = NetworkDownload()
-    private let wageFileLoader: WageFileLoader
+    private let wageFileLoader = WageFileLoader()
+    private let userCreator = UserCreator()
     private let wageFiles: WageFiles
+    private let filtering: Filtering
     
-    init(wageFileLoader: WageFileLoader) {
+    init() {
         self.wageFiles = WageFiles(networkDownload: networkDownload)
-        self.wageFileLoader = wageFileLoader
         self.wageFileLoader.wageFileManageable = wageFiles
         self.wageFileLoader.networkDownload = networkDownload
+        self.filtering = Filtering(wageFileLoader: wageFileLoader)
         PersistenceController.shared.setWageFileManageable(wageFiles) 
+    }
+    
+    deinit {
+        print("Deinit on dependency router")
+    }
+    
+    func injectNetwork() -> NetworkDownload {
+        networkDownload
+    }
+    
+    func injectWageFileLoader() -> WageFileLoader {
+        print("called")
+        return wageFileLoader
+    }
+    
+    func injectUserCreator() -> UserCreator {
+        userCreator
+    }
+    
+    func injectFiltering() -> Filtering {
+        filtering
     }
     
 }

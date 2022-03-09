@@ -11187,7 +11187,7 @@
 		BDE25F350F839B2EA09BF9BE497DAA93 /* FirebaseInstallations.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FirebaseInstallations.modulemap; sourceTree = "<group>"; };
 		BDE84D30A299CC01B66FC4FF87151258 /* arg.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = arg.h; path = absl/strings/internal/str_format/arg.h; sourceTree = "<group>"; };
 		BDEC41680C7EE722A2A66BD43D9358A8 /* global_subchannel_pool.cc */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = global_subchannel_pool.cc; path = src/core/ext/filters/client_channel/global_subchannel_pool.cc; sourceTree = "<group>"; };
-		BE0A094332D5258B8AEDF0D03D31AED8 /* Pods-Wage */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Wage"; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0A094332D5258B8AEDF0D03D31AED8 /* Pods_Wage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE158839E8AF5264697000F6F7DAA341 /* channel_stack_builder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = channel_stack_builder.h; path = src/core/lib/channel/channel_stack_builder.h; sourceTree = "<group>"; };
 		BE2A1B1474976E41FEEA22C97FD6A811 /* stacktrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = stacktrace.h; path = absl/debugging/stacktrace.h; sourceTree = "<group>"; };
 		BE2CC565EE66BAD48FFE4581B18D6663 /* grpclb_channel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = grpclb_channel.h; path = src/core/ext/filters/client_channel/lb_policy/grpclb/grpclb_channel.h; sourceTree = "<group>"; };
@@ -13092,7 +13092,7 @@
 				C1998E0D8085221AD87F89B614C10E52 /* GTMSessionFetcher.framework */,
 				0A9F46A999C47653013D3AD854352507 /* leveldb.framework */,
 				06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */,
-				BE0A094332D5258B8AEDF0D03D31AED8 /* Pods-Wage */,
+				BE0A094332D5258B8AEDF0D03D31AED8 /* Pods_Wage.framework */,
 				0716E5EFAFB4BCD8B7F48CFD4148C919 /* Pods-Wage-WageUITests */,
 				17E88C4B63E1B8F9BF338838443D0FAF /* Pods-WageTests */,
 				3347A1AB6546F0A3977529B8F199DC41 /* FBLPromises.framework */,
@@ -18910,7 +18910,7 @@
 			);
 			name = "Pods-Wage";
 			productName = Pods_Wage;
-			productReference = BE0A094332D5258B8AEDF0D03D31AED8 /* Pods-Wage */;
+			productReference = BE0A094332D5258B8AEDF0D03D31AED8 /* Pods_Wage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C68D5A66413C389A0C4D74C6FC0E5CBD /* Pods-Wage-WageUITests */ = {

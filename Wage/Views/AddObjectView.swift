@@ -15,7 +15,15 @@ struct AddObjectView: View {
     @State private var showAlert = false
     @State private var gigTypeTitle = "Kiezen"
     @State private var artistTypeTitle = "Kiezen"
+    @State private var instrumentTitle: String
     @State private var wageText = ""
+    
+    init(instrument: Instrument, isShown: Binding<Bool>, objectAdded: Binding<Bool>) {
+        _objectAdded = objectAdded
+        _isShown = isShown
+        wageObjectCreator.instrument = instrument
+        instrumentTitle = instrument.rawValue
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,6 +33,23 @@ struct AddObjectView: View {
                     .padding(.vertical)
                     .font(.title)
                 Spacer()
+                Divider()
+                HStack {
+                    Text("Instrument ").foregroundColor(Color("darkWhite"))
+                    Spacer()
+                    Image(systemName: "music.note.house")
+                }
+                Menu(instrumentTitle) {
+                    ForEach(Instrument.allCases) { instrument in
+                        Button(instrument.rawValue) {
+                            instrumentTitle = instrument.rawValue
+                            wageObjectCreator.instrument = instrument
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
+                .padding()
+                .foregroundColor(Color("lightBlue"))
                 Divider()
                 HStack {
                     Text("Type optreden ").foregroundColor(Color("darkWhite"))
@@ -136,6 +161,6 @@ struct PreviewAddObject: View {
     @State var objectAdded = true
 
     var body: some View {
-        AddObjectView(isShown: $isShown, objectAdded: $objectAdded)
+        AddObjectView(instrument: .Keyboards, isShown: $isShown, objectAdded: $objectAdded)
     }
 }

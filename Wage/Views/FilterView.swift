@@ -32,19 +32,6 @@ struct FilterView: View {
                 Divider()
                 
                 Group {
-                    Text("Online resultaten weergeven: ")
-                        .fontWeight(.thin)
-                    
-                    Button("\(wageFileLoader.isLocal ? "Nee" : "Ja")") {
-                        wageFileLoader.isLocal.toggle()
-                        wageFileLoader.loadAllFiles()
-                    }
-                    .foregroundColor(Color("lightBlue"))
-                    .buttonStyle(.bordered)
-                    Divider()
-                }
-                
-                Group {
                     Text("Instrument: ")
                         .fontWeight(.thin)
                     
@@ -138,6 +125,6 @@ struct FilterView_Previews: PreviewProvider {
 struct FilterViewPreview: View {
     @State private var isPresented = true
     var body: some View {
-        FilterView(filters: Filtering(), wageFileLoader: WageFileLoader(), isPresented: $isPresented)
+        FilterView(filters: Filtering(wageFileLoader: WageFileLoader()), wageFileLoader: WageFileLoader(), isPresented: $isPresented)
     }
 }

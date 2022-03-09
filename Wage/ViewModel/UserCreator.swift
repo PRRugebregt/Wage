@@ -10,7 +10,10 @@ import Firebase
 
 class UserCreator: ObservableObject {
     
-    @Published var user: User = User() 
+    @Published var user: User = User()
+    var newUser: Bool {
+        return user.newUser
+    }
     
     init() {
         authenticateAnonymous()

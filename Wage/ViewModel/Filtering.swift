@@ -10,12 +10,13 @@ import UIKit
 class Filtering: ObservableObject {
     
     @Published var filterOptions: FilterOptions = FilterOptions()
+    private var wageFileLoader: WageFileLoader
     var minimumWage = 0
     var maximumWage = 1000
     var isFiltered = false
     
-    init() {
-
+    init(wageFileLoader: WageFileLoader) {
+        self.wageFileLoader = wageFileLoader
     }
     
     // Intent functions
@@ -51,6 +52,8 @@ class Filtering: ObservableObject {
     
     func reset() {
         filterOptions = FilterOptions()
+        wageFileLoader.removeFilters()
+        wageFileLoader.loadAllFiles()
         isFiltered = false
     }
     

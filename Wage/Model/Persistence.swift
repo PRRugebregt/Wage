@@ -131,4 +131,21 @@ class PersistenceController {
         }
     }
     
+    func removeFromCoreData(_ wageFile: WageFile) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "WageObject")
+        let predicate = NSPredicate(format: "idNumber = '\(wageFile.id)'")
+        request.predicate = predicate
+        do {
+            let objects = try container.viewContext.fetch(request)
+            if let results = objects as? [NSManagedObject] {
+                guard results.count > 0 else { return }
+                let object = results[0]
+                container.viewContext.delete(object)
+                save()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
 }

@@ -46,7 +46,7 @@ class WageFiles: WageFileManageable {
     private var networkDownload: NetworkDownloadable
     var all: [WageFile] {
         get {
-                return PersistenceController.shared.loadAllObjects()
+            return PersistenceController.shared.loadAllObjects()
         }
         set {}
     }
@@ -80,6 +80,13 @@ struct WageFile: Identifiable, Equatable, Hashable {
     let yearsOfExperience: Int
     let didStudy: Bool
     let instrument: Instrument
+    let timeStamp: Date
+    var dateFormatted: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        return dateFormatter.string(from: timeStamp)
+    }
     
     enum CodingKeys: String {
         case id

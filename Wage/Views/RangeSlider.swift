@@ -68,6 +68,6 @@ struct RangeSlider: View {
 
 struct RangeSlider_Previews: PreviewProvider {
     static var previews: some View {
-        RangeSlider(filtering: Filtering(), screenWidth: 500)
+        RangeSlider(filtering: Filtering(wageFileLoader: WageFileLoader()), screenWidth: 500)
     }
 }

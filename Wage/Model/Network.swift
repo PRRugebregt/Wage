@@ -7,15 +7,27 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 protocol NetworkDownloadable {
-    func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ()) 
+    func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ())
+    func removeWageFileOnline(_ wageFile: WageFile)
 }
 
 class NetworkUpload {
         
     private var db = Firestore.firestore()
+    private var user: User?
     @Published private var isDoneUploading = false
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUser(_:)), name: .shareUser, object: nil)
+    }
+    
+    @objc func updateUser(_ notification: Notification) {
+        guard let user = notification.userInfo?["user"] as? User else { return }
+        self.user = user
+    }
     
     func upload(wageFile: WageFile) {
         db.collection("data").document("\(wageFile.id)").setData([
@@ -25,7 +37,8 @@ class NetworkUpload {
             "artistType": wageFile.artistType.rawValue,
             "yearsOfExperience": wageFile.yearsOfExperience,
             "wage": wageFile.wage,
-            "didStudy": wageFile.didStudy
+            "didStudy": wageFile.didStudy,
+            "timeStamp": wageFile.timeStamp
         ]) { error in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -36,11 +49,10 @@ class NetworkUpload {
     }
     
     func sendSuggestion(with text: String) {
-        let user = User()
         db.collection("Suggestions").addDocument(data: [
-            "instrument": user.instrument.rawValue,
-            "yearsOfExperience": user.yearsOfExperience,
-            "didStudy": user.didStudy,
+            "instrument": user?.instrument.rawValue ?? Instrument.Anders,
+            "yearsOfExperience": user?.yearsOfExperience ?? 0,
+            "didStudy": user?.didStudy ?? false,
             "suggestion": text
         ])
     }
@@ -48,6 +60,16 @@ class NetworkUpload {
 }
 
 class NetworkDownload: NetworkDownloadable {
+
+    func removeWageFileOnline(_ wageFile: WageFile) {
+        db.collection("data").document("\(wageFile.id)").delete { err in
+            guard err == nil else {
+                print(err!)
+                return
+            }
+            print("removed \(wageFile.timeStamp)")
+        }
+    }
     
     private var db = Firestore.firestore()
     @Published private var isDoneDownloading = false

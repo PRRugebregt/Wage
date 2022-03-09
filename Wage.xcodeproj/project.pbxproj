@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0123B45B27D823E900DCE209 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B45A27D823E900DCE209 /* CustomToggleStyle.swift */; };
+		0123B45D27D8A58400DCE209 /* InitialHelpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B45C27D8A58400DCE209 /* InitialHelpScreen.swift */; };
 		014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014ED84427C0E6B900705AF0 /* AverageView.swift */; };
 		0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180675C27C029C300EAD6F9 /* PrettyCell.swift */; };
 		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
@@ -37,6 +39,10 @@
 		019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A627BC36C300B84AED /* DependencyRouter.swift */; };
 		019091A927BE449A00B84AED /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A827BE449900B84AED /* Spinner.swift */; };
 		019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091AC27BE7CF200B84AED /* RangeSlider.swift */; };
+		019A9C9427C2AD79006415EF /* AddRandomEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9327C2AD79006415EF /* AddRandomEntries.swift */; };
+		019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9627C2CABD006415EF /* NotificationExtensions.swift */; };
+		01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */; };
+		01A8843327D6660B0076BC1C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 01A8843227D6660B0076BC1C /* TODO */; };
 		2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3D47C73F54D01202245DF /* Pods_Wage.framework */; };
 		AC03DA03DF0209C6AFDD43F0 /* Pods_Wage_WageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAA79CCB178C7BE6AC0F40 /* Pods_Wage_WageUITests.framework */; };
 		C08DE643DABED681E1B10C08 /* Pods_WageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89677E9050F03A2AF064DAF4 /* Pods_WageTests.framework */; };
@@ -60,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0123B45A27D823E900DCE209 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
+		0123B45C27D8A58400DCE209 /* InitialHelpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialHelpScreen.swift; sourceTree = "<group>"; };
 		014ED84427C0E6B900705AF0 /* AverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageView.swift; sourceTree = "<group>"; };
 		014ED84627C0E83A00705AF0 /* Wage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wage.entitlements; sourceTree = "<group>"; };
 		0180675C27C029C300EAD6F9 /* PrettyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyCell.swift; sourceTree = "<group>"; };
@@ -94,6 +102,11 @@
 		019091A627BC36C300B84AED /* DependencyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRouter.swift; sourceTree = "<group>"; };
 		019091A827BE449900B84AED /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		019091AC27BE7CF200B84AED /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		019A9C9327C2AD79006415EF /* AddRandomEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRandomEntries.swift; sourceTree = "<group>"; };
+		019A9C9627C2CABD006415EF /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
+		01A8843127D665A20076BC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		01A8843227D6660B0076BC1C /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		02B109C1D32E8B5C4745987C /* Pods-Wage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wage.release.xcconfig"; path = "Target Support Files/Pods-Wage/Pods-Wage.release.xcconfig"; sourceTree = "<group>"; };
 		0EF2791A2EC626EF7EEE7FEC /* Pods-WageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WageTests.release.xcconfig"; path = "Target Support Files/Pods-WageTests/Pods-WageTests.release.xcconfig"; sourceTree = "<group>"; };
 		12F3D47C73F54D01202245DF /* Pods_Wage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +171,9 @@
 		018B7A5E27B5BDF400068F7F /* Wage */ = {
 			isa = PBXGroup;
 			children = (
+				01A8843227D6660B0076BC1C /* TODO */,
+				01A8843127D665A20076BC1C /* Info.plist */,
+				019A9C9527C2CAAF006415EF /* Extensions */,
 				014ED84627C0E83A00705AF0 /* Wage.entitlements */,
 				019091A027BA76AB00B84AED /* GoogleService-Info.plist */,
 				018B7A5F27B5BDF400068F7F /* WageApp.swift */,
@@ -217,6 +233,7 @@
 				0190919C27B84E5A00B84AED /* UserCreator.swift */,
 				019091A427BBD25300B84AED /* AverageCalculator.swift */,
 				019091A627BC36C300B84AED /* DependencyRouter.swift */,
+				019A9C9327C2AD79006415EF /* AddRandomEntries.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -235,8 +252,19 @@
 				019091AC27BE7CF200B84AED /* RangeSlider.swift */,
 				0180675C27C029C300EAD6F9 /* PrettyCell.swift */,
 				014ED84427C0E6B900705AF0 /* AverageView.swift */,
+				0123B45A27D823E900DCE209 /* CustomToggleStyle.swift */,
+				0123B45C27D8A58400DCE209 /* InitialHelpScreen.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		019A9C9527C2CAAF006415EF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				019A9C9627C2CABD006415EF /* NotificationExtensions.swift */,
+				01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2771C9EA507647439E49DCB4 /* Pods */ = {
@@ -373,6 +401,7 @@
 			files = (
 				018B7A6727B5BDF500068F7F /* Preview Assets.xcassets in Resources */,
 				018B7A6427B5BDF500068F7F /* Assets.xcassets in Resources */,
+				01A8843327D6660B0076BC1C /* TODO in Resources */,
 				019091A127BA76AB00B84AED /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,11 +535,14 @@
 				0190918827B7D14300B84AED /* Filtering.swift in Sources */,
 				0190919627B8320800B84AED /* AddObjectView.swift in Sources */,
 				0190918627B7B13400B84AED /* WageFileLoader.swift in Sources */,
+				0123B45D27D8A58400DCE209 /* InitialHelpScreen.swift in Sources */,
 				019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */,
 				0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */,
 				0190918E27B80E4D00B84AED /* WageObjectCreator.swift in Sources */,
+				01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */,
 				018B7A6927B5BDF500068F7F /* Persistence.swift in Sources */,
 				0190919B27B835E600B84AED /* UserView.swift in Sources */,
+				019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */,
 				0190919227B831A200B84AED /* WagesListView.swift in Sources */,
 				019091A927BE449A00B84AED /* Spinner.swift in Sources */,
 				0190919427B831E300B84AED /* ToolBarView.swift in Sources */,
@@ -518,10 +550,12 @@
 				018B7A6C27B5BDF500068F7F /* Wage.xcdatamodeld in Sources */,
 				0190919D27B84E5A00B84AED /* UserCreator.swift in Sources */,
 				019091A327BB2D7400B84AED /* HelpView.swift in Sources */,
+				019A9C9427C2AD79006415EF /* AddRandomEntries.swift in Sources */,
 				019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */,
 				014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */,
 				018B7A6227B5BDF400068F7F /* MainView.swift in Sources */,
 				019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */,
+				0123B45B27D823E900DCE209 /* CustomToggleStyle.swift in Sources */,
 				018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */,
 				0190919027B8300900B84AED /* User.swift in Sources */,
 				0190918427B71B7B00B84AED /* WageFile.swift in Sources */,
@@ -685,23 +719,25 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wage/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -719,23 +755,26 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wage/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.7;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

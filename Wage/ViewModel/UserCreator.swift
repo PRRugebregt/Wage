@@ -10,10 +10,9 @@ import Firebase
 
 class UserCreator: ObservableObject {
     
-    @Published var user: User = User() {
-        didSet {
-            print(user)
-        }
+    @Published var user: User = User()
+    var newUser: Bool {
+        return user.newUser
     }
     
     init() {

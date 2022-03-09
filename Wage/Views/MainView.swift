@@ -9,20 +9,30 @@ import SwiftUI
 import CoreData
 
 struct MainView: View {
-    
-    @ObservedObject private var wageFileLoader: WageFileLoader = WageFileLoader()
-    @State private var presentUserView = true
-    @State private var isLoading = false
-    private var filtering = Filtering()
+
+    private var dependencies: Dependencies
+    private var userCreator: UserCreator
+    private var filtering: Filtering
+    @ObservedObject private var wageFileLoader: WageFileLoader
+    @State private var presentUserView: Bool
+    @State private var showInitialHelpView = false
+    @State private var isBlurred = false
+    private var isLoading: Bool {
+        return wageFileLoader.isLoading
+    }
     var wageFiles: [WageFile] {
         return wageFileLoader.wageFiles
     }
     
     init() {
-        _ = DependencyRouter(wageFileLoader: wageFileLoader)
-        UITabBar.appearance().backgroundColor = .white
-        UITabBar.appearance().tintColor = UIColor(named: "blueIsh")
-        isLoading = wageFileLoader.isLoading
+        dependencies = Dependencies()
+        wageFileLoader = dependencies.injectWageFileLoader()
+        userCreator = dependencies.injectUserCreator()
+        filtering = dependencies.injectFiltering()
+        presentUserView = userCreator.newUser
+        UITabBar.appearance().backgroundColor = UIColor(named: "blueIsh-2")
+        UITabBar.appearance().unselectedItemTintColor = .white
+        wageFileLoader.loadAllFiles()
     }
     
     var body: some View {
@@ -30,23 +40,22 @@ struct MainView: View {
             NavigationView {
                 ZStack {
                     VStack(alignment: .center) {
-                        ToolBarView(wageFileLoader: wageFileLoader, filtering: filtering)
+                        ToolBarView(dependencies: dependencies, isShowingHelpScreen: $showInitialHelpView)
                             .background(.clear)
-                        WagesListView(wageFileLoader: wageFileLoader, filtering: filtering)
+                        WagesListView(wageFileLoader: wageFileLoader, filtering: filtering, showInitialHelpView: $showInitialHelpView)
                     }
                     .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
-                    if wageFileLoader.isLoading {
+                    if isLoading {
                         Spinner()
                             .background(.clear)
                     } else {
-                        
+                        // Remove Spinner
                     }
-                    
                 }
             }
             .navigationViewStyle(.stack)
             .tabItem {
-                Label("Je gages", systemImage: "music.note")
+                Label("Gages", systemImage: "music.note")
                     .background(.white)
             }
             AverageView(wageFiles: wageFiles)
@@ -59,21 +68,37 @@ struct MainView: View {
                 }
         }
         .sheet(isPresented: $presentUserView, onDismiss: {
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showInitialHelpView = true
+            }
         }, content: {
-            UserView(isPresented: $presentUserView)
+            UserView(user: userCreator, isPresented: $presentUserView)
+        })
+        .sheet(isPresented: $showInitialHelpView, content: {
+            InitialHelpScreen(showHelpScreen: $showInitialHelpView)
+                .background(BackgroundClearView())
         })
         .navigationBarHidden(true)
         .navigationTitle("")
     }
 }
 
+struct BackgroundClearView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
 
-
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView().preferredColorScheme(.light)
+        MainView().preferredColorScheme(.dark)
     }
 }
 

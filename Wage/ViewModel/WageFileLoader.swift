@@ -29,8 +29,16 @@ class WageFileLoader: ObservableObject {
     
     @Published var wageFiles: [WageFile] = []
     @Published var isLoading: Bool = false
+    var onlineResults: [WageFile] = []
     var filters: FilterOptions?
-    var networkDownload: NetworkDownloadable? 
+    var networkDownload: NetworkDownloadable? {
+        didSet {
+            loadNetworkFiles { wageFiles in
+                self.onlineResults = wageFiles
+                print(wageFiles)
+            }
+        }
+    }
     var wageFileManageable: WageFileManageable?
     var isLocal: Bool = true {
         didSet {
@@ -55,11 +63,21 @@ class WageFileLoader: ObservableObject {
         } else {
             print("Online")
             isLoading = true
-            self.loadNetworkFiles()
+            loadNetworkFiles(completion: { wageFiles in
+                self.wageFiles = wageFiles
+                print(wageFiles)
+                if self.filters != nil {
+                    self.filterResults(with: self.filters!)
+                }
+            })
         }
     }
     
-    private func loadNetworkFiles() {
+    func loadNetworkFiles(completion: @escaping (_ wageFiles: [WageFile]) -> Void) {
+        guard networkDownload != nil else {
+            print("NETWORK WAS STILL NILL IN WAGEFILELOADER")
+            return
+        }
         networkDownload?.downloadAllData { queryDocuments in
             var wageFiles = [WageFile]()
             for file in queryDocuments {
@@ -80,10 +98,7 @@ class WageFileLoader: ObservableObject {
                 wageFiles.append(wageFile)
             }
             self.isLoading = false
-            self.wageFiles = wageFiles
-            if self.filters != nil {
-                self.filterResults(with: self.filters!)
-            }
+            completion(wageFiles)
         }
     }
     

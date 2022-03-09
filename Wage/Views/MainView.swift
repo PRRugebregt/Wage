@@ -62,6 +62,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Je Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
                 }
+            AveragePerInstrumentView(wageFileLoader: wageFileLoader)
+                .tabItem {
+                    Label("Globaal Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
+                }
             HelpView()
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")

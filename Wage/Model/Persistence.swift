@@ -60,12 +60,12 @@ class PersistenceController {
             let wageFile = WageFile(
                 id: object.idNumber,
                 wage: Int(object.wage),
-                artistType: ArtistType(rawValue: object.artistType!)!,
-                gigType: GigType(rawValue: object.gigType!)!,
+                artistType: ArtistType(rawValue: object.artistType ?? "Groot") ?? .Groot,
+                gigType: GigType(rawValue: object.gigType ?? "festival") ?? .festival,
                 yearsOfExperience: Int(object.yearsOfExperience),
                 didStudy: object.didStudy,
-                instrument: Instrument(rawValue: object.instrument!)!,
-                timeStamp: object.timeStamp!)
+                instrument: Instrument(rawValue: object.instrument ?? "Piano") ?? .Piano,
+                timeStamp: object.timeStamp ?? Date.now)
             wageFiles.append(wageFile)
         }
         print(wageFiles)

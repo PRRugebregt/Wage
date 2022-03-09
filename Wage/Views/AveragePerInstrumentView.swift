@@ -24,7 +24,7 @@ struct AveragePerInstrumentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Gemiddelde gage voor").padding().foregroundColor(.black)
+                Text("Gemiddelde gage voor").padding().foregroundColor(.black).minimumScaleFactor(0.5)
                 Spacer()
                 Menu(gigTypeTitle) {
                     ForEach(GigType.allCases) { gigType in
@@ -61,6 +61,7 @@ struct AveragePerInstrumentView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(Instrument.allCases) { instrument in
+                        
                         HStack {
                             Text(instrument.rawValue)
                                 .frame(maxWidth: .infinity)
@@ -72,9 +73,12 @@ struct AveragePerInstrumentView: View {
                                 .frame(width: 30, height: 30,alignment: .leading)
                             Divider()
                             Text("€ \(averagePerInstrumentViewModel.allAverages[instrument.rawValue] ?? 0)")
+                                .minimumScaleFactor(0.5)
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         }
+                        .transition(.scale)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 1))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 20)
                                         .foregroundColor(.clear)

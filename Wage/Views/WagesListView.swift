@@ -62,9 +62,6 @@ struct WagesListView: View {
                                 wageFileLoader.deleteWageFile(with: index)
                             }
                         }
-                        .onChange(perform: {
-                            proxy.scrollTo(0)
-                        })
                         .transition(.scale)
                         .animation(.spring())
                         .blur(radius: isShowingHelpScreen ? 5 : 0)

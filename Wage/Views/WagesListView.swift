@@ -53,17 +53,22 @@ struct WagesListView: View {
                     .transition(.scale)
                     .animation(.spring())
                 } else {
-                    List {
-                        ForEach(wageFiles) { item in
-                            PrettyCell(item: item, size: geometry.size)
+                    ScrollViewReader{ proxy in
+                        List {
+                            ForEach(wageFiles) { item in
+                                PrettyCell(item: item, size: geometry.size)
+                            }
+                            .onDelete { index in
+                                wageFileLoader.deleteWageFile(with: index)
+                            }
                         }
-                        .onDelete { index in
-                            wageFileLoader.deleteWageFile(with: index)
-                        }
+                        .onChange(perform: {
+                            proxy.scrollTo(0)
+                        })
+                        .transition(.scale)
+                        .animation(.spring())
+                        .blur(radius: isShowingHelpScreen ? 5 : 0)
                     }
-                    .transition(.scale)
-                    .animation(.spring())
-                    .blur(radius: isShowingHelpScreen ? 5 : 0)
                 }
             }
             .transition(.scale)

@@ -56,6 +56,7 @@ struct FilterView: View {
                                 gigTypeTitle = gigType.rawValue
                                 filters.changeGigType(to: gigType)
                             }
+                            .contentShape(Rectangle())
                         }
                     }
                     .foregroundColor(Color("lightBlue"))
@@ -72,6 +73,7 @@ struct FilterView: View {
                                 artistTypeTitle = artistType.rawValue
                                 filters.changeArtistType(to: artistType)
                             }
+                            .contentShape(Rectangle())
                         }
                     }
                     .foregroundColor(Color("lightBlue"))
@@ -102,6 +104,7 @@ struct FilterView: View {
                 Button("Filters toepassen", action: {
                     isPresented = false
                 })
+                    .contentShape(Rectangle())
                     .background(Color("blueIsh-3"))
                     .foregroundColor(.white)
                     .cornerRadius(15)

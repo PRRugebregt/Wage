@@ -24,53 +24,53 @@ struct AveragePerInstrumentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Gemiddelde gage voor").padding().foregroundColor(.black).minimumScaleFactor(0.5)
+                Text("Gemiddelde gage voor").padding().font(.title3).foregroundColor(.white).minimumScaleFactor(0.5)
                 Spacer()
-                Menu(gigTypeTitle) {
+                Menu {
                     ForEach(GigType.allCases) { gigType in
                         Button {
                             gigTypeTitle = gigType.rawValue
                             chosenGigType = gigType
                         } label: {
-                            Text(gigType.rawValue).padding(5)
+                            Text(gigType.rawValue)
                         }
                     }
+                } label: {
+                    Text(gigTypeTitle).padding()
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 25)
                 .background(RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("blueIsh"))
-                                .shadow(color: .black, radius: 2, x: -2, y: 2))
-                .foregroundColor(.white)
+                                .foregroundColor(Color("blueIsh-2")))
                 Spacer()
             }
-            .padding(.horizontal)
-            //.background(Color("blueIsh-2"))
-            
-            HStack {
-                Text("Instrument").frame(maxWidth: .infinity).padding()
-                Spacer()
-                Spacer()
-                Text("Gage").frame(maxWidth: .infinity).padding()
-            }
-            .frame(height: 40)
-            .background(LinearGradient(colors: [Color("blueIsh-1"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
             .foregroundColor(.white)
-            .font(.title2)
-            .padding(.vertical)
+            .padding(.horizontal)
+            .background(Color("blueIsh").ignoresSafeArea())
+            
+//            HStack {
+//                Text("Instrument").fontWeight(.light).frame(maxWidth: .infinity).padding()
+//                Spacer()
+//                Spacer()
+//                Text("Gage").fontWeight(.light).frame(maxWidth: .infinity).padding()
+//            }
+//            .frame(height: 30)
+//            //.background(LinearGradient(colors: [Color("blueIsh-1"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
+//            .foregroundColor(.black)
+//            .font(.title2)
+//            .padding(.vertical)
             ScrollView {
                 LazyVStack {
                     ForEach(Instrument.allCases) { instrument in
                         
                         HStack {
-                            Text(instrument.rawValue)
-                                .frame(maxWidth: .infinity)
-                                .lineLimit(1)
-                                .padding()
                             Image("\(instrument.rawValue)")
                                 .resizable()
                                 .aspectRatio(1/1, contentMode: .fit)
                                 .frame(width: 30, height: 30,alignment: .leading)
+                                .padding(.horizontal, 40)
+                            Text(instrument.rawValue)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .lineLimit(1)
+                                .padding()
                             Divider()
                             Text("€ \(averagePerInstrumentViewModel.allAverages[instrument.rawValue] ?? 0)")
                                 .minimumScaleFactor(0.5)

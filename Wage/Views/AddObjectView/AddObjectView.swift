@@ -40,16 +40,16 @@ struct AddObjectView: View {
                     Spacer()
                     Image(systemName: "music.note.house")
                 }
-                Menu(instrumentTitle) {
+                Menu {
                     ForEach(Instrument.allCases) { instrument in
                         Button(instrument.rawValue) {
                             instrumentTitle = instrument.rawValue
                             wageObjectCreator.instrument = instrument
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(instrumentTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
                 HStack {
@@ -57,16 +57,16 @@ struct AddObjectView: View {
                     Spacer()
                     Image(systemName: "music.note.house")
                 }
-                Menu(gigTypeTitle) {
+                Menu {
                     ForEach(GigType.allCases) { gigType in
                         Button(gigType.rawValue) {
                             gigTypeTitle = gigType.rawValue
                             wageObjectCreator.gigType = gigType
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(gigTypeTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
             }
@@ -76,16 +76,20 @@ struct AddObjectView: View {
                     Spacer()
                     Image(systemName: "lines.measurement.horizontal")
                 }
-                Menu(artistTypeTitle) {
+                Menu {
                     ForEach(ArtistType.allCases) { artistType in
-                        Button(artistType.rawValue) {
+                        Button {
                             artistTypeTitle = artistType.rawValue
                             wageObjectCreator.artistType = artistType
+                        } label: {
+                            VStack {
+                            Text(artistType.rawValue).padding()
+                            }
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(artistTypeTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
                 HStack {
@@ -127,6 +131,7 @@ struct AddObjectView: View {
                     Button("Annuleren") {
                         isShown = false
                     }
+                    .contentShape(Rectangle())
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     Button("Gage toevoegen") {
                         guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen", Int(wageObjectCreator.wage) != nil else {
@@ -140,6 +145,7 @@ struct AddObjectView: View {
                         wageObjectCreator.createObject()
                         isShown = false
                     }
+                    .contentShape(Rectangle())
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     .alert("Oops", isPresented: $showAlert) {
                         Text("Hi")

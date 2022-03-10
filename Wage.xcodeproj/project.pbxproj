@@ -11,6 +11,7 @@
 		0123B45D27D8A58400DCE209 /* InitialHelpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B45C27D8A58400DCE209 /* InitialHelpScreen.swift */; };
 		0123B45F27D927CD00DCE209 /* AveragePerInstrumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B45E27D927CC00DCE209 /* AveragePerInstrumentView.swift */; };
 		0123B46127D92A4900DCE209 /* AveragePerInstrumentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B46027D92A4900DCE209 /* AveragePerInstrumentViewModel.swift */; };
+		0123B46327D97A5300DCE209 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B46227D97A5300DCE209 /* UIApplicationExtensions.swift */; };
 		014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014ED84427C0E6B900705AF0 /* AverageView.swift */; };
 		0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180675C27C029C300EAD6F9 /* PrettyCell.swift */; };
 		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
@@ -72,6 +73,7 @@
 		0123B45C27D8A58400DCE209 /* InitialHelpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialHelpScreen.swift; sourceTree = "<group>"; };
 		0123B45E27D927CC00DCE209 /* AveragePerInstrumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragePerInstrumentView.swift; sourceTree = "<group>"; };
 		0123B46027D92A4900DCE209 /* AveragePerInstrumentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragePerInstrumentViewModel.swift; sourceTree = "<group>"; };
+		0123B46227D97A5300DCE209 /* UIApplicationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtensions.swift; sourceTree = "<group>"; };
 		014ED84427C0E6B900705AF0 /* AverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageView.swift; sourceTree = "<group>"; };
 		014ED84627C0E83A00705AF0 /* Wage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wage.entitlements; sourceTree = "<group>"; };
 		0180675C27C029C300EAD6F9 /* PrettyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyCell.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				019A9C9627C2CABD006415EF /* NotificationExtensions.swift */,
 				01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */,
+				0123B46227D97A5300DCE209 /* UIApplicationExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */,
 				014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */,
 				018B7A6227B5BDF400068F7F /* MainView.swift in Sources */,
+				0123B46327D97A5300DCE209 /* UIApplicationExtensions.swift in Sources */,
 				019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */,
 				0123B45B27D823E900DCE209 /* CustomToggleStyle.swift in Sources */,
 				018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */,
@@ -727,7 +731,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
@@ -745,7 +749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7;
+				MARKETING_VERSION = 0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -763,7 +767,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Wage/Wage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Wage/Preview Content\"";
 				DEVELOPMENT_TEAM = F97FE5Z68U;
 				ENABLE_PREVIEWS = YES;
@@ -781,7 +785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7;
+				MARKETING_VERSION = 0.8;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.patrickrugebregt.Wage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

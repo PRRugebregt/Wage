@@ -17,6 +17,7 @@ struct AddObjectView: View {
     @State private var artistTypeTitle = "Kiezen"
     @State private var instrumentTitle: String
     @State private var wageText = ""
+    @FocusState private var gageTextFieldFocused: Bool
     
     init(instrument: Instrument, isShown: Binding<Bool>, objectAdded: Binding<Bool>) {
         _objectAdded = objectAdded
@@ -98,6 +99,17 @@ struct AddObjectView: View {
                     print(wageText)
                     wageObjectCreator.wage = wageText
                 })
+                    .onTapGesture(perform: {
+                        gageTextFieldFocused = true
+                    })
+                    .toolbar(content: {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("Klaar") {
+                                gageTextFieldFocused = false
+                            }
+                        }
+                    })
+                    .focused($gageTextFieldFocused)
                     .onSubmit {
                         wageObjectCreator.wage = wageText
                     }
@@ -107,7 +119,7 @@ struct AddObjectView: View {
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
                     .cornerRadius(10)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numberPad)
             }
             Spacer()
             Group {
@@ -117,7 +129,7 @@ struct AddObjectView: View {
                     }
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     Button("Gage toevoegen") {
-                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen" else {
+                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen", Int(wageObjectCreator.wage) != nil else {
                             print(wageObjectCreator.wage)
                             print(artistTypeTitle)
                             print(gigTypeTitle)
@@ -132,7 +144,7 @@ struct AddObjectView: View {
                     .alert("Oops", isPresented: $showAlert) {
                         Text("Hi")
                     } message: {
-                        Text("Vul aub alle informatie in")
+                        Text("Vul aub alle informatie correct in")
                     }
                     
                 }
@@ -144,7 +156,9 @@ struct AddObjectView: View {
         .frame(maxWidth: .infinity)
         .font(.body)
         .foregroundColor(.white)
-        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing)).onTapGesture {
+            gageTextFieldFocused = false
+        }
     }
         
     

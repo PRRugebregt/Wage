@@ -14,6 +14,11 @@ struct UserView: View {
     @State private var presentAlert = false
     @Binding var isPresented: Bool
     
+    init(dependencies: HasUserCreator, isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self.user = dependencies.injectUserCreator()
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -139,7 +144,7 @@ struct UserViewPreview: View {
     @State var isPresented = true
 
     var body: some View {
-        UserView(user: UserCreator(), isPresented: $isPresented)
+        UserView(dependencies: Dependencies(), isPresented: $isPresented)
     }
 }
 

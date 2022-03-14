@@ -42,7 +42,7 @@ struct ToolBarView: View {
                 .sheet(isPresented: $showUserScreen, onDismiss: {
                     
                 }, content: {
-                    UserView(user: userCreator, isPresented: $showUserScreen)
+                    UserView(dependencies: dependencies, isPresented: $showUserScreen)
                 })
                 .navigationBarHidden(true)
                 .navigationTitle("")
@@ -83,7 +83,7 @@ struct ToolBarView: View {
 
 struct ToolBarPreview: View {
     @State private var isShowingHelpView = true
-    private let wageFileLoader = WageFileLoader()
+    private let wageFileLoader = WageFileLoader(dependencies: Dependencies())
     var body: some View {
         ToolBarView(dependencies: Dependencies(), isShowingHelpScreen: $isShowingHelpView)
     }

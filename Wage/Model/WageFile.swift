@@ -51,8 +51,8 @@ class WageFiles: WageFileManageable {
         set {}
     }
     
-    init(networkDownload: NetworkDownloadable) {
-        self.networkDownload = networkDownload
+    init(dependencies: HasNetwork) {
+        self.networkDownload = dependencies.injectNetwork()
     }
     
     func appendNewFile(_ file: WageFile) {

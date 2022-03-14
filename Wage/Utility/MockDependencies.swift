@@ -1,33 +1,13 @@
 //
-//  DependencyRouter.swift
+//  MockDependencies.swift
 //  Wage
 //
-//  Created by Patrick Rugebregt on 15/02/2022.
+//  Created by Patrick Rugebregt on 14/03/2022.
 //
 
 import Foundation
 
-protocol HasNetwork {
-    func injectNetwork() -> NetworkDownload
-}
-
-protocol HasWageFileLoader {
-    func injectWageFileLoader() -> WageFileLoader
-}
-
-protocol HasUserCreator {
-    func injectUserCreator() -> UserCreator
-}
-
-protocol HasFiltering {
-    func injectFiltering() -> Filtering
-}
-
-protocol HasWageFileManageable {
-    func injectWageFileManageable() -> WageFileManageable
-}
-
-class Dependencies:     HasNetwork,
+class MockDependencies:     HasNetwork,
                         HasWageFileLoader,
                         HasUserCreator,
                         HasFiltering,
@@ -41,9 +21,9 @@ class Dependencies:     HasNetwork,
     private var wageFiles: WageFiles!
     
     init() {
-        self.wageFiles = WageFiles(dependencies: self)
         wageFileLoader = WageFileLoader(dependencies: self)
         self.filtering = Filtering(dependencies: self)
+        self.wageFiles = WageFiles(dependencies: self)
         PersistenceController.shared.setWageFileManageable(wageFiles)
     }
     
@@ -56,7 +36,7 @@ class Dependencies:     HasNetwork,
     }
     
     func injectWageFileLoader() -> WageFileLoader {
-        print("called inject wagefileloader?? ")
+        print("called")
         return wageFileLoader
     }
     

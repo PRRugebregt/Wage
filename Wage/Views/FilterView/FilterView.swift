@@ -22,6 +22,12 @@ struct FilterView: View {
     @State var gigTypeTitle = "Kiezen"
     @State var artistTypeTitle = "Kiezen"
     
+    init(dependencies: HasFiltering & HasWageFileLoader, isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self.filters = dependencies.injectFiltering()
+        self.wageFileLoader = dependencies.injectWageFileLoader()
+    }
+    
     var body: some View {
         GeometryReader() { geometry in
             VStack(alignment: .leading) {
@@ -128,6 +134,6 @@ struct FilterView_Previews: PreviewProvider {
 struct FilterViewPreview: View {
     @State private var isPresented = true
     var body: some View {
-        FilterView(filters: Filtering(wageFileLoader: WageFileLoader()), wageFileLoader: WageFileLoader(), isPresented: $isPresented)
+        FilterView(dependencies: Dependencies(), isPresented: $isPresented)
     }
 }

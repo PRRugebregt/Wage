@@ -13,8 +13,8 @@ class AveragePerInstrumentViewModel: ObservableObject {
     private var wageFileLoader: WageFileLoader
     private var files: [WageFile] = []
     
-    init(wageFileLoader: WageFileLoader) {
-        self.wageFileLoader = wageFileLoader
+    init(dependencies: HasWageFileLoader) {
+        self.wageFileLoader = dependencies.injectWageFileLoader()
     }
     
     func loadResults(gigType: GigType) {

@@ -24,57 +24,59 @@ struct AverageView: View {
     }
     
     var body: some View {
-        ZStack {
-            Rectangle().foregroundColor(.clear).background(LinearGradient(colors: [.white,Color("blueIsh"),.white], startPoint: .topLeading, endPoint: .bottomTrailing))
-            VStack(alignment: .center) {
-                Image("logo").resizable().aspectRatio(3/1, contentMode: .fit).opacity(0.8).foregroundColor(.black)
-                Spacer()
-                Group {
-                    VStack {
-                        if showText1 {
-                            Group {
-                                Text("Totaal aantal resultaten").fontWeight(.thin)
-                                    .transition(.opacity)
-                                    .font(.title3)
-                                Text("\(wageFiles.count)")
-                                    .transition(.scale)
-                                    .font(.title)
+            ZStack {
+                GeometryReader { proxy in
+                Rectangle().foregroundColor(.clear).background(LinearGradient(colors: [.white,Color("blueIsh"),.white], startPoint: .topLeading, endPoint: .bottomTrailing))
+                VStack(alignment: .center) {
+                    Image("logo").resizable().frame(height:proxy.size.height / 5).aspectRatio(1/1, contentMode: .fit).opacity(0.8).foregroundColor(.black)
+                    Spacer()
+                    Group {
+                        ScrollView {
+                        VStack {
+                            if showText1 {
+                                Group {
+                                    Text("Totaal aantal resultaten").fontWeight(.thin)
+                                        .transition(.opacity)
+                                        .font(.title3)
+                                    Text("\(wageFiles.count)")
+                                        .transition(.scale)
+                                        .font(.title)
+                                }
                             }
-                        }
-                        Divider().foregroundColor(.white)
-                        if showText2 {
-                            Group {
-                                Text("Gemiddelde gage").fontWeight(.thin)
-                                    .transition(.opacity)
-                                    .font(.title3)
-                                Text("€ \(averageCalculator.averageFee)")
-                                    .transition(.scale)
-                                    .font(.title)
+                            Divider().foregroundColor(.white)
+                            if showText2 {
+                                Group {
+                                    Text("Gemiddelde gage").fontWeight(.thin)
+                                        .transition(.opacity)
+                                        .font(.title3)
+                                    Text("€ \(averageCalculator.averageFee)")
+                                        .transition(.scale)
+                                        .font(.title)
+                                }
                             }
-                        }
-                        Divider()
-                        
-                        if showText3 {
-                            Group {
-                                Text("Meest gespeeld bij").fontWeight(.thin)
-                                    .transition(.opacity)
-                                    .font(.title3)
-                                Text("\(averageCalculator.averageGigType.rawValue)")
-                                    .transition(.scale)
-                                    .font(.title)
+                            Divider()
+                            
+                            if showText3 {
+                                Group {
+                                    Text("Meest gespeeld bij").fontWeight(.thin)
+                                        .transition(.opacity)
+                                        .font(.title3)
+                                    Text("\(averageCalculator.averageGigType.rawValue)")
+                                        .transition(.scale)
+                                        .font(.title)
+                                }
                             }
-                        }
-                        Divider()
-                        if showText4 {
-                            Group {
-                                Text("Gemiddeld aantal jaar ervaring").fontWeight(.thin)
-                                    .font(.title3)
-                                    .transition(.opacity)
-                                Text("\(averageCalculator.averageExperience)")
-                                    .font(.title)
-                                    .transition(.scale)
+                            Divider()
+                            if showText4 {
+                                Group {
+                                    Text("Gemiddeld aantal jaar ervaring").fontWeight(.thin)
+                                        .font(.title3)
+                                        .transition(.opacity)
+                                    Text("\(averageCalculator.averageExperience)")
+                                        .font(.title)
+                                        .transition(.scale)
+                                }
                             }
-                        }
                             if showText5 {
                                 Group {
                                     Divider()
@@ -88,13 +90,14 @@ struct AverageView: View {
                                 }
                             }
                         }
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("blueIsh")).opacity(0.7))
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 15).foregroundColor(Color("blueIsh")).opacity(0.7))
+                    }
                     }
                     .foregroundColor(.white)
                     Spacer()
                 }
-            .transition(.slide)
+                .transition(.slide)
                 .onAppear(perform: {
                     showText1 = false
                     showText2 = false
@@ -126,19 +129,20 @@ struct AverageView: View {
                             showText5 = true
                         }
                     }
-
+                    
                 })
                 .padding()
             }
-        }
     }
-    
-    
-    struct AverageView_Previews: PreviewProvider {
-        static var previews: some View {
-            AverageView(wageFiles: [WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 10, didStudy: true, instrument: .Piano, timeStamp: Date())])
-        }
     }
+}
+
+
+struct AverageView_Previews: PreviewProvider {
+    static var previews: some View {
+        AverageView(wageFiles: [WageFile(id: 0, wage: 250, artistType: .Groot, gigType: .festival, yearsOfExperience: 10, didStudy: true, instrument: .Piano, timeStamp: Date())])
+    }
+}
 
 
 

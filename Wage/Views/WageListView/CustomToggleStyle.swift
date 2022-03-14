@@ -25,7 +25,7 @@ struct CustomToggleStyle: ToggleStyle {
                         .foregroundColor(.white)
                         .padding(.all, 3)
                         .overlay(
-                            Image(systemName: configuration.isOn ? "globe" : "externaldrive")
+                            Image(systemName: configuration.isOn ? "globe" : "eurosign.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .font(Font.title.weight(.black))

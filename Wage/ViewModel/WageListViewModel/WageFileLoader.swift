@@ -31,23 +31,20 @@ class WageFileLoader: ObservableObject {
     @Published var isLoading: Bool = false
     var onlineResults: [WageFile] = []
     var filters: FilterOptions?
-    var networkDownload: NetworkDownloadable? {
-        didSet {
-            loadNetworkFiles { wageFiles in
-                self.onlineResults = wageFiles
-                print(wageFiles)
-            }
-        }
-    }
-    var wageFileManageable: WageFileManageable?
+    var networkDownload: NetworkDownloadable
+    var wageFileManageable: WageFileManageable
     var isLocal: Bool = true {
         didSet {
             loadAllFiles()
         }
     }
-    @Published var isPrettyView = UserDefaults.standard.object(forKey: "isPrettyView") as? Bool ?? false {
-        didSet {
-            UserDefaults.standard.setValue(isPrettyView, forKey: "isPrettyView")
+    
+    init(dependencies: HasNetwork & HasWageFileManageable) {
+        self.networkDownload = dependencies.injectNetwork()
+        self.wageFileManageable = dependencies.injectWageFileManageable()
+        loadNetworkFiles { wageFiles in
+            self.onlineResults = wageFiles
+            print("Setting online results for average per instrument view")
         }
     }
     
@@ -55,7 +52,7 @@ class WageFileLoader: ObservableObject {
         wageFiles = []
         if isLocal {
             print("local")
-            self.wageFiles = wageFileManageable?.fetchAllFiles() ?? []
+            self.wageFiles = wageFileManageable.fetchAllFiles()
             print(filters.debugDescription) 
             if filters != nil {
                 filterResults(with: filters!)
@@ -74,11 +71,7 @@ class WageFileLoader: ObservableObject {
     }
     
     func loadNetworkFiles(completion: @escaping (_ wageFiles: [WageFile]) -> Void) {
-        guard networkDownload != nil else {
-            print("NETWORK WAS STILL NILL IN WAGEFILELOADER")
-            return
-        }
-        networkDownload?.downloadAllData { queryDocuments in
+        networkDownload.downloadAllData { queryDocuments in
             var wageFiles = [WageFile]()
             for file in queryDocuments {
                 let data = file.data()
@@ -105,7 +98,7 @@ class WageFileLoader: ObservableObject {
     func deleteWageFile(with indexes: IndexSet) {
         indexes.forEach { index in
             let wageFileToDelete = wageFiles[index]
-            networkDownload?.removeWageFileOnline(wageFileToDelete)
+            networkDownload.removeWageFileOnline(wageFileToDelete)
             PersistenceController.shared.removeFromCoreData(wageFileToDelete)
             wageFiles.remove(at: index)
         }

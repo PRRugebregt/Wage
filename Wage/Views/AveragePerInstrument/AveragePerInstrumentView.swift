@@ -17,8 +17,8 @@ struct AveragePerInstrumentView: View {
     }
     @State private var gigTypeTitle: String = "Kies"
     
-    init(wageFileLoader: WageFileLoader) {
-        averagePerInstrumentViewModel = AveragePerInstrumentViewModel(wageFileLoader: wageFileLoader)
+    init(dependencies: HasWageFileLoader) {
+        averagePerInstrumentViewModel = AveragePerInstrumentViewModel(dependencies: dependencies)
     }
     
     var body: some View {
@@ -46,17 +46,6 @@ struct AveragePerInstrumentView: View {
             .padding(.horizontal)
             .background(Color("blueIsh").ignoresSafeArea())
             
-//            HStack {
-//                Text("Instrument").fontWeight(.light).frame(maxWidth: .infinity).padding()
-//                Spacer()
-//                Spacer()
-//                Text("Gage").fontWeight(.light).frame(maxWidth: .infinity).padding()
-//            }
-//            .frame(height: 30)
-//            //.background(LinearGradient(colors: [Color("blueIsh-1"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
-//            .foregroundColor(.black)
-//            .font(.title2)
-//            .padding(.vertical)
             ScrollView {
                 LazyVStack {
                     ForEach(Instrument.allCases) { instrument in
@@ -94,6 +83,6 @@ struct AveragePerInstrumentView: View {
 
 struct AveragePerInstrumentView_Previews: PreviewProvider {
     static var previews: some View {
-        AveragePerInstrumentView(wageFileLoader: WageFileLoader())
+        AveragePerInstrumentView(dependencies: Dependencies())
     }
 }

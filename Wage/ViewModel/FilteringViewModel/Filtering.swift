@@ -15,8 +15,8 @@ class Filtering: ObservableObject {
     var maximumWage = 1000
     var isFiltered = false
     
-    init(wageFileLoader: WageFileLoader) {
-        self.wageFileLoader = wageFileLoader
+    init(dependencies: HasWageFileLoader) {
+        self.wageFileLoader = dependencies.injectWageFileLoader()
     }
     
     // Intent functions

@@ -42,7 +42,7 @@ struct MainView: View {
                     VStack(alignment: .center) {
                         ToolBarView(dependencies: dependencies, isShowingHelpScreen: $showInitialHelpView)
                             .background(.clear)
-                        WagesListView(wageFileLoader: wageFileLoader, filtering: filtering, showInitialHelpView: $showInitialHelpView)
+                        WagesListView(dependencies: dependencies, showInitialHelpView: $showInitialHelpView)
                     }
                     .background(LinearGradient(colors: [.white,.gray], startPoint: .topLeading, endPoint: .bottomTrailing))
                     if isLoading {
@@ -62,9 +62,9 @@ struct MainView: View {
                 .tabItem {
                     Label("Je Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
                 }
-            AveragePerInstrumentView(wageFileLoader: wageFileLoader)
+            AveragePerInstrumentView(dependencies: dependencies)
                 .tabItem {
-                    Label("Globaal Gemiddelde", systemImage: "square.3.stack.3d.middle.filled")
+                    Label("Globaal Gemiddelde", systemImage: "globe")
                 }
             HelpView()
                 .tabItem {
@@ -76,7 +76,7 @@ struct MainView: View {
                 self.showInitialHelpView = true
             }
         }, content: {
-            UserView(user: userCreator, isPresented: $presentUserView)
+            UserView(dependencies: dependencies, isPresented: $presentUserView)
         })
         .sheet(isPresented: $showInitialHelpView, content: {
             InitialHelpScreen(showHelpScreen: $showInitialHelpView)

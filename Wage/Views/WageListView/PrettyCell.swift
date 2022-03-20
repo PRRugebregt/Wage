@@ -29,7 +29,10 @@ struct PrettyCell: View {
                 Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
                 Spacer()
                 Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
-                    .foregroundColor(Color("darkWhite")).fontWeight(.thin).font(.subheadline)
+                    .foregroundColor(Color("darkWhite"))
+                    .fontWeight(.thin)
+                    .font(.subheadline)
+                    .minimumScaleFactor(0.5)
                 Spacer()
             }
             Spacer()

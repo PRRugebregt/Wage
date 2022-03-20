@@ -22,6 +22,12 @@ struct FilterView: View {
     @State var gigTypeTitle = "Kiezen"
     @State var artistTypeTitle = "Kiezen"
     
+    init(dependencies: HasFiltering & HasWageFileLoader, isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self.filters = dependencies.injectFiltering()
+        self.wageFileLoader = dependencies.injectWageFileLoader()
+    }
+    
     var body: some View {
         GeometryReader() { geometry in
             VStack(alignment: .leading) {
@@ -56,6 +62,7 @@ struct FilterView: View {
                                 gigTypeTitle = gigType.rawValue
                                 filters.changeGigType(to: gigType)
                             }
+                            .contentShape(Rectangle())
                         }
                     }
                     .foregroundColor(Color("lightBlue"))
@@ -72,6 +79,7 @@ struct FilterView: View {
                                 artistTypeTitle = artistType.rawValue
                                 filters.changeArtistType(to: artistType)
                             }
+                            .contentShape(Rectangle())
                         }
                     }
                     .foregroundColor(Color("lightBlue"))
@@ -102,6 +110,7 @@ struct FilterView: View {
                 Button("Filters toepassen", action: {
                     isPresented = false
                 })
+                    .contentShape(Rectangle())
                     .background(Color("blueIsh-3"))
                     .foregroundColor(.white)
                     .cornerRadius(15)
@@ -125,6 +134,6 @@ struct FilterView_Previews: PreviewProvider {
 struct FilterViewPreview: View {
     @State private var isPresented = true
     var body: some View {
-        FilterView(filters: Filtering(wageFileLoader: WageFileLoader()), wageFileLoader: WageFileLoader(), isPresented: $isPresented)
+        FilterView(dependencies: Dependencies(), isPresented: $isPresented)
     }
 }

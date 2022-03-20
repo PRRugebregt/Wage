@@ -17,6 +17,8 @@ struct AddObjectView: View {
     @State private var artistTypeTitle = "Kiezen"
     @State private var instrumentTitle: String
     @State private var wageText = ""
+    @State private var showInfoGrootte = false
+    @FocusState private var gageTextFieldFocused: Bool
     
     init(instrument: Instrument, isShown: Binding<Bool>, objectAdded: Binding<Bool>) {
         _objectAdded = objectAdded
@@ -39,16 +41,16 @@ struct AddObjectView: View {
                     Spacer()
                     Image(systemName: "music.note.house")
                 }
-                Menu(instrumentTitle) {
+                Menu {
                     ForEach(Instrument.allCases) { instrument in
                         Button(instrument.rawValue) {
                             instrumentTitle = instrument.rawValue
                             wageObjectCreator.instrument = instrument
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(instrumentTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
                 HStack {
@@ -56,16 +58,16 @@ struct AddObjectView: View {
                     Spacer()
                     Image(systemName: "music.note.house")
                 }
-                Menu(gigTypeTitle) {
+                Menu {
                     ForEach(GigType.allCases) { gigType in
                         Button(gigType.rawValue) {
                             gigTypeTitle = gigType.rawValue
                             wageObjectCreator.gigType = gigType
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(gigTypeTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
             }
@@ -73,18 +75,30 @@ struct AddObjectView: View {
                 HStack {
                     Text("Grootte van show ").foregroundColor(Color("darkWhite"))
                     Spacer()
-                    Image(systemName: "lines.measurement.horizontal")
+                    Button {
+                        showInfoGrootte = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                    .popover(isPresented: $showInfoGrootte) {
+                        ShowGrootteInfoView(showInfoView: $showInfoGrootte)
+                    }
+
                 }
-                Menu(artistTypeTitle) {
+                Menu {
                     ForEach(ArtistType.allCases) { artistType in
-                        Button(artistType.rawValue) {
+                        Button {
                             artistTypeTitle = artistType.rawValue
                             wageObjectCreator.artistType = artistType
+                        } label: {
+                            VStack {
+                            Text(artistType.rawValue).padding()
+                            }
                         }
-                        .buttonStyle(.bordered)
                     }
+                } label: {
+                    Text(artistTypeTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
                 }
-                .padding()
                 .foregroundColor(Color("lightBlue"))
                 Divider()
                 HStack {
@@ -98,6 +112,17 @@ struct AddObjectView: View {
                     print(wageText)
                     wageObjectCreator.wage = wageText
                 })
+                    .onTapGesture(perform: {
+                        gageTextFieldFocused = true
+                    })
+                    .toolbar(content: {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("Klaar") {
+                                gageTextFieldFocused = false
+                            }
+                        }
+                    })
+                    .focused($gageTextFieldFocused)
                     .onSubmit {
                         wageObjectCreator.wage = wageText
                     }
@@ -107,7 +132,7 @@ struct AddObjectView: View {
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
                     .cornerRadius(10)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numberPad)
             }
             Spacer()
             Group {
@@ -115,9 +140,10 @@ struct AddObjectView: View {
                     Button("Annuleren") {
                         isShown = false
                     }
+                    .contentShape(Rectangle())
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     Button("Gage toevoegen") {
-                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen" else {
+                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen", Int(wageObjectCreator.wage) != nil else {
                             print(wageObjectCreator.wage)
                             print(artistTypeTitle)
                             print(gigTypeTitle)
@@ -128,11 +154,12 @@ struct AddObjectView: View {
                         wageObjectCreator.createObject()
                         isShown = false
                     }
+                    .contentShape(Rectangle())
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     .alert("Oops", isPresented: $showAlert) {
                         Text("Hi")
                     } message: {
-                        Text("Vul aub alle informatie in")
+                        Text("Vul aub alle informatie correct in")
                     }
                     
                 }
@@ -144,9 +171,42 @@ struct AddObjectView: View {
         .frame(maxWidth: .infinity)
         .font(.body)
         .foregroundColor(.white)
-        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing)).onTapGesture {
+            gageTextFieldFocused = false
+        }
     }
         
+    
+}
+
+struct ShowGrootteInfoView: View {
+    
+    @Binding var showInfoView: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Button {
+                showInfoView = false
+            } label: {
+                Image(systemName: "chevron.down").font(.largeTitle)
+            }
+            Spacer()
+            Group {
+            Text("Klein: ")
+            Text("Shows tot 100 man. Kleine artiest. Minder dan 100,000 streams op Spotify/ views op youtube. Klein bedrijfsfeest tot 100 man. Minder dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            Divider()
+            Text("Middel: ")
+            Text("Shows tot 500 man. Artiest met enige bekendheid. Nummers met tussen de 100,000 en 10,000,000 streams op Spotify / 100,000 views op youtube. Middelgrote bedrijfsfeesten tot 350 man. Band / orkesten met meer dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            Divider()
+            Text("Groot: ")
+            Text("Shows meer dan 500 man. Bekende artiest. Nummers met meer dan 10,000,000 streams op Spotify / 1,000,000 views op YouTube. Grote bedrijfsfeesten voor bekende bedrijven met meer dan 350 man. Bands / Orkesten met meer dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            }
+            Spacer()
+        }
+        .padding()
+        .font(.title3)
+        .foregroundColor(.black)
+    }
     
 }
 

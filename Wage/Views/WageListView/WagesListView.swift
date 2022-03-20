@@ -10,33 +10,32 @@ import SwiftUI
 struct WagesListView: View {
     
     @ObservedObject var wageFileLoader: WageFileLoader
-    var filtering: Filtering
+    @Binding var isShowingHelpScreen: Bool
+    @State var orientation: UIDeviceOrientation?
+    @State private var showFilters = false
     @State var onlineResults: Bool = false {
         didSet {
             print("Toggle switch")
             wageFileLoader.isLocal.toggle()
         }
     }
-    @Binding var isShowingHelpScreen: Bool
-    @State var orientation: UIDeviceOrientation?
-    @State private var showFilters = false
-    @State var headers: [String] = [
-        "Item"
-    ]
-    var wageFiles : [WageFile] {
+    private var dependencies: HasFiltering & HasWageFileLoader
+    private var filtering: Filtering
+    private var wageFiles : [WageFile] {
         return wageFileLoader.wageFiles
     }
     
-    init(wageFileLoader: WageFileLoader, filtering: Filtering, showInitialHelpView: Binding<Bool>) {
-        self.wageFileLoader = wageFileLoader
-        self.filtering = filtering
+    init(dependencies: HasFiltering & HasWageFileLoader, showInitialHelpView: Binding<Bool>) {
+        self.dependencies = dependencies
+        self.wageFileLoader = dependencies.injectWageFileLoader()
+        self.filtering = dependencies.injectFiltering()
         self._isShowingHelpScreen = showInitialHelpView
     }
     
     var body: some View {
         GeometryReader() { geometry in
             VStack {
-                TopWageListView(filtering: filtering, wageFileLoader: wageFileLoader, showFilters: $showFilters)
+                TopWageListView(dependencies: dependencies, filtering: filtering, wageFileLoader: wageFileLoader, showFilters: $showFilters)
                     .blur(radius: 0)
                 if wageFiles.isEmpty {
                     VStack(alignment: .center) {
@@ -53,17 +52,19 @@ struct WagesListView: View {
                     .transition(.scale)
                     .animation(.spring())
                 } else {
-                    List {
-                        ForEach(wageFiles) { item in
-                            PrettyCell(item: item, size: geometry.size)
+                    ScrollViewReader{ proxy in
+                        List {
+                            ForEach(wageFiles) { item in
+                                PrettyCell(item: item, size: geometry.size)
+                            }
+                            .onDelete { index in
+                                wageFileLoader.deleteWageFile(with: index)
+                            }
                         }
-                        .onDelete { index in
-                            wageFileLoader.deleteWageFile(with: index)
-                        }
+                        .transition(.scale)
+                        .animation(.spring())
+                        .blur(radius: isShowingHelpScreen ? 5 : 0)
                     }
-                    .transition(.scale)
-                    .animation(.spring())
-                    .blur(radius: isShowingHelpScreen ? 5 : 0)
                 }
             }
             .transition(.scale)
@@ -85,10 +86,12 @@ struct WagesListView: View {
 
 struct TopWageListView: View {
     
+    var dependencies: HasFiltering & HasWageFileLoader
     var filtering: Filtering
     @ObservedObject var wageFileLoader: WageFileLoader
     @State var chosenSortOption: WageFileLoader.SortOptions?
     @State var onlineResults: Bool = false
+    @State var didTap: Bool = false
     @Binding var showFilters: Bool
 
     var body: some View {
@@ -126,21 +129,25 @@ struct TopWageListView: View {
                         Text("Filter")
                             .fontWeight(.light)
                             .font(.body)
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            Image("filter")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(3)
                         }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 25)
-                .foregroundColor(.blue)
+                .foregroundColor(didTap ? .gray : .blue)
                 .font(.title2)
                 .shadow(color: .gray, radius: 3, x: 0, y: 3)
+                .onTapGesture(perform: {
+                    didTap = true
+                })
                 .sheet(isPresented: $showFilters, onDismiss: {
                     wageFileLoader.setFilterOptions(with: filtering.filterOptions)
                     wageFileLoader.loadAllFiles()
                 }) {
-                    FilterView(filters: filtering,
-                               wageFileLoader: wageFileLoader,
-                               isPresented: $showFilters)
+                    FilterView(dependencies: dependencies, isPresented: $showFilters)
                 }
             } else {
                 Button() {
@@ -174,7 +181,7 @@ struct BindingViewExamplePreviewContainer_2 : View {
      private var value = false
 
      var body: some View {
-         WagesListView(wageFileLoader: WageFileLoader(), filtering: Filtering(wageFileLoader: WageFileLoader()), showInitialHelpView: $value)
+         WagesListView(dependencies: Dependencies(), showInitialHelpView: $value)
      }
 }
 

@@ -17,6 +17,7 @@ struct AddObjectView: View {
     @State private var artistTypeTitle = "Kiezen"
     @State private var instrumentTitle: String
     @State private var wageText = ""
+    @State private var showInfoGrootte = false
     @FocusState private var gageTextFieldFocused: Bool
     
     init(instrument: Instrument, isShown: Binding<Bool>, objectAdded: Binding<Bool>) {
@@ -74,7 +75,15 @@ struct AddObjectView: View {
                 HStack {
                     Text("Grootte van show ").foregroundColor(Color("darkWhite"))
                     Spacer()
-                    Image(systemName: "lines.measurement.horizontal")
+                    Button {
+                        showInfoGrootte = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                    .popover(isPresented: $showInfoGrootte) {
+                        ShowGrootteInfoView(showInfoView: $showInfoGrootte)
+                    }
+
                 }
                 Menu {
                     ForEach(ArtistType.allCases) { artistType in
@@ -167,6 +176,37 @@ struct AddObjectView: View {
         }
     }
         
+    
+}
+
+struct ShowGrootteInfoView: View {
+    
+    @Binding var showInfoView: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Button {
+                showInfoView = false
+            } label: {
+                Image(systemName: "chevron.down").font(.largeTitle)
+            }
+            Spacer()
+            Group {
+            Text("Klein: ")
+            Text("Shows tot 100 man. Kleine artiest. Minder dan 100,000 streams op Spotify/ views op youtube. Klein bedrijfsfeest tot 100 man. Minder dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            Divider()
+            Text("Middel: ")
+            Text("Shows tot 500 man. Artiest met enige bekendheid. Nummers met tussen de 100,000 en 10,000,000 streams op Spotify / 100,000 views op youtube. Middelgrote bedrijfsfeesten tot 350 man. Band / orkesten met meer dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            Divider()
+            Text("Groot: ")
+            Text("Shows meer dan 500 man. Bekende artiest. Nummers met meer dan 10,000,000 streams op Spotify / 1,000,000 views op YouTube. Grote bedrijfsfeesten voor bekende bedrijven met meer dan 350 man. Bands / Orkesten met meer dan 40 shows per jaar.").font(.subheadline).foregroundColor(.gray)
+            }
+            Spacer()
+        }
+        .padding()
+        .font(.title3)
+        .foregroundColor(.black)
+    }
     
 }
 

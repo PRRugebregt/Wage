@@ -15,7 +15,7 @@ struct AveragePerInstrumentView: View {
             averagePerInstrumentViewModel.loadResults(gigType: chosenGigType)
         }
     }
-    @State private var gigTypeTitle: String = "Kies"
+    @State private var gigTypeTitle: String = "Kies type gig"
     
     init(dependencies: HasWageFileLoader) {
         averagePerInstrumentViewModel = AveragePerInstrumentViewModel(dependencies: dependencies)
@@ -24,7 +24,13 @@ struct AveragePerInstrumentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Gemiddelde gage voor").padding().font(.title3).foregroundColor(.white).minimumScaleFactor(0.5)
+                Spacer().frame(maxWidth: .infinity)
+                Image("logo").resizable().foregroundColor(.white).aspectRatio(contentMode: .fit).frame(height: 30).padding(5)
+                Spacer().frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal)
+            .background(Color("blueIsh").ignoresSafeArea())
+            HStack {
                 Spacer()
                 Menu {
                     ForEach(GigType.allCases) { gigType in
@@ -38,14 +44,14 @@ struct AveragePerInstrumentView: View {
                 } label: {
                     Text(gigTypeTitle).padding()
                 }
-                .background(RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("blueIsh-2")))
+                .frame(maxWidth: 200)
+                .background(RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(Color("blueIsh")))
+                .foregroundColor(Color("lightBlue"))
                 Spacer()
             }
-            .foregroundColor(.white)
-            .padding(.horizontal)
-            .background(Color("blueIsh").ignoresSafeArea())
-            
+            .background(Color("darkWhite"))
+
             ScrollView {
                 LazyVStack {
                     ForEach(Instrument.allCases) { instrument in
@@ -71,13 +77,15 @@ struct AveragePerInstrumentView: View {
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 20)
                                         .foregroundColor(.clear)
-                                        .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-2")], startPoint: .leading, endPoint: .trailing))
+                                        .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
                                         .cornerRadius(20)
+                                        .opacity(0.9)
                                         .padding(.horizontal))
                     }
                 }
             }
         }
+        .background(LinearGradient(colors: [Color("darkWhite"), .white], startPoint: .top, endPoint: .bottomTrailing))
     }
 }
 

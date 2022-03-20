@@ -47,7 +47,7 @@ struct ToolBarView: View {
                 .navigationBarHidden(true)
                 .navigationTitle("")
                 Spacer()
-                Image("logo").resizable().frame(width: 100).foregroundColor(.white).aspectRatio(3/1, contentMode: .fit)
+                Image("logo").resizable().foregroundColor(.white).aspectRatio( contentMode: .fit).frame(height: 30)
                 Spacer()
                 Button {
                     showAddObjectView.toggle()

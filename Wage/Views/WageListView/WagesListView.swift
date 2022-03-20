@@ -91,6 +91,7 @@ struct TopWageListView: View {
     @ObservedObject var wageFileLoader: WageFileLoader
     @State var chosenSortOption: WageFileLoader.SortOptions?
     @State var onlineResults: Bool = false
+    @State var didTap: Bool = false
     @Binding var showFilters: Bool
 
     var body: some View {
@@ -128,14 +129,20 @@ struct TopWageListView: View {
                         Text("Filter")
                             .fontWeight(.light)
                             .font(.body)
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            Image("filter")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(3)
                         }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 25)
-                .foregroundColor(.blue)
+                .foregroundColor(didTap ? .gray : .blue)
                 .font(.title2)
                 .shadow(color: .gray, radius: 3, x: 0, y: 3)
+                .onTapGesture(perform: {
+                    didTap = true
+                })
                 .sheet(isPresented: $showFilters, onDismiss: {
                     wageFileLoader.setFilterOptions(with: filtering.filterOptions)
                     wageFileLoader.loadAllFiles()

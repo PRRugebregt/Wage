@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol HasNetwork {
     func injectNetwork() -> NetworkDownload
@@ -31,19 +32,15 @@ class Dependencies:     HasNetwork,
                         HasWageFileLoader,
                         HasUserCreator,
                         HasFiltering,
-                        HasWageFileManageable
-{
-    
-    private var wageFileLoader: WageFileLoader!
-    private var filtering: Filtering!
+                        HasWageFileManageable {
+    private static let dependencies = Dependencies()
+    @StateObject private var wageFileLoader = WageFileLoader(dependencies: dependencies)
+    @StateObject private var filtering = Filtering(dependencies: dependencies)
+    @StateObject private var userCreator: UserCreator = UserCreator()
     private var networkDownload = NetworkDownload()
-    private var userCreator: UserCreator = UserCreator()
-    private var wageFiles: WageFiles!
+    private var wageFiles: WageFiles = WageFiles(dependencies: dependencies)
     
     init() {
-        self.wageFiles = WageFiles(dependencies: self)
-        wageFileLoader = WageFileLoader(dependencies: self)
-        self.filtering = Filtering(dependencies: self)
         PersistenceController.shared.setWageFileManageable(wageFiles)
     }
     

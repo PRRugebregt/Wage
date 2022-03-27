@@ -33,14 +33,16 @@ class Dependencies:     HasNetwork,
                         HasUserCreator,
                         HasFiltering,
                         HasWageFileManageable {
-    private static let dependencies = Dependencies()
-    @StateObject private var wageFileLoader = WageFileLoader(dependencies: dependencies)
-    @StateObject private var filtering = Filtering(dependencies: dependencies)
-    @StateObject private var userCreator: UserCreator = UserCreator()
+    private var wageFileLoader: WageFileLoader!
+    private var filtering: Filtering!
+    private var userCreator: UserCreator = UserCreator()
     private var networkDownload = NetworkDownload()
-    private var wageFiles: WageFiles = WageFiles(dependencies: dependencies)
+    private var wageFiles: WageFiles!
     
     init() {
+        self.wageFileLoader = WageFileLoader(dependencies: self)
+        self.filtering = Filtering(dependencies: self)
+        self.wageFiles = WageFiles(dependencies: self)
         PersistenceController.shared.setWageFileManageable(wageFiles)
     }
     

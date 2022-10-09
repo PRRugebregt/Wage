@@ -9,20 +9,22 @@ import SwiftUI
 
 struct WagesListView: View {
     
+    private var dependencies: HasFiltering & HasWageFileLoader
+    private var filtering: Filtering
+    private var wageFiles : [WageFile] {
+        wageFileLoader.wageFiles
+    }
+    
     @ObservedObject var wageFileLoader: WageFileLoader
     @Binding var isShowingHelpScreen: Bool
     @State var orientation: UIDeviceOrientation?
-    @State private var showFilters = false
+    @State private var showFilters: Bool = false
+    @State private var showList: Bool  = false
     @State var onlineResults: Bool = false {
         didSet {
             print("Toggle switch")
             wageFileLoader.isLocal.toggle()
         }
-    }
-    private var dependencies: HasFiltering & HasWageFileLoader
-    private var filtering: Filtering
-    private var wageFiles : [WageFile] {
-        return wageFileLoader.wageFiles
     }
     
     init(dependencies: HasFiltering & HasWageFileLoader, showInitialHelpView: Binding<Bool>) {
@@ -38,19 +40,7 @@ struct WagesListView: View {
                 TopWageListView(dependencies: dependencies, filtering: filtering, wageFileLoader: wageFileLoader, showFilters: $showFilters)
                     .blur(radius: 0)
                 if wageFiles.isEmpty {
-                    VStack(alignment: .center) {
-                        Spacer()
-                        Image(systemName: "eyes").font(.largeTitle)
-                        Divider()
-                        Text("De lijst is leeg. Voeg gages toe (+) of bekijk de online resultaten")
-                            .blur(radius: isShowingHelpScreen ? 5 : 0)
-                            .font(.title3)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                        Spacer()
-                    }
-                    .transition(.scale)
-                    .animation(.spring())
+                    WageFileEmptyView(isShowingHelpScreen: $isShowingHelpScreen)
                 } else {
                     ScrollViewReader{ proxy in
                         List {
@@ -62,13 +52,15 @@ struct WagesListView: View {
                             }
                         }
                         .transition(.scale)
-                        .animation(.spring())
+                        .onAppear(perform: { showList = true })
+                        .onDisappear(perform: { showList = false })
+                        .opacity(showList ? 1 : 0)
                         .blur(radius: isShowingHelpScreen ? 5 : 0)
                     }
                 }
             }
             .transition(.scale)
-            .animation(.spring())
+            .animation(Animation.spring(), value: showList)
             .navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
@@ -173,6 +165,29 @@ struct TopWageListView: View {
                 wageFileLoader.isLocal = !onlineResults
             }
         }
+    }
+}
+
+struct WageFileEmptyView: View {
+    
+    @Binding var isShowingHelpScreen: Bool
+    @State var scale: CGFloat = 0
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Spacer()
+            Image(systemName: "eyes").font(.largeTitle)
+            Divider()
+            Text("De lijst is leeg. Voeg gages toe (+) of bekijk de online resultaten")
+                .blur(radius: isShowingHelpScreen ? 5 : 0)
+                .font(.title3)
+                .multilineTextAlignment(.center)
+                .padding()
+            Spacer()
+        }
+        .scaleEffect(scale)
+        .onAppear(perform: { scale += 1 })
+        .animation(Animation.spring(), value: scale)
     }
 }
 

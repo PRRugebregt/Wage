@@ -18,7 +18,6 @@ struct CustomToggleStyle: ToggleStyle {
             Spacer()
             Rectangle()
                 .foregroundColor(configuration.isOn ? .green : .gray)
-                //.background(configuration.isOn ? gradient1 : gradient2)
                 .frame(width: 51, height: 31, alignment: .center)
                 .overlay(
                     Circle()
@@ -33,7 +32,7 @@ struct CustomToggleStyle: ToggleStyle {
                                 .foregroundColor(.blue)
                         )
                         .offset(x: configuration.isOn ? 11 : -11, y: 0)
-                        .animation(Animation.easeInOut(duration: 0.5))
+                        .animation(Animation.easeInOut(duration: 0.5), value: configuration.isOn)
                         
                 ).cornerRadius(20)
                 .onTapGesture { configuration.isOn.toggle() }

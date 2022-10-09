@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Instrument: String, CaseIterable, Identifiable {
+enum Instrument: String, CaseIterable, Identifiable, Codable {
     var id: RawValue {
         rawValue
     }

@@ -16,6 +16,7 @@ struct AveragePerInstrumentView: View {
         }
     }
     @State private var gigTypeTitle: String = "Kies type gig"
+    @State private var scale: CGFloat = 0
     
     init(dependencies: HasWageFileLoader) {
         averagePerInstrumentViewModel = AveragePerInstrumentViewModel(dependencies: dependencies)
@@ -71,9 +72,11 @@ struct AveragePerInstrumentView: View {
                                 .minimumScaleFactor(0.5)
                                 .padding()
                                 .frame(maxWidth: .infinity)
+                                .scaleEffect(scale)
+                                .onAppear(perform: { scale = 1 })
+                                .onDisappear(perform: { scale = 0 })
+                                .animation(Animation.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 1), value: scale)
                         }
-                        .transition(.scale)
-                        .animation(.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 1))
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 20)
                                         .foregroundColor(.clear)

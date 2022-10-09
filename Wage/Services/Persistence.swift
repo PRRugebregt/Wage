@@ -9,12 +9,12 @@ import CoreData
 
 class PersistenceController {
     static let shared = PersistenceController()
+    let container: NSPersistentContainer
     var user: User?
     var wageFileManageable: WageFileManageable?
     var wageFileLoader: WageFileLoader?
-    let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
+    init() {
         container = NSPersistentContainer(name: "Wage")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

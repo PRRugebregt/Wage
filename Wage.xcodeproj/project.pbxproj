@@ -37,16 +37,18 @@
 		0190919B27B835E600B84AED /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190919A27B835E600B84AED /* UserView.swift */; };
 		0190919D27B84E5A00B84AED /* UserCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190919C27B84E5A00B84AED /* UserCreator.swift */; };
 		0190919F27BA72B200B84AED /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0190919E27BA72B200B84AED /* Network.swift */; };
-		019091A127BA76AB00B84AED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 019091A027BA76AB00B84AED /* GoogleService-Info.plist */; };
 		019091A327BB2D7400B84AED /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A227BB2D7400B84AED /* HelpView.swift */; };
 		019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A427BBD25300B84AED /* AverageCalculator.swift */; };
 		019091A727BC36C300B84AED /* DependencyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A627BC36C300B84AED /* DependencyRouter.swift */; };
 		019091A927BE449A00B84AED /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091A827BE449900B84AED /* Spinner.swift */; };
 		019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019091AC27BE7CF200B84AED /* RangeSlider.swift */; };
+		01965BBE28E4B3470042A02A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01965BBD28E4B3470042A02A /* GoogleService-Info.plist */; };
+		01965BC028E5009D0042A02A /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01965BBF28E5009D0042A02A /* SequenceExtensions.swift */; };
 		019A9C9427C2AD79006415EF /* AddRandomEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9327C2AD79006415EF /* AddRandomEntries.swift */; };
 		019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9627C2CABD006415EF /* NotificationExtensions.swift */; };
 		01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */; };
 		01A8843327D6660B0076BC1C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 01A8843227D6660B0076BC1C /* TODO */; };
+		01C95E6D27F1A29900690D9A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C95E6C27F1A29900690D9A /* SnapshotHelper.swift */; };
 		2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3D47C73F54D01202245DF /* Pods_Wage.framework */; };
 		AC03DA03DF0209C6AFDD43F0 /* Pods_Wage_WageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAA79CCB178C7BE6AC0F40 /* Pods_Wage_WageUITests.framework */; };
 		C08DE643DABED681E1B10C08 /* Pods_WageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89677E9050F03A2AF064DAF4 /* Pods_WageTests.framework */; };
@@ -104,17 +106,19 @@
 		0190919A27B835E600B84AED /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		0190919C27B84E5A00B84AED /* UserCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreator.swift; sourceTree = "<group>"; };
 		0190919E27BA72B200B84AED /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		019091A027BA76AB00B84AED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		019091A227BB2D7400B84AED /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		019091A427BBD25300B84AED /* AverageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalculator.swift; sourceTree = "<group>"; };
 		019091A627BC36C300B84AED /* DependencyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRouter.swift; sourceTree = "<group>"; };
 		019091A827BE449900B84AED /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		019091AC27BE7CF200B84AED /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		01965BBD28E4B3470042A02A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Wage googleService-info/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01965BBF28E5009D0042A02A /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		019A9C9327C2AD79006415EF /* AddRandomEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRandomEntries.swift; sourceTree = "<group>"; };
 		019A9C9627C2CABD006415EF /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
 		01A8843127D665A20076BC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		01A8843227D6660B0076BC1C /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		01C95E6C27F1A29900690D9A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		02B109C1D32E8B5C4745987C /* Pods-Wage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wage.release.xcconfig"; path = "Target Support Files/Pods-Wage/Pods-Wage.release.xcconfig"; sourceTree = "<group>"; };
 		0EF2791A2EC626EF7EEE7FEC /* Pods-WageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WageTests.release.xcconfig"; path = "Target Support Files/Pods-WageTests/Pods-WageTests.release.xcconfig"; sourceTree = "<group>"; };
 		12F3D47C73F54D01202245DF /* Pods_Wage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +158,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0123B46427DA8E5C00DCE209 /* Utility */ = {
+		0123B46427DA8E5C00DCE209 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				0190919E27BA72B200B84AED /* Network.swift */,
@@ -163,7 +167,7 @@
 				019A9C9327C2AD79006415EF /* AddRandomEntries.swift */,
 				0177316027DF511D000CCA3A /* MockDependencies.swift */,
 			);
-			path = Utility;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		0123B46527DA8EC900DCE209 /* WageListView */ = {
@@ -220,46 +224,6 @@
 			path = HelpView;
 			sourceTree = "<group>";
 		};
-		0123B46B27DA8F6500DCE209 /* WageListViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0190918527B7B13400B84AED /* WageFileLoader.swift */,
-			);
-			path = WageListViewModel;
-			sourceTree = "<group>";
-		};
-		0123B46C27DA8F8600DCE209 /* UserViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0190919C27B84E5A00B84AED /* UserCreator.swift */,
-			);
-			path = UserViewModel;
-			sourceTree = "<group>";
-		};
-		0123B46D27DA8FA200DCE209 /* AverageViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				019091A427BBD25300B84AED /* AverageCalculator.swift */,
-			);
-			path = AverageViewModel;
-			sourceTree = "<group>";
-		};
-		0123B46E27DA8FAD00DCE209 /* AveragePerInstrumentViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0123B46027D92A4900DCE209 /* AveragePerInstrumentViewModel.swift */,
-			);
-			path = AveragePerInstrumentViewModel;
-			sourceTree = "<group>";
-		};
-		0123B46F27DA8FBD00DCE209 /* FilteringViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0190918727B7D14300B84AED /* Filtering.swift */,
-			);
-			path = FilteringViewModel;
-			sourceTree = "<group>";
-		};
 		0123B47027DA8FE200DCE209 /* FilterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,14 +238,6 @@
 				0190919527B8320800B84AED /* AddObjectView.swift */,
 			);
 			path = AddObjectView;
-			sourceTree = "<group>";
-		};
-		0123B47227DA901800DCE209 /* AddObjectViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0190918D27B80E4D00B84AED /* WageObjectCreator.swift */,
-			);
-			path = AddObjectViewModel;
 			sourceTree = "<group>";
 		};
 		018B7A5327B5BDF400068F7F = {
@@ -310,14 +266,14 @@
 			isa = PBXGroup;
 			children = (
 				019A9C9527C2CAAF006415EF /* Extensions */,
-				0123B46427DA8E5C00DCE209 /* Utility */,
+				0123B46427DA8E5C00DCE209 /* Services */,
 				0190919927B832E800B84AED /* Views */,
 				0190918B27B8050700B84AED /* Model */,
 				0190918C27B8051400B84AED /* ViewModel */,
 				01A8843227D6660B0076BC1C /* TODO */,
 				01A8843127D665A20076BC1C /* Info.plist */,
 				014ED84627C0E83A00705AF0 /* Wage.entitlements */,
-				019091A027BA76AB00B84AED /* GoogleService-Info.plist */,
+				01965BBD28E4B3470042A02A /* GoogleService-Info.plist */,
 				018B7A5F27B5BDF400068F7F /* WageApp.swift */,
 				018B7A6327B5BDF500068F7F /* Assets.xcassets */,
 				018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */,
@@ -345,6 +301,7 @@
 		018B7A7E27B5BDF500068F7F /* WageUITests */ = {
 			isa = PBXGroup;
 			children = (
+				01C95E6C27F1A29900690D9A /* SnapshotHelper.swift */,
 				018B7A7F27B5BDF500068F7F /* WageUITests.swift */,
 				018B7A8127B5BDF500068F7F /* WageUITestsLaunchTests.swift */,
 			);
@@ -364,12 +321,12 @@
 		0190918C27B8051400B84AED /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0123B47227DA901800DCE209 /* AddObjectViewModel */,
-				0123B46B27DA8F6500DCE209 /* WageListViewModel */,
-				0123B46F27DA8FBD00DCE209 /* FilteringViewModel */,
-				0123B46C27DA8F8600DCE209 /* UserViewModel */,
-				0123B46D27DA8FA200DCE209 /* AverageViewModel */,
-				0123B46E27DA8FAD00DCE209 /* AveragePerInstrumentViewModel */,
+				0190918D27B80E4D00B84AED /* WageObjectCreator.swift */,
+				0190918527B7B13400B84AED /* WageFileLoader.swift */,
+				0190918727B7D14300B84AED /* Filtering.swift */,
+				0190919C27B84E5A00B84AED /* UserCreator.swift */,
+				019091A427BBD25300B84AED /* AverageCalculator.swift */,
+				0123B46027D92A4900DCE209 /* AveragePerInstrumentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -395,6 +352,7 @@
 				019A9C9627C2CABD006415EF /* NotificationExtensions.swift */,
 				01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */,
 				0123B46227D97A5300DCE209 /* UIApplicationExtensions.swift */,
+				01965BBF28E5009D0042A02A /* SequenceExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -533,8 +491,8 @@
 			files = (
 				018B7A6727B5BDF500068F7F /* Preview Assets.xcassets in Resources */,
 				018B7A6427B5BDF500068F7F /* Assets.xcassets in Resources */,
+				01965BBE28E4B3470042A02A /* GoogleService-Info.plist in Resources */,
 				01A8843327D6660B0076BC1C /* TODO in Resources */,
-				019091A127BA76AB00B84AED /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +644,7 @@
 				0123B45F27D927CD00DCE209 /* AveragePerInstrumentView.swift in Sources */,
 				019091A327BB2D7400B84AED /* HelpView.swift in Sources */,
 				019A9C9427C2AD79006415EF /* AddRandomEntries.swift in Sources */,
+				01965BC028E5009D0042A02A /* SequenceExtensions.swift in Sources */,
 				019091AD27BE7CF200B84AED /* RangeSlider.swift in Sources */,
 				014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */,
 				018B7A6227B5BDF400068F7F /* MainView.swift in Sources */,
@@ -712,6 +671,7 @@
 			files = (
 				018B7A8227B5BDF500068F7F /* WageUITestsLaunchTests.swift in Sources */,
 				018B7A8027B5BDF500068F7F /* WageUITests.swift in Sources */,
+				01C95E6D27F1A29900690D9A /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

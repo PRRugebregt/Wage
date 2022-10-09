@@ -13,7 +13,7 @@ struct MainView: View {
     private var dependencies: Dependencies
     private var userCreator: UserCreator
     private var filtering: Filtering
-    @ObservedObject private var wageFileLoader: WageFileLoader
+    @StateObject private var wageFileLoader: WageFileLoader
     @State private var presentUserView: Bool
     @State private var showInitialHelpView = false
     @State private var isBlurred = false
@@ -24,15 +24,14 @@ struct MainView: View {
         return wageFileLoader.wageFiles
     }
     
-    init() {
-        dependencies = Dependencies()
-        wageFileLoader = dependencies.injectWageFileLoader()
+    init(wageFileLoader: WageFileLoader, dependencies: Dependencies) {
+        _wageFileLoader = StateObject(wrappedValue: wageFileLoader)
+        self.dependencies = dependencies
         userCreator = dependencies.injectUserCreator()
         filtering = dependencies.injectFiltering()
         presentUserView = userCreator.newUser
         UITabBar.appearance().backgroundColor = UIColor(named: "blueIsh-2")
         UITabBar.appearance().unselectedItemTintColor = .white
-        wageFileLoader.loadAllFiles()
     }
     
     var body: some View {
@@ -82,6 +81,9 @@ struct MainView: View {
             InitialHelpScreen(showHelpScreen: $showInitialHelpView)
                 .background(BackgroundClearView())
         })
+        .onAppear {
+            self.wageFileLoader.loadAllFiles()
+        }
         .navigationBarHidden(true)
         .navigationTitle("")
     }
@@ -100,13 +102,10 @@ struct BackgroundClearView: UIViewRepresentable {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static let dependencies = Dependencies()
     static var previews: some View {
-        MainView().preferredColorScheme(.light)
-        MainView().preferredColorScheme(.dark)
+        MainView(wageFileLoader: WageFileLoader(dependencies: dependencies), dependencies: dependencies).preferredColorScheme(.light)
+        MainView(wageFileLoader: WageFileLoader(dependencies: dependencies), dependencies: dependencies).preferredColorScheme(.dark)
     }
-}
-
-extension Sequence where Element: Hashable {
-    var frequency: [Element: Int] { reduce(into: [:]) { $0[$1, default: 0] += 1 } }
 }
 

@@ -40,14 +40,9 @@ class Dependencies:     HasNetwork,
     private var wageFiles: WageFiles!
     
     init() {
+        self.wageFiles = WageFiles(dependencies: self)
         self.wageFileLoader = WageFileLoader(dependencies: self)
         self.filtering = Filtering(dependencies: self)
-        self.wageFiles = WageFiles(dependencies: self)
-        PersistenceController.shared.setWageFileManageable(wageFiles)
-    }
-    
-    deinit {
-        print("Deinit on dependency router")
     }
     
     func injectNetwork() -> NetworkDownload {
@@ -55,7 +50,6 @@ class Dependencies:     HasNetwork,
     }
     
     func injectWageFileLoader() -> WageFileLoader {
-        print("called inject wagefileloader?? ")
         return wageFileLoader
     }
     

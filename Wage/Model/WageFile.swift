@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ArtistType: String, CaseIterable, Identifiable {
+enum ArtistType: String, CaseIterable, Identifiable, Codable {
     var id: RawValue {
         rawValue
     }
@@ -16,7 +16,7 @@ enum ArtistType: String, CaseIterable, Identifiable {
     case Klein
 }
 
-enum GigType: String, CaseIterable, Identifiable {
+enum GigType: String, CaseIterable, Identifiable, Codable {
     var id: RawValue {
         rawValue
     }
@@ -65,14 +65,8 @@ class WageFiles: WageFileManageable {
     
 }
 
-struct WageFile: Identifiable, Equatable, Hashable {
+struct WageFile: Identifiable, Equatable, Codable {
     
-    static func == (lhs: WageFile, rhs: WageFile) -> Bool {
-        lhs.hashValue == rhs.hashValue
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
     let id: Int64
     let wage: Int
     let artistType: ArtistType
@@ -88,11 +82,48 @@ struct WageFile: Identifiable, Equatable, Hashable {
         return dateFormatter.string(from: timeStamp)
     }
     
-    enum CodingKeys: String {
-        case id
-        case wage
-        case artistType = "artist_type"
-        case gigType = "gig_type"
+    init(
+        id: Int64,
+        wage: Int,
+        artistType: ArtistType,
+        gigType: GigType,
+        yearsOfExperience: Int,
+        didStudy: Bool,
+        instrument: Instrument,
+        timeStamp: Date
+    ) {
+        self.id = id
+        self.wage = wage
+        self.artistType = artistType
+        self.gigType = gigType
+        self.yearsOfExperience = yearsOfExperience
+        self.didStudy = didStudy
+        self.instrument = instrument
+        self.timeStamp = timeStamp
     }
     
+    init?(firestoreDictionary: [String: Any]) {
+        self.id = firestoreDictionary["id"] as? Int64 ?? 0
+        let instrumentRaw = firestoreDictionary["instrument"] as? String ?? "Anders"
+        self.instrument = Instrument(rawValue: instrumentRaw) ?? .Anders
+        let gigTypeRaw = firestoreDictionary["gigType"] as? String ?? "anders"
+        self.gigType = GigType(rawValue: gigTypeRaw) ?? .anders
+        let artistTypeRaw = firestoreDictionary["artistType"] as? String ?? "Midden"
+        self.artistType = ArtistType(rawValue: artistTypeRaw) ?? .Midden
+        self.yearsOfExperience = firestoreDictionary["yearsOfExperience"] as? Int ?? 0
+        self.wage = firestoreDictionary["wage"] as? Int ?? 0
+        self.didStudy = firestoreDictionary["didStudy"] as? Bool ?? false
+        self.timeStamp = firestoreDictionary["timeStamp"] as? Date ?? .now
+    }
+    
+    static func == (lhs: WageFile, rhs: WageFile) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+}
+
+private enum CodingKeys: String, CodingKey {
+    case id, wage, yearsOfExperience, didStudy, instrument, timeStamp, dateFormatted
+    case artistType = "artist_type"
+    case gigType = "gig_type"
 }

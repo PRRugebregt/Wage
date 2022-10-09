@@ -10,8 +10,32 @@ import Firebase
 import FirebaseFirestore
 
 protocol NetworkDownloadable {
-    func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ())
+    func downloadAllData() async throws -> [QueryDocumentSnapshot]
     func removeWageFileOnline(_ wageFile: WageFile)
+}
+
+class NetworkDownload: NetworkDownloadable {
+    
+    @Published private var isDoneDownloading = false
+    private var db = Firestore.firestore()
+    
+    func removeWageFileOnline(_ wageFile: WageFile) {
+        db.collection("data").document("\(wageFile.id)").delete { err in
+            guard err == nil else {
+                print(err!)
+                return
+            }
+            print("removed \(wageFile.timeStamp)")
+        }
+    }
+    
+    func downloadAllData() async throws -> [QueryDocumentSnapshot] {
+        do {
+            return try await db.collection("data").getDocuments().documents
+        } catch {
+            throw error
+        }
+    }
 }
 
 class NetworkUpload {
@@ -59,30 +83,3 @@ class NetworkUpload {
     
 }
 
-class NetworkDownload: NetworkDownloadable {
-
-    func removeWageFileOnline(_ wageFile: WageFile) {
-        db.collection("data").document("\(wageFile.id)").delete { err in
-            guard err == nil else {
-                print(err!)
-                return
-            }
-            print("removed \(wageFile.timeStamp)")
-        }
-    }
-    
-    private var db = Firestore.firestore()
-    @Published private var isDoneDownloading = false
-    
-    func downloadAllData(completionHandler: @escaping (_ queryDocuments: [QueryDocumentSnapshot]) -> ()) {
-        db.collection("data").getDocuments { snapshot, error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            guard let documents = snapshot?.documents else { return }
-            completionHandler(documents)
-        }
-    }
-    
-}

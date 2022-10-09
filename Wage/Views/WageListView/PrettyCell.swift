@@ -26,7 +26,7 @@ struct PrettyCell: View {
                 .padding(.leading)
             VStack(alignment: .leading) {
                 Spacer()
-                Text("€ \(item.wage)").font(.callout).foregroundColor(.white).fontWeight(.thin)
+                Text("€ \(item.wage)").bold().font(.callout).foregroundColor(.white).fontWeight(.thin)
                 Spacer()
                 Text("\(item.gigType.rawValue) - \(item.artistType.rawValue)")
                     .foregroundColor(Color("darkWhite"))

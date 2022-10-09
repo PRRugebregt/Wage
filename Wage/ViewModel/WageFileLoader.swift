@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class WageFileLoader: ObservableObject {
     
+    typealias Dependencies = HasNetwork & HasWageFileManageable
+    
     enum SortOptions: String, CaseIterable, Identifiable {
         var id: String {
             rawValue
@@ -33,65 +35,65 @@ class WageFileLoader: ObservableObject {
     var filters: FilterOptions?
     var networkDownload: NetworkDownloadable
     var wageFileManageable: WageFileManageable
-    var isLocal: Bool = true {
+    var isLocal = true {
         didSet {
             loadAllFiles()
         }
     }
     
-    init(dependencies: HasNetwork & HasWageFileManageable) {
+    init(dependencies: Dependencies) {
         self.networkDownload = dependencies.injectNetwork()
         self.wageFileManageable = dependencies.injectWageFileManageable()
-        loadNetworkFiles { wageFiles in
-            self.onlineResults = wageFiles
-            print("Setting online results for average per instrument view")
+        Task {
+            do {
+                onlineResults = try await loadNetworkFiles()
+            } catch {
+                print(error)
+            }
         }
     }
     
     func loadAllFiles() {
-        wageFiles = []
+        
         if isLocal {
             print("local")
+            print(filters.debugDescription)
             self.wageFiles = wageFileManageable.fetchAllFiles()
-            print(filters.debugDescription) 
-            if filters != nil {
-                filterResults(with: filters!)
-            }
         } else {
             print("Online")
             isLoading = true
-            loadNetworkFiles(completion: { wageFiles in
-                self.wageFiles = wageFiles
-                print(wageFiles)
-                if self.filters != nil {
-                    self.filterResults(with: self.filters!)
+            Task {
+                do {
+                    self.wageFiles = try await loadNetworkFiles()
+                } catch {
+                    print(error)
                 }
-            })
+            }
+        }
+        if let filters {
+            filterResults(with: filters)
         }
     }
     
-    func loadNetworkFiles(completion: @escaping (_ wageFiles: [WageFile]) -> Void) {
-        networkDownload.downloadAllData { queryDocuments in
+    func loadNetworkFiles() async throws -> [WageFile] {
+        do {
+            let queryDocuments = try await networkDownload.downloadAllData()
             var wageFiles = [WageFile]()
+            
             for file in queryDocuments {
                 let data = file.data()
-                guard let id = data["id"] as? Int64 else { return }
-                guard let instrumentRaw = data["instrument"] as? String else { return }
-                guard let instrument = Instrument(rawValue: instrumentRaw) else { return }
-                guard let gigTypeRaw = data["gigType"] as? String else { return }
-                guard let gigType = GigType(rawValue: gigTypeRaw) else { return }
-                guard let artistTypeRaw = data["artistType"] as? String else { return }
-                guard let artistType = ArtistType(rawValue: artistTypeRaw) else { return }
-                guard let yearsOfExperience = data["yearsOfExperience"] as? Int else { return }
-                guard let wage = data["wage"] as? Int else { return }
-                guard let didStudy = data["didStudy"] as? Bool else { return }
-                guard let firTimeStamp = data["timeStamp"] as? Timestamp else { return }
-                let timeStamp = firTimeStamp.dateValue()
-                let wageFile = WageFile(id: id, wage: wage, artistType: artistType, gigType: gigType, yearsOfExperience: yearsOfExperience, didStudy: didStudy, instrument: instrument, timeStamp: timeStamp)
+                guard let wageFile = WageFile(firestoreDictionary: data) else {
+                    print("wagefile conversion failed from firestore dictionary")
+                    continue
+                }
                 wageFiles.append(wageFile)
             }
-            self.isLoading = false
-            completion(wageFiles)
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            return wageFiles
+        } catch {
+            throw error
         }
     }
     

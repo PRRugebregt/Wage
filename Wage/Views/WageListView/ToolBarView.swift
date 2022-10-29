@@ -57,7 +57,9 @@ struct ToolBarView: View {
                 .sheet(isPresented: $showAddObjectView, onDismiss: {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         if objectAdded {
-                            wageFileLoader.loadAllFiles()
+                            Task {
+                                await wageFileLoader.loadAllFiles()
+                            }
                             showSuccessAlert.toggle()
                             objectAdded = false
                         }

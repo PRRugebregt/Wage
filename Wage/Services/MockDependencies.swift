@@ -21,9 +21,9 @@ class MockDependencies:     HasNetwork,
     private var wageFiles: WageFiles!
     
     init() {
+        self.wageFiles = WageFiles(dependencies: self)
         wageFileLoader = WageFileLoader(dependencies: self)
         self.filtering = Filtering(dependencies: self)
-        self.wageFiles = WageFiles(dependencies: self)
         PersistenceController.shared.setWageFileManageable(wageFiles)
     }
     

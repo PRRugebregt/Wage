@@ -15,6 +15,7 @@ class WageObjectCreator {
     private var user: User? {
         PersistenceController.shared.user
     }
+    
     var wage: String = ""
     var gigType: GigType?
     var artistType: ArtistType?

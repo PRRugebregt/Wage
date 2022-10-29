@@ -35,7 +35,9 @@ class PersistenceController {
     
     func createObject(wageFile: WageFile) {
         wageFileManageable?.appendNewFile(wageFile)
-        wageFileLoader?.loadAllFiles()
+        Task {
+            await wageFileLoader?.loadAllFiles()
+        }
         let object = WageObject(context: container.viewContext)
         object.artistType = wageFile.artistType.rawValue
         object.gigType = wageFile.gigType.rawValue

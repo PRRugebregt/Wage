@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import CocoaLumberjackSwift
 
 class UserCreator: ObservableObject {
     
@@ -19,14 +20,14 @@ class UserCreator: ObservableObject {
         authenticateAnonymous()
     }
     
-    func authenticateAnonymous() {
+    private func authenticateAnonymous() {
         Auth.auth().signInAnonymously { authResult, error in
             guard error == nil else {
-                print("FAILED TO LOGIN")
-                print(error!.localizedDescription)
+                DDLogInfo("FAILED TO LOGIN")
+                DDLogError(error!.localizedDescription)
                 return
             }
-            print(authResult!)
+            DDLogInfo(authResult!)
         }
     }
     
@@ -35,7 +36,6 @@ class UserCreator: ObservableObject {
     }
     
     func updateYearsExperience(amount: Int) {
-        print(amount)
         user.updateYearsExperience(amount: amount)
     }
     

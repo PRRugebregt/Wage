@@ -113,7 +113,6 @@ struct PrettyDetail: View {
                     RoundedRectangle(cornerRadius: 15).foregroundColor(Color(color)).opacity(0.8).padding(standardPadding)
                     VStack {
                         Image(item.instrument.rawValue).resizable().aspectRatio(1/1, contentMode: .fit)
-                            //.frame(height: geometrySize.size.height * 0.2)
                         Spacer()
                         Text(item.dateFormatted).fontWeight(.thin).font(.title3)
 

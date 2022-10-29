@@ -16,6 +16,7 @@ struct FilterView: View {
     let artistTypes = ArtistType.allCases
     @ObservedObject var wageFileLoader: WageFileLoader
     @Binding var isPresented: Bool
+    @State var presented: Bool = true
     @State var minimum: String = ""
     @State var maximum: String = ""
     @State var instrumentTypeTitle = "Kiezen"
@@ -108,7 +109,7 @@ struct FilterView: View {
                 
                 Spacer()
                 Button("Filters toepassen", action: {
-                    isPresented = false
+                    presented = false
                 })
                     .contentShape(Rectangle())
                     .background(Color("blueIsh-3"))
@@ -120,6 +121,9 @@ struct FilterView: View {
             .padding(.horizontal)
             .foregroundColor(.white)
             .background(LinearGradient(colors: [Color("toolbar"),Color("blueIsh")], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .onChange(of: presented) { _ in
+                isPresented = presented
+            }
         }
     }
     

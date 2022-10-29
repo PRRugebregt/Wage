@@ -50,7 +50,7 @@ class Dependencies:     HasNetwork,
     }
     
     func injectWageFileLoader() -> WageFileLoader {
-        return wageFileLoader
+        wageFileLoader
     }
     
     func injectUserCreator() -> UserCreator {

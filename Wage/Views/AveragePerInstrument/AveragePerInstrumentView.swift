@@ -9,9 +9,10 @@ import SwiftUI
 
 struct AveragePerInstrumentView: View {
     
-    @ObservedObject private var averagePerInstrumentViewModel: AveragePerInstrumentViewModel
-    @State private var chosenGigType: GigType = .festival {
+    @StateObject private var averagePerInstrumentViewModel: AveragePerInstrumentViewModel
+    @State fileprivate var chosenGigType: GigType = .festival {
         didSet {
+            print("Didset chosengigtype")
             averagePerInstrumentViewModel.loadResults(gigType: chosenGigType)
         }
     }
@@ -19,44 +20,17 @@ struct AveragePerInstrumentView: View {
     @State private var scale: CGFloat = 0
     
     init(dependencies: HasWageFileLoader) {
-        averagePerInstrumentViewModel = AveragePerInstrumentViewModel(dependencies: dependencies)
+        _averagePerInstrumentViewModel = StateObject(wrappedValue: AveragePerInstrumentViewModel(dependencies: dependencies)) 
     }
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer().frame(maxWidth: .infinity)
-                Image("logo").resizable().foregroundColor(.white).aspectRatio(contentMode: .fit).frame(height: 30).padding(5)
-                Spacer().frame(maxWidth: .infinity)
-            }
-            .padding(.horizontal)
-            .background(Color("blueIsh").ignoresSafeArea())
-            HStack {
-                Spacer()
-                Menu {
-                    ForEach(GigType.allCases) { gigType in
-                        Button {
-                            gigTypeTitle = gigType.rawValue
-                            chosenGigType = gigType
-                        } label: {
-                            Text(gigType.rawValue)
-                        }
-                    }
-                } label: {
-                    Text(gigTypeTitle).padding()
-                }
-                .frame(maxWidth: 200)
-                .background(RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(Color("blueIsh")))
-                .foregroundColor(Color("lightBlue"))
-                Spacer()
-            }
-            .background(Color("darkWhite"))
-
+            // HeaderView with menu button
+            AveragePerInstrumentHeaderView(gigTypeTitle: $gigTypeTitle, chosenGigType: $chosenGigType)
+            
             ScrollView {
                 LazyVStack {
                     ForEach(Instrument.allCases) { instrument in
-                        
                         HStack {
                             Image("\(instrument.rawValue)")
                                 .resizable()
@@ -74,21 +48,59 @@ struct AveragePerInstrumentView: View {
                                 .frame(maxWidth: .infinity)
                                 .scaleEffect(scale)
                                 .onAppear(perform: { scale = 1 })
-                                .onDisappear(perform: { scale = 0 })
                                 .animation(Animation.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 1), value: scale)
                         }
                         .foregroundColor(.white)
                         .background(RoundedRectangle(cornerRadius: 20)
-                                        .foregroundColor(.clear)
-                                        .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
-                                        .cornerRadius(20)
-                                        .opacity(0.9)
-                                        .padding(.horizontal))
+                            .foregroundColor(.clear)
+                            .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-1")], startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(20)
+                            .opacity(0.9)
+                            .padding(.horizontal))
                     }
                 }
             }
         }
         .background(LinearGradient(colors: [Color("darkWhite"), .white], startPoint: .top, endPoint: .bottomTrailing))
+    }
+}
+
+struct AveragePerInstrumentHeaderView: View {
+    
+    @Binding var gigTypeTitle: String
+    @Binding var chosenGigType: GigType
+    
+    var body: some View {
+        // Header
+        HStack {
+            Spacer().frame(maxWidth: .infinity)
+            Image("logo").resizable().foregroundColor(.white).aspectRatio(contentMode: .fit).frame(height: 30).padding(5)
+            Spacer().frame(maxWidth: .infinity)
+        }
+        .padding(.horizontal)
+        .background(Color("blueIsh").ignoresSafeArea())
+        // Menu Button
+        HStack {
+            Spacer()
+            Menu {
+                ForEach(GigType.allCases) { gigType in
+                    Button {
+                        gigTypeTitle = gigType.rawValue
+                        chosenGigType = gigType
+                    } label: {
+                        Text(gigType.rawValue)
+                    }
+                }
+            } label: {
+                Text(gigTypeTitle).padding()
+            }
+            .frame(maxWidth: 200)
+            .background(RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(Color("blueIsh")))
+            .foregroundColor(Color("lightBlue"))
+            Spacer()
+        }
+        .background(Color("darkWhite"))
     }
 }
 

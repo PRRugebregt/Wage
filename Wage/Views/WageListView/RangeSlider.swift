@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+// Custom Range slider with
 struct RangeSlider: View {
     
     var filtering: Filtering
-    @State var positionMinimum: CGFloat
-    @State var positionMaximum: CGFloat 
+    @State var positionMinimum: CGFloat = 0
+    @State var positionMaximum: CGFloat = 0
     let screenWidth: CGFloat
     
     init(filtering: Filtering, screenWidth: CGFloat) {
@@ -27,16 +28,16 @@ struct RangeSlider: View {
                 Rectangle()
                     .foregroundColor(.black).opacity(0.2)
                     .frame(height: 6)
+                
                 Rectangle()
                     .foregroundColor(.clear)
                     .background(LinearGradient(colors: [Color("blueIsh"),Color("blueIsh-2")], startPoint: .topLeading, endPoint: .bottomTrailing))
                     .frame(width: positionMaximum - positionMinimum + 18, height: 6)
                     .offset(x: positionMinimum)
+                
                 HStack(spacing: 0) {
-                    Circle()
-                        .fill(Color("blueIsh-3"))
-                        .frame(width: 18, height: 18)
-                        .offset(x: positionMinimum)
+                    // Minimum thumb
+                    customThumb(offSet: positionMinimum)
                         .gesture(
                             DragGesture()
                                 .onChanged({ value in
@@ -46,10 +47,8 @@ struct RangeSlider: View {
                                     }
                                 })
                         )
-                    Circle()
-                        .fill(Color("blueIsh-3"))
-                        .frame(width: 18, height: 18)
-                        .offset(x: positionMaximum)
+                    // Maximum thumb
+                    customThumb(offSet: positionMaximum)
                         .gesture(
                             DragGesture()
                                 .onChanged({ value in
@@ -64,6 +63,14 @@ struct RangeSlider: View {
             .padding()
         }
     }
+    
+    private func customThumb(offSet: CGFloat) -> some View {
+        return Circle()
+            .fill(Color("blueIsh-3"))
+            .frame(width: 18, height: 18)
+            .offset(x: offSet)
+    }
+    
 }
 
 struct RangeSlider_Previews: PreviewProvider {

@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
 
 struct WagesListView: View {
     
-    private var dependencies: HasFiltering & HasWageFileLoader
-    private var filtering: Filtering
-    private var wageFiles : [WageFile] {
-        wageFileLoader.wageFiles
-    }
+    typealias Dependencies = HasFiltering & HasWageFileLoader
     
     @ObservedObject var wageFileLoader: WageFileLoader
     @Binding var isShowingHelpScreen: Bool
@@ -22,12 +19,18 @@ struct WagesListView: View {
     @State private var showList: Bool  = false
     @State var onlineResults: Bool = false {
         didSet {
-            print("Toggle switch")
+            DDLogInfo("Toggle switch")
             wageFileLoader.isLocal.toggle()
         }
     }
     
-    init(dependencies: HasFiltering & HasWageFileLoader, showInitialHelpView: Binding<Bool>) {
+    private var dependencies: Dependencies
+    private var filtering: Filtering
+    private var wageFiles : [WageFile] {
+        wageFileLoader.wageFiles
+    }
+    
+    init(dependencies: Dependencies, showInitialHelpView: Binding<Bool>) {
         self.dependencies = dependencies
         self.wageFileLoader = dependencies.injectWageFileLoader()
         self.filtering = dependencies.injectFiltering()
@@ -37,7 +40,7 @@ struct WagesListView: View {
     var body: some View {
         GeometryReader() { geometry in
             VStack {
-                TopWageListView(dependencies: dependencies, filtering: filtering, wageFileLoader: wageFileLoader, showFilters: $showFilters)
+                TopWageListView(dependencies: dependencies, showFilters: $showFilters)
                     .blur(radius: 0)
                 if wageFiles.isEmpty {
                     WageFileEmptyView(isShowingHelpScreen: $isShowingHelpScreen)
@@ -70,28 +73,38 @@ struct WagesListView: View {
                 orientation = UIDevice.current.orientation
             }
             .refreshable {
-                wageFileLoader.loadAllFiles()
-            }
+                Task {
+                    await wageFileLoader.loadAllFiles()
+                }            }
         }
     }
 }
 
 struct TopWageListView: View {
     
-    var dependencies: HasFiltering & HasWageFileLoader
+    typealias Dependencies = HasFiltering & HasWageFileLoader
+    
+    var dependencies: Dependencies
     var filtering: Filtering
     @ObservedObject var wageFileLoader: WageFileLoader
-    @State var chosenSortOption: WageFileLoader.SortOptions?
+    @State var chosenSortOption: SortOptions?
     @State var onlineResults: Bool = false
     @State var didTap: Bool = false
     @Binding var showFilters: Bool
+    
+    init(dependencies: Dependencies, showFilters: Binding<Bool>) {
+        self.dependencies = dependencies
+        self._showFilters = showFilters
+        self.filtering = dependencies.injectFiltering()
+        wageFileLoader = dependencies.injectWageFileLoader()
+    }
 
     var body: some View {
         HStack {
             Menu(content: {
-                ForEach(WageFileLoader.SortOptions.allCases) { sortOption in
+                ForEach(SortOptions.allCases) { sortOption in
                     Button {
-                        wageFileLoader.sortFiles(by: sortOption.rawValue)
+                        wageFileLoader.sortFiles(by: sortOption)
                         chosenSortOption = sortOption
                     } label: {
                         HStack {
@@ -137,7 +150,10 @@ struct TopWageListView: View {
                 })
                 .sheet(isPresented: $showFilters, onDismiss: {
                     wageFileLoader.setFilterOptions(with: filtering.filterOptions)
-                    wageFileLoader.loadAllFiles()
+                    Task {
+                        await wageFileLoader.loadAllFiles()
+                    }
+                    
                 }) {
                     FilterView(dependencies: dependencies, isPresented: $showFilters)
                 }

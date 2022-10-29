@@ -21,9 +21,8 @@ class AveragePerInstrumentViewModel: ObservableObject {
         allAverages = calculateAllAverages(for: gigType)
     }
     
-    func calculateAllAverages(for gigType: GigType) -> [String:Int] {
-        print(files.count)
-        let files = wageFileLoader.onlineResults
+    func calculateAllAverages(for gigType: GigType, withFiles wageFiles: [WageFile]? = nil) -> [String:Int] {
+        let files = wageFiles == nil ? wageFileLoader.onlineResults : wageFiles!
         var localAllAverages: [String:Int] = [:]
         for instrument in Instrument.allCases {
             let instrumentName = instrument.rawValue
@@ -38,8 +37,9 @@ class AveragePerInstrumentViewModel: ObservableObject {
             }
             average = count > 0 ? sum / count : 0
             localAllAverages[instrumentName] = average
+            print(localAllAverages[instrumentName])
         }
+        print("returning")
         return localAllAverages
     }
-    
 }

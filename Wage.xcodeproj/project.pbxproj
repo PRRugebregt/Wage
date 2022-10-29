@@ -48,6 +48,9 @@
 		019A9C9727C2CABD006415EF /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A9C9627C2CABD006415EF /* NotificationExtensions.swift */; };
 		01A883B527D3F8880076BC1C /* NavigationBarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */; };
 		01A8843327D6660B0076BC1C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 01A8843227D6660B0076BC1C /* TODO */; };
+		01B0FE4E290521D8006365D8 /* AveragePerInstrumentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B0FE4D290521D8006365D8 /* AveragePerInstrumentsTests.swift */; };
+		01B0FE51290C9830006365D8 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 01B0FE50290C9830006365D8 /* CocoaLumberjack */; };
+		01B0FE53290C9830006365D8 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 01B0FE52290C9830006365D8 /* CocoaLumberjackSwift */; };
 		01C95E6D27F1A29900690D9A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C95E6C27F1A29900690D9A /* SnapshotHelper.swift */; };
 		2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3D47C73F54D01202245DF /* Pods_Wage.framework */; };
 		AC03DA03DF0209C6AFDD43F0 /* Pods_Wage_WageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAA79CCB178C7BE6AC0F40 /* Pods_Wage_WageUITests.framework */; };
@@ -118,6 +121,7 @@
 		01A883B427D3F8880076BC1C /* NavigationBarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtensions.swift; sourceTree = "<group>"; };
 		01A8843127D665A20076BC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		01A8843227D6660B0076BC1C /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		01B0FE4D290521D8006365D8 /* AveragePerInstrumentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragePerInstrumentsTests.swift; sourceTree = "<group>"; };
 		01C95E6C27F1A29900690D9A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		02B109C1D32E8B5C4745987C /* Pods-Wage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wage.release.xcconfig"; path = "Target Support Files/Pods-Wage/Pods-Wage.release.xcconfig"; sourceTree = "<group>"; };
 		0EF2791A2EC626EF7EEE7FEC /* Pods-WageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WageTests.release.xcconfig"; path = "Target Support Files/Pods-WageTests/Pods-WageTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,7 +139,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B0FE51290C9830006365D8 /* CocoaLumberjack in Frameworks */,
 				2E1E670BF02770792902FF5B /* Pods_Wage.framework in Frameworks */,
+				01B0FE53290C9830006365D8 /* CocoaLumberjackSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				018B7A7527B5BDF500068F7F /* WageTests.swift */,
+				01B0FE4D290521D8006365D8 /* AveragePerInstrumentsTests.swift */,
 			);
 			path = WageTests;
 			sourceTree = "<group>";
@@ -398,6 +405,10 @@
 			dependencies = (
 			);
 			name = Wage;
+			packageProductDependencies = (
+				01B0FE50290C9830006365D8 /* CocoaLumberjack */,
+				01B0FE52290C9830006365D8 /* CocoaLumberjackSwift */,
+			);
 			productName = Wage;
 			productReference = 018B7A5C27B5BDF400068F7F /* Wage.app */;
 			productType = "com.apple.product-type.application";
@@ -473,6 +484,9 @@
 				Base,
 			);
 			mainGroup = 018B7A5327B5BDF400068F7F;
+			packageReferences = (
+				01B0FE4F290C9830006365D8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+			);
 			productRefGroup = 018B7A5D27B5BDF400068F7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -661,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B0FE4E290521D8006365D8 /* AveragePerInstrumentsTests.swift in Sources */,
 				018B7A7627B5BDF500068F7F /* WageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1000,6 +1015,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		01B0FE4F290C9830006365D8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		01B0FE50290C9830006365D8 /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B0FE4F290C9830006365D8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
+		};
+		01B0FE52290C9830006365D8 /* CocoaLumberjackSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01B0FE4F290C9830006365D8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjackSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		018B7A6A27B5BDF500068F7F /* Wage.xcdatamodeld */ = {

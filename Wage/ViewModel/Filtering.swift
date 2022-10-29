@@ -10,7 +10,9 @@ import UIKit
 class Filtering: ObservableObject {
     
     @Published var filterOptions: FilterOptions = FilterOptions()
+    
     private var wageFileLoader: WageFileLoader
+    
     var minimumWage = 0
     var maximumWage = 1000
     var isFiltered = false
@@ -19,7 +21,7 @@ class Filtering: ObservableObject {
         self.wageFileLoader = dependencies.injectWageFileLoader()
     }
     
-    // Intent functions
+    // MARK: - Intent functions
     
     func changeGigType(to option: GigType) {
         filterOptions.changeGigType(to: option)
@@ -53,8 +55,32 @@ class Filtering: ObservableObject {
     func reset() {
         filterOptions = FilterOptions()
         wageFileLoader.removeFilters()
-        wageFileLoader.loadAllFiles()
+        Task {
+            await wageFileLoader.loadAllFiles()
+        }
         isFiltered = false
+    }
+    
+    // MARK: - Filtering for wageFileLoader
+    
+    func filterWageFiles(_ wageFiles: [WageFile], with options: FilterOptions) -> [WageFile] {
+        var filteredWageFiles = wageFiles
+        if let gigType = options.gigType {
+            filteredWageFiles = filteredWageFiles.filter {$0.gigType == gigType}
+        }
+        if let artistType = options.artistType {
+            filteredWageFiles = filteredWageFiles.filter {$0.artistType == artistType}
+        }
+        if let instrumentType = options.instrumentType {
+            filteredWageFiles = filteredWageFiles.filter {$0.instrument == instrumentType}
+        }
+        if let maximum = options.wageHighLimit {
+            filteredWageFiles = filteredWageFiles.filter {$0.wage < maximum}
+        }
+        if let minimum = options.wageLowLimit {
+            filteredWageFiles = filteredWageFiles.filter {$0.wage > minimum}
+        }
+        return filteredWageFiles
     }
     
 }

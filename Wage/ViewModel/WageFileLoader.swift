@@ -8,68 +8,64 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import CocoaLumberjackSwift
+
+enum SortOptions: String, CaseIterable, Identifiable {
+    var id: String {
+        rawValue
+    }
+    case dateHigh = "Datum (meest recent)"
+    case dateLow = "Datum (oudste eerst)"
+    case wageHigh = "Gage (hoog naar laag)"
+    case wageLow = "Gage (laag naar hoog)"
+    case yearsOfExperienceHigh = "Jaren Ervaring (hoog naar laag)"
+    case yearsOfExperienceLow = "Jaren Ervaring (laag naar hoog)"
+    case instrument = "Instrument"
+    case gigtype = "Gig type"
+    case artistType = "Show grootte"
+    case didStudy = "Gestudeerd"
+}
 
 class WageFileLoader: ObservableObject {
     
-    typealias Dependencies = HasNetwork & HasWageFileManageable
-    
-    enum SortOptions: String, CaseIterable, Identifiable {
-        var id: String {
-            rawValue
-        }
-        case dateHigh = "Datum (meest recent)"
-        case dateLow = "Datum (oudste eerst)"
-        case wageHigh = "Gage (hoog naar laag)"
-        case wageLow = "Gage (laag naar hoog)"
-        case yearsOfExperienceHigh = "Jaren Ervaring (hoog naar laag)"
-        case yearsOfExperienceLow = "Jaren Ervaring (laag naar hoog)"
-        case instrument = "Instrument"
-        case gigtype = "Gig type"
-        case artistType = "Show grootte"
-        case didStudy = "Gestudeerd"
-    }
+    typealias Dependencies = HasNetwork & HasWageFileManageable & HasFiltering
     
     @Published var wageFiles: [WageFile] = []
     @Published var isLoading: Bool = false
     var onlineResults: [WageFile] = []
     var filters: FilterOptions?
-    var networkDownload: NetworkDownloadable
-    var wageFileManageable: WageFileManageable
+    var dependencies: Dependencies!
+    lazy var networkDownload: NetworkDownloadable = dependencies.injectNetwork()
+    lazy var wageFileManageable: WageFileManageable = dependencies.injectWageFileManageable()
+    lazy var filtering: Filtering = dependencies.injectFiltering()
     var isLocal = true {
         didSet {
-            loadAllFiles()
+            Task {
+                await loadAllFiles()
+            }
         }
     }
     
     init(dependencies: Dependencies) {
-        self.networkDownload = dependencies.injectNetwork()
-        self.wageFileManageable = dependencies.injectWageFileManageable()
-        Task {
-            do {
-                onlineResults = try await loadNetworkFiles()
-            } catch {
-                print(error)
-            }
-        }
+        self.dependencies = dependencies
     }
     
-    func loadAllFiles() {
-        
+    func loadAllFiles() async {
         if isLocal {
-            print("local")
-            print(filters.debugDescription)
-            self.wageFiles = wageFileManageable.fetchAllFiles()
+            DDLogInfo("Loading local files only")
+            DDLogInfo(filters.debugDescription)
+            DispatchQueue.main.async {
+                self.wageFiles = self.wageFileManageable.fetchAllFiles()
+            }
         } else {
-            print("Online")
-            isLoading = true
-            Task {
-                do {
-                    self.wageFiles = try await loadNetworkFiles()
-                } catch {
-                    print(error)
-                }
+            DDLogInfo("Loading online results")
+            guard let onlineResults = try? await loadNetworkFiles() else { return }
+            DispatchQueue.main.async {
+                self.isLoading = true
+                self.wageFiles = onlineResults
             }
         }
+        
         if let filters {
             filterResults(with: filters)
         }
@@ -83,7 +79,7 @@ class WageFileLoader: ObservableObject {
             for file in queryDocuments {
                 let data = file.data()
                 guard let wageFile = WageFile(firestoreDictionary: data) else {
-                    print("wagefile conversion failed from firestore dictionary")
+                    DDLogInfo("wagefile conversion failed from firestore dictionary")
                     continue
                 }
                 wageFiles.append(wageFile)
@@ -106,57 +102,34 @@ class WageFileLoader: ObservableObject {
         }
     }
     
-    func sortFiles(by option: String) {
-        print(wageFiles.count)
+    func sortFiles(by option: SortOptions) {
+        DDLogInfo("Number of wageFiles \(wageFiles.count)")
         switch option {
-        case SortOptions.dateHigh.rawValue:
+        case SortOptions.dateHigh:
             wageFiles.sort(by: {$0.timeStamp > $1.timeStamp})
-        case SortOptions.dateLow.rawValue:
+        case SortOptions.dateLow:
             wageFiles.sort(by: {$0.timeStamp < $1.timeStamp})
-        case SortOptions.wageHigh.rawValue:
+        case SortOptions.wageHigh:
             wageFiles.sort(by: {$0.wage > $1.wage})
-        case SortOptions.wageLow.rawValue:
+        case SortOptions.wageLow:
             wageFiles.sort(by: {$0.wage < $1.wage})
-        case SortOptions.yearsOfExperienceHigh.rawValue:
+        case SortOptions.yearsOfExperienceHigh:
             wageFiles.sort(by: {$0.yearsOfExperience > $1.yearsOfExperience})
-        case SortOptions.yearsOfExperienceLow.rawValue:
+        case SortOptions.yearsOfExperienceLow:
             wageFiles.sort(by: {$0.yearsOfExperience < $1.yearsOfExperience})
-        case SortOptions.instrument.rawValue:
+        case SortOptions.instrument:
             wageFiles.sort(by: {$0.instrument.rawValue < $1.instrument.rawValue})
-        case SortOptions.artistType.rawValue:
+        case SortOptions.artistType:
             wageFiles.sort(by: {$0.artistType.rawValue < $1.artistType.rawValue})
-        case SortOptions.gigtype.rawValue:
+        case SortOptions.gigtype:
             wageFiles.sort(by: {$0.gigType.rawValue < $1.gigType.rawValue})
-        case SortOptions.didStudy.rawValue:
+        case SortOptions.didStudy:
             wageFiles.sort(by: {$0.didStudy && !$1.didStudy})
-        default :
-            wageFiles.sort(by: {$0.wage > $1.wage})
-        }
-        for wage in wageFiles {
-            print(wage.wage)
         }
     }
     
     func filterResults(with options: FilterOptions) {
-        self.filters = options
-        print(options)
-        var filteredWageFiles = self.wageFiles
-        if let gigType = options.gigType {
-            filteredWageFiles = filteredWageFiles.filter({$0.gigType == gigType})
-        }
-        if let artistType = options.artistType {
-            filteredWageFiles = filteredWageFiles.filter({$0.artistType == artistType})
-        }
-        if let instrumentType = options.instrumentType {
-            filteredWageFiles = filteredWageFiles.filter({$0.instrument == instrumentType})
-        }
-        if let maximum = options.wageHighLimit {
-            filteredWageFiles = filteredWageFiles.filter({$0.wage < maximum})
-        }
-        if let minimum = options.wageLowLimit {
-            filteredWageFiles = filteredWageFiles.filter({$0.wage > minimum})
-        }
-        self.wageFiles = filteredWageFiles
+        self.wageFiles = filtering.filterWageFiles(wageFiles, with: options)
     }
     
     func setFilterOptions(with options: FilterOptions) {

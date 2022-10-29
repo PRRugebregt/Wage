@@ -82,7 +82,9 @@ struct MainView: View {
                 .background(BackgroundClearView())
         })
         .onAppear {
-            self.wageFileLoader.loadAllFiles()
+            Task {
+                await wageFileLoader.loadAllFiles()
+            }
         }
         .navigationBarHidden(true)
         .navigationTitle("")

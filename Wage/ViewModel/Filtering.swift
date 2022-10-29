@@ -9,7 +9,7 @@ import UIKit
 
 class Filtering: ObservableObject {
     
-    @Published var filterOptions: FilterOptions = FilterOptions()
+    @Published var filterOptions = FilterOptions()
     
     private var wageFileLoader: WageFileLoader
     

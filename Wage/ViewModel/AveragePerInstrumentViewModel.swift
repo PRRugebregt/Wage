@@ -18,26 +18,25 @@ class AveragePerInstrumentViewModel: ObservableObject {
     }
     
     func loadResults(gigType: GigType) {
+        print("Loading results")
         allAverages = calculateAllAverages(for: gigType)
     }
     
     func calculateAllAverages(for gigType: GigType, withFiles wageFiles: [WageFile]? = nil) -> [String:Int] {
-        let files = wageFiles == nil ? wageFileLoader.onlineResults : wageFiles!
+        let files = wageFiles == nil ? wageFileLoader.wageFiles : wageFiles!
         var localAllAverages: [String:Int] = [:]
         for instrument in Instrument.allCases {
+            print(instrument.rawValue)
             let instrumentName = instrument.rawValue
-            var sum = 0
-            var count = 0
-            var average = 0
-            for file in files {
-                guard file.instrument == instrument, file.gigType == gigType else { continue }
-                sum += file.wage
-                count += 1
-                print(sum)
-            }
-            average = count > 0 ? sum / count : 0
-            localAllAverages[instrumentName] = average
-            print(localAllAverages[instrumentName])
+            // Calculate the sum of instrument in loop
+            let sum = files
+                .compactMap { $0.gigType == gigType && $0.instrument == instrument ? $0.wage : nil }
+                .reduce(0, { $0 + $1 })
+            print(sum)
+            // Calculate number of instrument entries
+            let numberOfEntries = files.compactMap({$0.instrument == instrument ? instrument : nil}).count
+            print(numberOfEntries)
+            localAllAverages[instrumentName] = sum / (numberOfEntries == 0 ? 1 : numberOfEntries)
         }
         print("returning")
         return localAllAverages

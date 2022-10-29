@@ -6,16 +6,12 @@
 //
 
 import SwiftUI
+import CocoaLumberjackSwift
 
 struct AveragePerInstrumentView: View {
     
     @StateObject private var averagePerInstrumentViewModel: AveragePerInstrumentViewModel
-    @State fileprivate var chosenGigType: GigType = .festival {
-        didSet {
-            print("Didset chosengigtype")
-            averagePerInstrumentViewModel.loadResults(gigType: chosenGigType)
-        }
-    }
+    @State fileprivate var chosenGigType: GigType = .festival 
     @State private var gigTypeTitle: String = "Kies type gig"
     @State private var scale: CGFloat = 0
     
@@ -26,7 +22,7 @@ struct AveragePerInstrumentView: View {
     var body: some View {
         VStack {
             // HeaderView with menu button
-            AveragePerInstrumentHeaderView(gigTypeTitle: $gigTypeTitle, chosenGigType: $chosenGigType)
+            AveragePerInstrumentHeaderView(gigTypeTitle: $gigTypeTitle, chosenGigType: $chosenGigType, viewModel: averagePerInstrumentViewModel)
             
             ScrollView {
                 LazyVStack {
@@ -69,6 +65,7 @@ struct AveragePerInstrumentHeaderView: View {
     
     @Binding var gigTypeTitle: String
     @Binding var chosenGigType: GigType
+    let viewModel : AveragePerInstrumentViewModel
     
     var body: some View {
         // Header
@@ -87,6 +84,7 @@ struct AveragePerInstrumentHeaderView: View {
                     Button {
                         gigTypeTitle = gigType.rawValue
                         chosenGigType = gigType
+                        viewModel.loadResults(gigType: gigType)
                     } label: {
                         Text(gigType.rawValue)
                     }

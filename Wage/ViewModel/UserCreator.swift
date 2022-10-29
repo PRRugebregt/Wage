@@ -11,16 +11,17 @@ import CocoaLumberjackSwift
 
 class UserCreator: ObservableObject {
     
-    @Published var user: User = User()
+    @Published var user = User()
+    
     var newUser: Bool {
         return user.newUser
     }
     
     init() {
-        authenticateAnonymous()
+        loginAnonymously()
     }
     
-    private func authenticateAnonymous() {
+    private func loginAnonymously() {
         Auth.auth().signInAnonymously { authResult, error in
             guard error == nil else {
                 DDLogInfo("FAILED TO LOGIN")

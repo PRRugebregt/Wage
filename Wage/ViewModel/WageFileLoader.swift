@@ -30,9 +30,8 @@ class WageFileLoader: ObservableObject {
     
     typealias Dependencies = HasNetwork & HasWageFileManageable & HasFiltering
     
-    @Published var wageFiles: [WageFile] = []
-    @Published var isLoading: Bool = false
-    var onlineResults: [WageFile] = []
+    @Published var wageFiles = [WageFile]()
+    @Published var isLoading = false
     var filters: FilterOptions?
     var dependencies: Dependencies!
     lazy var networkDownload: NetworkDownloadable = dependencies.injectNetwork()

@@ -62,7 +62,7 @@ struct AverageView: View {
                                         Text("Gemiddelde gage").fontWeight(.thin)
                                             .transition(.opacity)
                                             .font(.title3)
-                                        Text("€ \(averageCalculator.averageFee)")
+                                        Text("€ \(averageCalculator.averageWage)")
                                             .transition(.scale)
                                             .font(.title)
                                     }

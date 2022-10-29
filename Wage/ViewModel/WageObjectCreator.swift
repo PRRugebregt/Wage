@@ -10,13 +10,12 @@ import SwiftUI
 
 class WageObjectCreator {
     
-    private var wageObject: WageFile?
     private var network = NetworkUpload()
     private var user: User? {
         PersistenceController.shared.user
     }
     
-    var wage: String = ""
+    var wage = ""
     var gigType: GigType?
     var artistType: ArtistType?
     var instrument: Instrument?
@@ -24,25 +23,24 @@ class WageObjectCreator {
     func createObject() {
         // Check if we have all the info for the WageFile
         guard let wageInt = Int(wage),
-              let gigType = self.gigType,
-              let artistType = self.artistType else {
+              let gigType,
+              let artistType,
+              let instrument else {
             return
         }
         // Create the Wagefile
-        wageObject = WageFile(
+        let wageObject = WageFile(
             id: Int64.random(in: 0..<Int64.max),
             wage: wageInt,
             artistType: artistType,
             gigType: gigType,
             yearsOfExperience: user?.yearsOfExperience ?? 0,
             didStudy: user?.didStudy ?? false,
-            instrument: instrument ?? .Anders,
+            instrument: instrument,
             timeStamp: Date.now
         )
-        // Save the WageFile in CoreData
-        if let wageObject {
-            PersistenceController.shared.createObject(wageFile: wageObject)
-            network.upload(wageFile: wageObject)
-        }
+        // Save the WageFile in CoreData and upload to database
+        PersistenceController.shared.createObject(wageFile: wageObject)
+        network.upload(wageFile: wageObject)
     }
 }

@@ -46,7 +46,7 @@ struct FilterView: View {
                         ForEach(instrumentTypes) { instrument in
                             Button(instrument.rawValue) {
                                 instrumentTypeTitle = instrument.rawValue
-                                filters.changeInstrument(to: instrument)
+                                filters.changeFilterInstrument(to: instrument)
                             }
                         }
                     }
@@ -61,7 +61,7 @@ struct FilterView: View {
                         ForEach(gigTypes) { gigType in
                             Button(gigType.rawValue) {
                                 gigTypeTitle = gigType.rawValue
-                                filters.changeGigType(to: gigType)
+                                filters.changeFilterGigType(to: gigType)
                             }
                             .contentShape(Rectangle())
                         }

@@ -6,58 +6,56 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 enum Instrument: String, CaseIterable, Identifiable, Codable {
     var id: RawValue {
         rawValue
     }
-    case Vocalen
-    case Piano
-    case Keyboards
-    case Gitaar
-    case Drums
-    case Bas
-    case Viool
-    case Cello
-    case Contrabas
-    case Percussie
-    case Saxofoon
-    case Trompet
-    case Trombone
-    case Klarinet
-    case Hobo
-    case Hoorn
-    case KlassiekGitaar = "Klassiek Gitaar"
-    case Fluit
-    case Anders
+    case Vocalen,
+         Piano,
+         Keyboards,
+         Gitaar,
+         Drums,
+         Bas,
+         Viool,
+         Cello,
+         Contrabas,
+         Percussie,
+         Saxofoon,
+         Trompet,
+         Trombone,
+         Klarinet,
+         Hobo,
+         Hoorn,
+         KlassiekGitaar = "Klassiek Gitaar",
+         Fluit,
+         Anders
 }
 
 struct User {
     
-    var newUser: Bool
+    var isNewUser: Bool
     var yearsOfExperience: Int
     var didStudy: Bool
     var instrument: Instrument
-    private var coreDataObject: UserObject?
-    
-    init() {
-        let users = PersistenceController.shared.fetchUser()
         
-        guard users.count > 0 else {
-            print("no user found")
+    init() {
+        guard let user = PersistenceController.shared.fetchUser() else {
+            DDLogInfo("[User] no user found")
             yearsOfExperience = 0
             instrument = .Anders
             didStudy = false
-            newUser = true
+            isNewUser = true
             PersistenceController.shared.createUserObject(self)
             return
         }
-        print("yes user found")
-        newUser = false
-        coreDataObject = users[0]
-        yearsOfExperience = Int(users[0].yearsOfExperience)
-        instrument = Instrument(rawValue: users[0].instrument!)!
-        didStudy = users[0].didStudy
+        
+        DDLogInfo("[User] user found: \(user)")
+        isNewUser = false
+        yearsOfExperience = Int(user.yearsOfExperience)
+        instrument = Instrument(rawValue: user.instrument ?? "Anders") ?? .Anders
+        didStudy = user.didStudy
         NotificationCenter.default.post(Notification(name: .shareUser, object: nil, userInfo: ["user":self]))        
     }
     
@@ -74,7 +72,5 @@ struct User {
     mutating func updateDidStudy(_ bool: Bool) {
         didStudy = bool
         PersistenceController.shared.modifyUserObject(with: self)
-
     }
-    
 }

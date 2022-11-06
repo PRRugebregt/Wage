@@ -31,7 +31,7 @@ class AverageCalculator {
     private func calculateWage() -> Int {
         guard wageFiles.count > 0 else { return 0 }
         // Add all wages and divide by number of wages
-        var sum: Int = wageFiles.reduce(0, {$0 + $1.wage}) / wageFiles.count
+        let sum: Int = wageFiles.reduce(0, {$0 + $1.wage}) / wageFiles.count
         return sum
     }
     
@@ -39,7 +39,7 @@ class AverageCalculator {
     private func calculateGigType() -> GigType {
         guard wageFiles.count > 0 else { return .anders }
         
-        var allGigTypes = wageFiles.map { $0.gigType }
+        let allGigTypes = wageFiles.map { $0.gigType }
         let frequencyPerGigType = allGigTypes.frequency
         let maxValue = frequencyPerGigType.values.max()
         guard let averageGigType = frequencyPerGigType.first(where: {$0.value == maxValue}) else {
@@ -52,7 +52,8 @@ class AverageCalculator {
     /// Calculate the average years of experience
     private func calculateYears() -> Int {
         guard wageFiles.count > 0 else { return 0 }
-        var sum = wageFiles.reduce(0, {$0 + $1.yearsOfExperience}) / wageFiles.count
+        
+        let sum = wageFiles.reduce(0, {$0 + $1.yearsOfExperience}) / wageFiles.count
         return sum
     }
     
@@ -60,7 +61,7 @@ class AverageCalculator {
     private func calculateInstrument() -> Instrument {
         guard wageFiles.count > 0 else { return .Anders }
         
-        var allInstruments = wageFiles.map {$0.instrument}
+        let allInstruments = wageFiles.map {$0.instrument}
         // Count instrument frequency and map to dictionary
         let frequencyPerInstrument = allInstruments.frequency
         let maxValue = frequencyPerInstrument.values.max()

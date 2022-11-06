@@ -14,6 +14,9 @@
 		0123B46327D97A5300DCE209 /* UIApplicationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B46227D97A5300DCE209 /* UIApplicationExtensions.swift */; };
 		014ED84527C0E6B900705AF0 /* AverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014ED84427C0E6B900705AF0 /* AverageView.swift */; };
 		0177316127DF511D000CCA3A /* MockDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177316027DF511D000CCA3A /* MockDependencies.swift */; };
+		017EBFE729182F9A0056B3CA /* MockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017EBFE629182F9A0056B3CA /* MockNetwork.swift */; };
+		017EBFE92918305F0056B3CA /* FilteringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017EBFE82918305F0056B3CA /* FilteringTests.swift */; };
+		017EBFEB291830690056B3CA /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017EBFEA291830690056B3CA /* TestData.swift */; };
 		0180675D27C029C300EAD6F9 /* PrettyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180675C27C029C300EAD6F9 /* PrettyCell.swift */; };
 		018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A5F27B5BDF400068F7F /* WageApp.swift */; };
 		018B7A6227B5BDF400068F7F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B7A6127B5BDF400068F7F /* MainView.swift */; };
@@ -83,6 +86,9 @@
 		014ED84427C0E6B900705AF0 /* AverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageView.swift; sourceTree = "<group>"; };
 		014ED84627C0E83A00705AF0 /* Wage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wage.entitlements; sourceTree = "<group>"; };
 		0177316027DF511D000CCA3A /* MockDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDependencies.swift; sourceTree = "<group>"; };
+		017EBFE629182F9A0056B3CA /* MockNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwork.swift; sourceTree = "<group>"; };
+		017EBFE82918305F0056B3CA /* FilteringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringTests.swift; sourceTree = "<group>"; };
+		017EBFEA291830690056B3CA /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		0180675C27C029C300EAD6F9 /* PrettyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyCell.swift; sourceTree = "<group>"; };
 		018B7A5C27B5BDF400068F7F /* Wage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		018B7A5F27B5BDF400068F7F /* WageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WageApp.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 				019091A627BC36C300B84AED /* DependencyRouter.swift */,
 				019A9C9327C2AD79006415EF /* AddRandomEntries.swift */,
 				0177316027DF511D000CCA3A /* MockDependencies.swift */,
+				017EBFE629182F9A0056B3CA /* MockNetwork.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -301,6 +308,8 @@
 			children = (
 				018B7A7527B5BDF500068F7F /* WageTests.swift */,
 				01B0FE4D290521D8006365D8 /* AveragePerInstrumentsTests.swift */,
+				017EBFE82918305F0056B3CA /* FilteringTests.swift */,
+				017EBFEA291830690056B3CA /* TestData.swift */,
 			);
 			path = WageTests;
 			sourceTree = "<group>";
@@ -666,6 +675,7 @@
 				019091A527BBD25300B84AED /* AverageCalculator.swift in Sources */,
 				0123B45B27D823E900DCE209 /* CustomToggleStyle.swift in Sources */,
 				018B7A6027B5BDF400068F7F /* WageApp.swift in Sources */,
+				017EBFE729182F9A0056B3CA /* MockNetwork.swift in Sources */,
 				0190919027B8300900B84AED /* User.swift in Sources */,
 				0190918427B71B7B00B84AED /* WageFile.swift in Sources */,
 			);
@@ -677,6 +687,8 @@
 			files = (
 				01B0FE4E290521D8006365D8 /* AveragePerInstrumentsTests.swift in Sources */,
 				018B7A7627B5BDF500068F7F /* WageTests.swift in Sources */,
+				017EBFE92918305F0056B3CA /* FilteringTests.swift in Sources */,
+				017EBFEB291830690056B3CA /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

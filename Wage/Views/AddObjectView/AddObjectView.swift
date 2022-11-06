@@ -87,14 +87,10 @@ struct AddObjectView: View {
                 }
                 Menu {
                     ForEach(ArtistType.allCases) { artistType in
-                        Button {
+                        Button(artistType.rawValue) {
                             artistTypeTitle = artistType.rawValue
                             wageObjectCreator.artistType = artistType
-                        } label: {
-                            VStack {
-                            Text(artistType.rawValue).padding()
-                            }
-                        }
+                        } 
                     }
                 } label: {
                     Text(artistTypeTitle).padding().background(RoundedRectangle(cornerRadius: 10).foregroundColor(.clear))
@@ -107,10 +103,10 @@ struct AddObjectView: View {
                     Image(systemName: "dollarsign.circle").font(.title3)
                 }
                 TextField("Wat was je gage", text: $wageText) {
-                    wageObjectCreator.wage = wageText
+                    wageObjectCreator.wageString = wageText
                 }.onChange(of: wageText, perform: { T in
                     print(wageText)
-                    wageObjectCreator.wage = wageText
+                    wageObjectCreator.wageString = wageText
                 })
                     .onTapGesture(perform: {
                         gageTextFieldFocused = true
@@ -124,7 +120,7 @@ struct AddObjectView: View {
                     })
                     .focused($gageTextFieldFocused)
                     .onSubmit {
-                        wageObjectCreator.wage = wageText
+                        wageObjectCreator.wageString = wageText
                     }
                     .frame(width: 200, height: 30)
                     .font(.body)
@@ -143,8 +139,8 @@ struct AddObjectView: View {
                     .contentShape(Rectangle())
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color("blueIsh-1")))
                     Button("Gage toevoegen") {
-                        guard wageObjectCreator.wage != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen", Int(wageObjectCreator.wage) != nil else {
-                            print(wageObjectCreator.wage)
+                        guard wageObjectCreator.wageString != "", artistTypeTitle != "Kiezen", gigTypeTitle != "Kiezen", Int(wageObjectCreator.wageString) != nil else {
+                            print(wageObjectCreator.wageString)
                             print(artistTypeTitle)
                             print(gigTypeTitle)
                             showAlert.toggle()

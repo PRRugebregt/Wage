@@ -93,15 +93,15 @@ class PersistenceController {
         return []
     }
     
-    func fetchUser() -> [UserObject] {
+    func fetchUser() -> UserObject? {
         let request: NSFetchRequest<UserObject> = UserObject.fetchRequest()
         do {
-            let result = try container.viewContext.fetch(request)
+            let result = try container.viewContext.fetch(request).first
             return result
         } catch {
             print(error)
         }
-        return []
+        return nil
     }
     
     

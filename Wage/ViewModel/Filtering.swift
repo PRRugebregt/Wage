@@ -23,12 +23,12 @@ class Filtering: ObservableObject {
     
     // MARK: - Intent functions
     
-    func changeGigType(to option: GigType) {
+    func changeFilterGigType(to option: GigType) {
         filterOptions.changeGigType(to: option)
         isFiltered = true
     }
     
-    func changeInstrument(to instrument: Instrument) {
+    func changeFilterInstrument(to instrument: Instrument) {
         filterOptions.changeInstrument(to: instrument)
         isFiltered = true
     }

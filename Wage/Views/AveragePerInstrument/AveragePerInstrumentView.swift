@@ -84,7 +84,7 @@ struct AveragePerInstrumentHeaderView: View {
                     Button {
                         gigTypeTitle = gigType.rawValue
                         chosenGigType = gigType
-                        viewModel.loadResults(gigType: gigType)
+                        viewModel.loadAverageResultsPerInstrument(for: gigType)
                     } label: {
                         Text(gigType.rawValue)
                     }

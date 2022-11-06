@@ -40,7 +40,7 @@ struct WagesListView: View {
     var body: some View {
         GeometryReader() { geometry in
             VStack {
-                TopWageListView(dependencies: dependencies, showFilters: $showFilters)
+                TopWageListView(dependencies: dependencies, showFilters: $showFilters, showList: $showList)
                     .blur(radius: 0)
                 if wageFiles.isEmpty {
                     WageFileEmptyView(isShowingHelpScreen: $isShowingHelpScreen)
@@ -55,15 +55,12 @@ struct WagesListView: View {
                             }
                         }
                         .transition(.scale)
-                        .onAppear(perform: { showList = true })
-                        .onDisappear(perform: { showList = false })
-                        .opacity(showList ? 1 : 0)
                         .blur(radius: isShowingHelpScreen ? 5 : 0)
                     }
                 }
             }
             .transition(.scale)
-            .animation(Animation.spring(), value: showList)
+            .animation(Animation.easeInOut(duration: 1), value: showList)
             .navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
@@ -73,9 +70,11 @@ struct WagesListView: View {
                 orientation = UIDevice.current.orientation
             }
             .refreshable {
+                showList.toggle()
                 Task {
                     await wageFileLoader.loadAllFiles()
-                }            }
+                }
+            }
         }
     }
 }
@@ -91,10 +90,12 @@ struct TopWageListView: View {
     @State var onlineResults: Bool = false
     @State var didTap: Bool = false
     @Binding var showFilters: Bool
+    @Binding var showList: Bool
     
-    init(dependencies: Dependencies, showFilters: Binding<Bool>) {
+    init(dependencies: Dependencies, showFilters: Binding<Bool>, showList: Binding<Bool>) {
         self.dependencies = dependencies
         self._showFilters = showFilters
+        self._showList = showList
         self.filtering = dependencies.injectFiltering()
         wageFileLoader = dependencies.injectWageFileLoader()
     }
@@ -104,6 +105,7 @@ struct TopWageListView: View {
             Menu(content: {
                 ForEach(SortOptions.allCases) { sortOption in
                     Button {
+                        showList.toggle()
                         wageFileLoader.sortFiles(by: sortOption)
                         chosenSortOption = sortOption
                     } label: {
@@ -126,50 +128,9 @@ struct TopWageListView: View {
             .font(.title2)
             .shadow(color: .gray, radius: 3, x: 0, y: 3)
             if !filtering.isFiltered {
-                Button {
-                    showFilters.toggle()
-                } label: {
-                    HStack {
-                        Group {
-                        Text("Filter")
-                            .fontWeight(.light)
-                            .font(.body)
-                            Image("filter")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(3)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: 25)
-                .foregroundColor(didTap ? .gray : .blue)
-                .font(.title2)
-                .shadow(color: .gray, radius: 3, x: 0, y: 3)
-                .onTapGesture(perform: {
-                    didTap = true
-                })
-                .sheet(isPresented: $showFilters, onDismiss: {
-                    wageFileLoader.setFilterOptions(with: filtering.filterOptions)
-                    Task {
-                        await wageFileLoader.loadAllFiles()
-                    }
-                    
-                }) {
-                    FilterView(dependencies: dependencies, isPresented: $showFilters)
-                }
+                isNotFilteredView()
             } else {
-                Button() {
-                    filtering.reset()
-                } label: {
-                    HStack {
-                        Text("Filters").fontWeight(.light).font(.body)
-                        Image(systemName: "x.square").font(.title2)
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: 25)
-                .foregroundColor(.red)
-                .shadow(color: .gray, radius: 3, x: 0, y: 3)
-                .opacity(filtering.isFiltered ? 1 : 0)
+                isFilteredView()
             }
             Toggle("", isOn: $onlineResults)
             .labelsHidden()
@@ -178,10 +139,66 @@ struct TopWageListView: View {
             .padding(.horizontal)
             .padding(.vertical, 5)
             .onChange(of: onlineResults) { newValue in
+                showList.toggle()
                 wageFileLoader.isLocal = !onlineResults
             }
         }
     }
+    
+    @ViewBuilder
+    private func isNotFilteredView() -> some View {
+        VStack {
+            Button {
+                showList.toggle()
+                showFilters.toggle()
+            } label: {
+                HStack {
+                    Group {
+                    Text("Filter")
+                        .fontWeight(.light)
+                        .font(.body)
+                        Image("filter")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(3)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: 25)
+            .foregroundColor(didTap ? .gray : .blue)
+            .font(.title2)
+            .shadow(color: .gray, radius: 3, x: 0, y: 3)
+            .onTapGesture(perform: {
+                didTap = true
+            })
+            .sheet(isPresented: $showFilters, onDismiss: {
+                wageFileLoader.setFilterOptions(with: filtering.filterOptions)
+                Task {
+                    await wageFileLoader.loadAllFiles()
+                }
+                
+            }) {
+                FilterView(dependencies: dependencies, isPresented: $showFilters)
+            }
+        }
+    }
+    
+    private func isFilteredView() -> some View {
+        Button() {
+            showList.toggle()
+            filtering.reset()
+        } label: {
+            HStack {
+                Text("Filters").fontWeight(.light).font(.body)
+                Image(systemName: "x.square").font(.title2)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 25)
+        .foregroundColor(.red)
+        .shadow(color: .gray, radius: 3, x: 0, y: 3)
+        .opacity(filtering.isFiltered ? 1 : 0)
+    }
+    
 }
 
 struct WageFileEmptyView: View {

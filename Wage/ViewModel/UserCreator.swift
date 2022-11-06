@@ -14,7 +14,7 @@ class UserCreator: ObservableObject {
     @Published var user = User()
     
     var newUser: Bool {
-        return user.newUser
+        return user.isNewUser
     }
     
     init() {

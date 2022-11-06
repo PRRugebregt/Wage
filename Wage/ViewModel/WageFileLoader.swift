@@ -60,7 +60,7 @@ class WageFileLoader: ObservableObject {
             DDLogInfo("Loading online results")
             guard let onlineResults = try? await loadNetworkFiles() else { return }
             DispatchQueue.main.async {
-                self.isLoading = true
+                self.isLoading = false
                 self.wageFiles = onlineResults
             }
         }
@@ -72,6 +72,11 @@ class WageFileLoader: ObservableObject {
     
     func loadNetworkFiles() async throws -> [WageFile] {
         do {
+            // isLoading to true to show fancy loading animation
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                self.isLoading = true
+            }
             let queryDocuments = try await networkDownload.downloadAllData()
             var wageFiles = [WageFile]()
             
@@ -82,9 +87,6 @@ class WageFileLoader: ObservableObject {
                     continue
                 }
                 wageFiles.append(wageFile)
-            }
-            DispatchQueue.main.async {
-                self.isLoading = false
             }
             return wageFiles
         } catch {
@@ -128,7 +130,10 @@ class WageFileLoader: ObservableObject {
     }
     
     func filterResults(with options: FilterOptions) {
-        self.wageFiles = filtering.filterWageFiles(wageFiles, with: options)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.wageFiles = self.filtering.filterWageFiles(self.wageFiles, with: options)
+        }
     }
     
     func setFilterOptions(with options: FilterOptions) {

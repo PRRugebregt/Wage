@@ -15,14 +15,14 @@ class WageObjectCreator {
         PersistenceController.shared.user
     }
     
-    var wage = ""
+    var wageString = ""
     var gigType: GigType?
     var artistType: ArtistType?
     var instrument: Instrument?
     
     func createObject() {
         // Check if we have all the info for the WageFile
-        guard let wageInt = Int(wage),
+        guard let wageInt = Int(wageString),
               let gigType,
               let artistType,
               let instrument else {
